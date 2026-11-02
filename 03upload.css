@@ -1,0 +1,766 @@
+/* 전체 레이아웃 세팅 */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    /* height: 110px; */
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    z-index: 1000;
+}
+
+.header-inner {
+    width: 100%; /* 시안에 맞춰 조정 */
+    height: 100%;
+    margin-left: 105px; 
+    margin-right: 337px;
+    display: flex;
+    align-items: center;
+}
+
+
+.logo {
+    margin-right: 112px;
+    /* font-size: 22px; */
+}
+
+
+.gnb {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    
+}
+
+.gnb home, .gnb qna, .gnb best, .gnb HOF {
+    margin-inline: 20px;
+}
+
+
+
+/* .gnb qna{
+    border-bottom: #2DB400 4px solid;
+    padding-bottom: 32px;
+} */
+
+
+.header-right {
+    margin-left: auto;
+    margin-right: 337px;
+    display: flex;
+    align-items: right;
+}
+
+.search-bar {
+    width: 257px;
+    height: 35px;
+    border: 3px solid;
+    border-color: #2DB400;
+    border-radius: 20px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+
+.bell {
+    /* width: 37px; */
+    height: 43px;
+    /* background-color: #fff3f3; */
+    border-radius: 4px;
+    margin-left: 39px;
+    /*margin-right: 20px;*/
+}
+
+.user {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-left: 26px;
+    border: 1px solid #CECECE;
+    /* margin-right: 10px; */
+}
+
+
+
+.content-wrapper {
+    display: flex;
+    
+    width: 100%;             /* 전체 너비 사용 */
+    padding-left: 105px;     /* 맨 왼쪽 여백 (측정값) */
+    gap: 48px;               /* 좌측 메뉴와 메인 컨텐츠 사이 간격 (측정값) */
+    
+    margin: 0;               /* 중앙 정렬 해제 */
+    padding-top: 90px;
+}
+
+.side-left {
+    width: 183px;   /*좌측 메뉴 너미 (측정값)*/
+    height: fit-content;  /* 내용물만큼 차지함 (스티기 필수) */
+    /* background-color: #fff;
+    border: 1px solid #E3E4ED; */
+    border-radius: 20px;
+    flex-shrink: 0;
+
+    /*스크롤 시 따라오게*/
+    position: sticky;
+    top: 160px;
+    padding: 10px 0; /* 위 아래 살짝 여백주기 */
+}
+
+
+
+
+.main-content {
+    width: 928px;   /* 메인 컨텐츠 너비 (측정값) */
+    flex-shrink: 0;
+}
+
+
+
+
+
+
+
+
+/* 오른쪽 */
+
+/* .side-right {
+    width: 337px;   
+    margin-left: 78px; 
+    flex-shrink: 0;
+} */
+
+
+.side-right {
+    position: relative; /* 자식의 sticky 기준점 */
+    width: 240px;   
+    margin-left: 120px; 
+}
+
+.sticky-side-box {
+    position: sticky;
+    top: 300px; /* 헤더 높이 + 여백 */
+    z-index: 10;
+    margin-bottom: 20px;
+}
+
+.ad-banner img{
+    border-radius: 30px;
+}
+
+.btn-main-submit {
+    width: 100%;
+    height: 55px;
+    background-color: #2db400;
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+    border: none;
+    border-radius: 55px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.btn-under {
+    display: flex;
+    justify-content:space-between;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: #C2C6DE 1px solid;
+}
+
+.btn-save1 {
+    width: 100%;
+    height: 38px;
+    background-color: #C2E5D5;
+    color: #66776F;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    border-radius: 55px;
+    cursor: pointer;
+    margin-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.btn-cancel {
+    width: 100%;
+    height: 38px;
+    background-color: #DDE6E2;
+    color: #66776F;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    border-radius: 55px;
+    cursor: pointer;
+    margin-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.main-title {
+    font-size: 50px;
+    margin-top: 10px;
+    font-weight: 450;
+    margin-left: -8px;
+}
+
+.q-mark {
+    color: #2db400;
+    margin-right: 5px;
+}
+
+
+
+/* 카드 UI 디자인 */
+
+/* =========================================
+    1. 기본 설정 및 레이아웃
+   ========================================= */
+
+/* =========================================
+    2. 메인 질문 카드 (Q-Card)
+   ========================================= */
+
+.question-card {
+    width: 928px;
+    height: auto;
+    padding: 15px;
+    padding-top: 25px;
+    padding-left: 50px;
+    padding-right: 40px;
+    border: #C2E5D5 1px solid;
+    background-color: #F8FFFC;
+    border-radius: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card-top {
+    margin-bottom: -43px;
+}
+
+/* 카드 상단 */
+
+.top1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -5px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+.top1 .top1-R {
+    margin-bottom: -20px;
+    font-size: 14px;
+    color: #999;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.article.question-card {
+    width: 100%;
+    max-width: 800px; /* 시안과 비슷한 적정 너비 */
+    margin: 0 auto;    /* 좌우 마진을 auto로 주면 중앙으로 옵니다 */
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px; /* 시안처럼 둥글게 */
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.title{
+    width: 94%;         /* 부모 너비 얼마나 채울건지? */
+    border: 3px solid #ccc;
+    padding: 13px;       /* 안쪽 여백을 줘서 높이감을 만듦 */
+    padding-left: 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    outline: none;       /* 클릭 시 생기는 검정 테두리 제거 */
+    margin-bottom: 70px;
+}
+
+
+
+/* 카드 중간: 본문 */
+.card-mid {
+    margin-bottom: 15px;    /* 태그 들어가는곳 */
+    /* margin: 50px 0; */
+}
+
+.content-wrap {
+    background-color: #ffffff;
+    border: #ABACB3 2px solid;
+    border-radius: 15px;
+}
+
+.content-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 18px;
+    border-bottom: #ABACB3 1.5px solid;
+    margin-bottom: 18px;
+}
+
+.content {
+    width: 94%;         /* 부모 너비 얼마나 채울건지? */
+    border: none;
+    padding: 10px;       /* 안쪽 여백을 줘서 높이감을 만듦 */
+    padding-left: 20px;
+    font-size: 15px;
+    border-radius: 10px;
+    outline: none;       /* 클릭 시 생기는 검정 테두리 제거 */
+    margin-bottom: 15px;
+}
+
+.content {
+    padding-left: 20px;
+    padding-right: 17px;
+    line-height: 1.5;
+    font-size: 17px;
+    color: #333;
+    word-break: keep-all;
+    height: 450px;
+}
+
+
+/* 바텀1 좌우정렬 */
+
+.bottom1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 60px;
+    margin-right: 60px;
+    padding-bottom: 10px;
+    /* border-bottom: 1px solid #8EB9A5; */
+}
+
+
+
+/* 카드 하단: 분야 선택 */
+
+
+/* 부모 컨테이너 배치 (질문분야 글씨와 박스를 가로로) */
+.bottom1-L {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* 글씨와 박스 사이 간격 */
+}
+
+/* 라벨 숨기기 (이미 "질문분야)" 텍스트가 있으므로) */
+.select-box label {
+    display: none;
+}
+
+/* 실제 선택창 디자인 */
+#category {
+    width: 250px;
+    padding: 10px 15px;
+    font-size: 15px;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* 시안처럼 둥글게 */
+    background-color: #fff;
+    cursor: pointer;
+    
+    /* 기본 화살표 제거하고 커스텀 화살표 넣기 (선택사항) */
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23999" d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+}
+
+/* 선택창 클릭했을 때 테두리 색상 */
+#category:focus {
+    outline: none;
+    border-color: #2db400; /* 네이버 시그니처 초록색 */
+}
+
+/* 등록 버튼 디자인 (오른쪽 배치) */
+.btn-submit {
+    background-color: #2db400;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #28a100;
+}
+
+
+/* 카드 하단: 분야 선택 끝 */
+
+
+
+/* 카드 하단: 태그 추가 */
+
+
+.bottom1-R {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* 글씨와 박스 사이 간격 */
+    
+}
+
+.tag-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.label-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 시안의 핵심: 입력창과 버튼을 감싸는 박스 */
+.tag-input-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ced4da; /* 시안 같은 연한 회색 테두리 */
+    border-radius: 10px;       /* 둥근 모서리 */
+    padding: 5px 10px;
+    width: 250px;              /* 적절한 너비 */
+    background-color: #fff;
+}
+
+.tag-input-box input {
+    border: none;              /* 내부 입력창 테두리 제거 */
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.tag-input-box #add-tag-btn {
+    border: none;
+    background: none;
+    color: #999;               /* 시안 속 '추가' 버튼 색상 */
+    font-size: 14px;
+    cursor: pointer;
+    padding-left: 10px;
+    border-left: 1px solid #eee; /* 버튼 앞쪽 구분선 (선택사항) */
+}
+
+/* 태그가 생성되었을 때 스타일 (보라색 느낌) */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+    margin-left: 50px; /* '태그' 글자 너비만큼 띄우기 */
+}
+
+.tag-item {
+    background-color: #eef0ff; /* 연한 보라/파란 배경 */
+    color: #7d8ad0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    border: 1px solid #ddecff;
+}
+
+
+/* 카드 하단: 태그 추가 끝 */
+
+
+
+
+
+/* 카드 하단: 액션바 */
+.card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-left: 60px;
+    margin-right: 50px;
+}
+
+
+
+.tag {
+    background: #EEEEFC;
+    color: #8585B0;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+
+/* 구분선 */
+.divider {
+    border-top: 2px solid #8EB9A5;
+    margin-bottom: 25px;
+}
+
+
+.btn-submit {
+    background: #a5d6a7; /* 기본 비활성색 */
+    color: #fff;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* 입력창에 글을 쓰려고 포커스하면 버튼이 진해짐 */
+.comment-field:focus ~ .input-footer .btn-submit {
+    background: #2db400;
+}
+
+
+
+
+/* 펼치기 전 숨기기 */
+.expand-target {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    opacity: 0;
+}
+
+/* 체크박스 체크 시 펼치기 */
+#expand-trigger:checked ~ .expand-target {
+    max-height: 300px; /* 넉넉하게 */
+    opacity: 1;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* 화살표 회전 애니메이션 */
+#expand-trigger:checked + .expand-btn .arrow {
+    transform: rotate(180deg);
+}
+#expand-trigger { display: none; } /* 체크박스 숨김 */
+
+
+
+/* 메인 질문 카드 끝 */
+
+
+
+
+/* 우측 사이드바 푸터 */
+
+/* 푸터 */
+.footer {
+    width: 240px;
+    color: #828282;
+    font-size: 11px;
+    font-weight: 400;
+    padding-top: 10px;
+}
+
+.footer-inner {
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    width: 240px;
+    place-items: center; /* 수직 및 수평 중앙 정렬 */
+}
+
+.footer-1 span, .footer-2 span, .footer-3 span {
+    margin-inline: 5px;
+}
+
+.footer-2, .footer-3 { 
+    margin-top: 3px;
+}
+
+
+
+
+
+
+
+/* 설정 */
+/* 행 레이아웃 */
+.setting-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px 0;
+}
+.line-top { border-top: 1px solid #EAEAEA; }
+
+.setting-label {
+    width: 80px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    padding-top: 8px;
+}
+
+/* .setting-content { flex: 1; display: flex; align-items: center; gap: 15px; } */
+/* 공개설정 행 전체 컨테이너 */
+.setting-content.toggle-group {
+    display: flex;
+    align-items: flex-start; /* 상단 정렬 */
+    gap: 40px; /* 항목 간의 넓은 간격 (시안 느낌) */
+    padding-top: 10px;
+}
+
+/* 1:1 질문 드롭다운 & 텍스트 */
+.expert-select {
+    padding: 8px 12px;
+    border: 1.5px solid #D1D1D1;
+    border-radius: 8px;
+    width: 200px;
+    color: #666;
+}
+.info-text { font-size: 13px; color: #BDBDBD; }
+
+/* 커스텀 토글 스위치 (핵심) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 54px; /* 시안 비율에 맞춘 너비 */
+    height: 26px;
+    margin: 8px 0;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #D1DCCF; /* OFF 상태: 채도 낮은 연초록/회색 */
+    transition: .3s;
+    border-radius: 34px;
+}
+
+/* 원(Circle) 스타일 */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px; width: 20px;
+    left: 4px; bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ON 상태 스타일 */
+input:checked + .slider {
+    background-color: #2DB400; /* ON 상태: 네이버 대표 초록 */
+}
+
+/* 원 이동: 시안처럼 원이 오른쪽으로 이동 */
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* 토글 하단 텍스트 */
+.toggle-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    text-align: center;
+}
+
+/* .toggle-item > span:first-child { font-size: 12px; color: #666; height: 30px; display: flex; align-items: center; }
+.status-text { font-size: 12px; color: #8E8E8E; margin-top: -2px; } */
+
+/* 상단 라벨 폰트 (질문자 별명 등) */
+.toggle-item > span:first-child {
+    font-size: 13px;
+    color: #444; /* 조금 더 진하게 */
+    font-weight: 500;
+    white-space: pre-wrap; /* 줄바꿈 허용 */
+    text-align: center;
+    height: 36px; /* 두 줄인 항목(만 14세...) 기준으로 높이 고정 */
+    display: flex;
+    align-items: flex-end; /* 아래쪽으로 정렬하여 토글과 맞춤 */
+}
+
+
+
+/* 업로드 예약 전용 스타일 */
+.reservation {
+    
+    width: auto !important; /* 가로로 길어지므로 너비 제한 해제 */
+    align-items: flex-start !important; /* 상단 라벨과 정렬 */
+}
+
+.reservation-controls {
+    display: flex;
+    align-items: center; /* 스위치와 시간입력창의 높이를 중앙 정렬 */
+    gap: 80px; /* 스위치와 시간창 사이의 간격 */
+}
+
+/* 스위치와 하단 텍스트(설정)를 세로로 정렬 */
+.switch-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+/* 시간 설정 컨테이너 */
+.time-picker-container {
+    
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: -15px; /* '설정' 글자 높이만큼 위로 올려 스위치와 수평 맞춤 */
+}
+
+.time-input {
+    width: 120px;
+    height: 28px;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    font-size: 15px;
+    text-align: center;
+    color: #333;
+}
+
+.btn-more {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+}

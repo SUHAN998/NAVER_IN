@@ -1,0 +1,314 @@
+/* =========================================
+   1. 기본 설정 및 레이아웃
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f5f6f7;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    padding: 50px 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+/* =========================================
+   2. 메인 질문 카드 (Q-Card)
+   ========================================= */
+.q-card {
+    width: 800px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #eef0f2;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    position: relative; /* 자식 요소들의 기준점 */
+}
+
+/* 카드 상단: 프로필 및 아이콘 */
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #eee;
+}
+
+.nickname {
+    font-weight: 700;
+    font-size: 15px;
+    display: block;
+}
+
+.date-view {
+    font-size: 12px;
+    color: #999;
+}
+
+.top-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.icon-png {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    object-fit: contain;
+}
+
+.main-title {
+    font-size: 26px;
+    margin-top: 10px;
+    font-weight: 800;
+}
+
+.q-mark {
+    color: #2db400;
+    margin-right: 5px;
+}
+
+/* 카드 중간: 본문 */
+.card-mid {
+    margin: 30px 0;
+}
+
+.content {
+    line-height: 1.8;
+    font-size: 16px;
+    color: #333;
+    word-break: keep-all;
+}
+
+/* 카드 하단: 액션바 */
+.card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.bottom-left {
+    display: flex;
+    align-items: center;
+}
+
+.btn-comment {
+    display: inline-block;
+    border: 1px solid #e0e0e0;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.bottom-center {
+    display: flex;
+    gap: 6px;
+}
+
+.tag {
+    background: #f1f3f5;
+    color: #666;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.vote-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.vote-count {
+    font-size: 11px;
+    color: #888;
+}
+
+/* =========================================
+   3. 댓글 확장 로직 (중요: 수정된 부분)
+   ========================================= */
+
+/* 체크박스는 항상 숨김 */
+#comment-toggle {
+    display: none;
+}
+
+/* 초기 상태: 높이 0, 숨김 */
+.expandable-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 체크박스 체크 시(댓글 버튼 클릭 시) 동작 */
+#comment-toggle:checked ~ .expandable-content {
+    max-height: 500px; /* 답변창 높이에 따라 조절 가능 */
+    opacity: 1;
+    margin-top: 25px;
+}
+
+/* 체크 시 댓글 버튼 스타일 변경 (검정색 활성화) */
+#comment-toggle:checked ~ .card-bottom .btn-comment {
+    background: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+/* 구분선 */
+.divider {
+    border-top: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+/* =========================================
+   4. 댓글 입력창 디자인
+   ========================================= */
+.input-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background: #fafafa;
+    transition: border-color 0.2s;
+}
+
+.input-container:focus-within {
+    border-color: #2db400;
+}
+
+.comment-field {
+    width: 100%;
+    height: 100px;
+    border: none;
+    background: transparent;
+    padding: 15px;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.input-divider {
+    border-top: 1px solid #eee;
+}
+
+.input-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+.char-count {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.btn-submit {
+    background: #a5d6a7; /* 기본 비활성색 */
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* 입력창에 글을 쓰려고 포커스하면 버튼이 진해짐 */
+.comment-field:focus ~ .input-footer .btn-submit {
+    background: #2db400;
+}
+
+/* =========================================
+   5. 우측 사이드바 영역
+   ========================================= */
+.sidebar {
+    width: 300px;
+}
+
+.widget {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #eee;
+    margin-bottom: 16px;
+}
+
+.widget-tabs {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+.widget-tabs span {
+    font-size: 14px;
+    color: #999;
+    cursor: pointer;
+}
+
+.widget-tabs span.active {
+    color: #2db400;
+    font-weight: bold;
+}
+
+.widget-title {
+    font-size: 15px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.widget-list {
+    list-style: none;
+}
+
+.widget-list li {
+    font-size: 13px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    color: #555;
+    cursor: pointer;
+}
+
+.widget-list li:hover {
+    color: #000;
+}
+
+.widget-list li span {
+    color: #ccc;
+    font-size: 11px;
+}

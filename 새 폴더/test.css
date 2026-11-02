@@ -1,0 +1,144 @@
+/* 1. 상단 프로필 영역 정밀 배치 
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.user-block {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* 프사와 텍스트 사이 간격 /
+}
+
+.user-info-text {
+    display: flex;
+    flex-direction: column; /* 카테고리 아래에 닉네임 /
+    gap: 4px; 
+}
+
+.category-tag {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+}
+
+.username {
+    font-size: 12px;
+    color: #333;
+    font-weight: 800;
+}
+
+/* 2. 본문 여백 (프사 크기만큼 왼쪽 여백 주기) /
+.card-body {
+    padding-left: 71px; /* 프사(56px) + 간격(15px) /
+}
+
+.q-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+/* 3. 하단 인터랙션 (숫자를 아이콘 아래로!) /
+.interactions {
+    display: flex;
+    gap: 10px;
+}
+
+.react-btn {
+    display: flex;
+    flex-direction: column; /* 세로 나열 /
+    align-items: center;    /* 중앙 정렬 /
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.react {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 2px; /* 아이콘과 숫자 사이 미세 간격 /
+}
+
+.count {
+    font-size: 11px;
+    color: #666;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 10px;
+    padding-left: 30px; /* 시안 하단 여백 기준 /
+}
+
+*/
+
+
+/* 1. 숫자를 아이콘 아래로 내리는 마법 */
+.interactions {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.react-btn {
+    display: flex;
+    flex-direction: column !important; /* 세로 방향으로 나열 */
+    align-items: center !important;    /* 중앙 정렬 */
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.count {
+    font-size: 11px;
+    color: #666;
+    margin-top: 2px; /* 아이콘과의 간격 */
+}
+
+/* 2. 프사와 닉네임 정렬 (user-side) */
+.user-side {
+    width: 70px; /* 고정 너비 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.plane {
+    margin-left: 0 !important; /* 기존 마진 제거 */
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}
+
+.username {
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+}
+
+/* 3. 본문 텍스트 들여쓰기 정리 */
+.text-side {
+    flex: 1;
+}
+
+.q-title, .q-desc, .category-tag {
+    padding-left: 0 !important; /* 중복된 padding-left 제거 */
+}
+
+.category-tag {
+    margin-left: 0 !important;
+    font-weight: bold;
+    color: #000;
+}
+
+/* 4. 하단 영역 배치 */
+.card-footer {
+    padding-left: 85px; /* 프사 너비(70) + 여백에 맞춰 정렬 */
+}

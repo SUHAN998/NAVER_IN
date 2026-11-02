@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="01main.css">
+    <title>지식iN 메인</title>
+</head>
+
+<body>
+    <div class="container">
+    <header class="header">
+    <div class="header-inner">
+        <h1 class="logo">
+            <a class="go-main" href="01main.html">
+            <img src="img/00지식인 로고.png" width="100" height="auto" alt="NAVER 지식iN">
+            </a>
+        </h1>
+
+        <nav class="gnb">
+        <home href="#" class="active">홈</home>
+        <qna href="#">Q&A</qna>
+        <best href="#">베스트</best>
+        <HOF href="#">명예의 전당</HOF>
+        </nav>
+        <div class="header-right"> <!-- 상단 바 오른쪽 (검색,알림,마이,질문) -->
+        <input type="text" placeholder="검색어를 입력해주세요" class="search-bar">
+        
+        <div class="alarm">
+            <img class="bell" src="img/04알림3.png" width="35px" height="43px" alt="alarm">
+        </div>
+        
+        <div class="user-profile">
+            <img class="user" src="img/20_사용자프사.png" width="48" height="48" radius="50%" alt="user">
+        </div>
+        <a class="go-upload" href="03upload.html">
+        <button class="btn-ask">질문하기</button>
+        </a>
+        </div>
+    </div>
+    </header>
+
+    <div class="content-wrapper">
+    <aside class="side-left">
+        <ul class="category-list">
+        <li class="active">전체</li>
+        <li>전문지식/학문</li>
+        <li>IT / 테크</li>
+        <li>라이프 / 건강</li>
+        <li>컬쳐 / 취미</li>
+        <li>고민 / 커뮤니티</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+
+        
+        <section class="tab-menu">
+        <button class="active">인기</button>
+        <button>관심</button>
+        <button>답변</button>
+        </section>
+
+        <!-- 초록바 (보기옵션 및 필터) -->
+
+    <div class="greenbar">
+        <div class="view-filter">
+            <div class="cardV">
+                <img class="active" src="img/07크게보기2.png" height="32px" alt="크게보기 on">
+            </div>
+            <div class="listV">
+                <img src="img/08작게보기1.png" height="32px" alt="작게보기 off">
+            </div>
+            <div class="filterOP">
+                <img src="img/09검색필터1.png" height="32px" alt="필터">
+            </div>
+        </div>
+        
+    </div>
+
+
+
+        <!-- 카드들 (3단으로 수정) -->
+
+        <!-- 첫카드 -->
+
+        <article class="question-card">
+    <div class="card-header-top">
+        <div class="user-info-group">
+            <img class="plane" src="img/30_프사고민.png" alt="프로필">
+            <div class="name-tag-stack">
+                <span class="category-tag">고민/커뮤니티</span>
+                <span class="username">USAK7***</span>
+            </div>
+        </div>
+        <div class="top-icons">
+            <img class="bookmark" src="img/01북마크1.png" alt="북마크" height="28">
+            <img class="share" src="img/05공유1.png" alt="공유" height="28">
+            <img class="more" src="img/14_더보기1.png" alt="더보기" height="28">
+        </div>
+    </div>
+
+    <div class="card-body-middle">
+        <h3 class="q-title"><span class="greenq">Q.</span> 만날때 마다 은근히 무시하는 친구, 손절이 답인가요?</h3>
+        <p class="content">15년 지기인데 요즘 저를 위하는 척하면서 은근히 후려치기를 해요. 이번에 이직했다니까 "거기 힘들다던데 네가 버틸 수 있겠어?" 라며 초 치고, 새로 산 옷 보고도 자기 스타일 아니라고 꼭 한마디씩 얹네요. 기분 나빠서 정색하면 오히려 저보고 예민하다며 친구 사이에 이런 말도 못 하나는데... 진짜 스트레스 받아서 이제 그만 만나고 싶어요 ㅠㅠ. 제가 예민한건지, 아니면 손절이 답인지 조언 좀 부탁드릴게요 ㅠ</p>
+    </div>
+
+    <div class="card-footer-bottom">
+        <div class="info-group">
+            <span class="date">2026.03.17</span>
+            <span class="views">조회수 2,107</span>
+        </div>
+        <div class="interactions">
+            <button class="react-btn">
+                <img class="react" src="img/02좋아요1.png" alt=""> 
+                <span class="count">45개</span>
+            </button>
+            <button class="react-btn">
+                <img class="react" src="img/03싫어요1.png" alt=""> 
+                <span class="count">3개</span>
+            </button>
+            <button class="react-btn">
+                <img class="react" src="img/06답변하기1.png" alt=""> 
+                <span class="count">15개</span>
+            </button>
+        </div>
+    </div>
+</article>
+
+
+        <!-- 두번째 카드 -->
+         
+        <article class="question-card">
+    <div class="card-header-top">
+        <div class="user-info-group">
+            <img class="plane" src="img/21_프사.png" alt="프로필">
+            <div class="name-tag-stack">
+                <span class="category-tag">부동산, 건축</span>
+                <span class="username">PSA1***</span>
+            </div>
+        </div>
+        <div class="top-icons">
+            <img class="bookmark" src="img/01북마크1.png" alt="북마크" height="28">
+            <img class="share" src="img/05공유1.png" alt="공유" height="28">
+            <img class="more" src="img/14_더보기1.png" alt="더보기" height="28">
+        </div>
+    </div>
+
+    <a class="go-qna" href="02qna.html">
+    <div class="card-body-middle">
+        <h3 class="q-title"><span class="greenq">Q.</span> 보증금 대출 질문</h3>
+        <p class="content">저는 중소기업에 다니는 만 27세의 청년입니다. 통근이 힘들어 독립을 위해 보증금을 대출 받고 싶은데 80%밖에 안나와서요. 100% 중소기업 어쩌구는 폐지 되었다고 하고 저것도 세대주여야 버팀목 80% 받는다던데 저는 부모집에 살고 있으니 세대주는 아버지로 되어있는데 받을 수 있는건지도 모르겠고 보증금 1000~2000정도 받을 수 있는 대출 다 알려주시면 감사하겠습니다.</p>
+    </div>
+    </a>
+
+    <div class="card-footer-bottom">
+        <div class="info-group">
+            <span class="date">2026.04.16</span>
+            <span class="views">조회수 1,797</span>
+        </div>
+        <div class="interactions">
+            <button class="react-btn">
+                <img class="react" src="img/02좋아요1.png" alt=""> 
+                <span class="count">31개</span>
+            </button>
+            <button class="react-btn">
+                <img class="react" src="img/03싫어요1.png" alt=""> 
+                <span class="count">2개</span>
+            </button>
+            <button class="react-btn">
+                <img class="react" src="img/06답변하기1.png" alt=""> 
+                <span class="count">12개</span>
+            </button>
+        </div>
+    </div>
+</article>
+
+
+        <!-- 세번째 카드 (사진1장) -->
+
+        <article class="question-card">
+    <div class="card-header-top">
+        <div class="user-info-group">
+            <img class="plane" src="img/31_프사_LA.png" alt="프로필">
+            <div class="name-tag-stack">
+                <span class="category-tag">여행</span>
+                <span class="username">방구석 여행가</span>
+            </div>
+        </div>
+        <div class="top-icons">
+            <img class="bookmark" src="img/01북마크1.png" alt="북마크" height="28">
+            <img class="share" src="img/05공유1.png" alt="공유" height="28">
+            <img class="more" src="img/14_더보기1.png" alt="더보기" height="28">
+        </div>
+    </div>
+
+    <div class="card-body-middle">
+        <h3 class="q-title"><span class="greenq">Q.</span> 이 여행지 장소 정보 좀 알려주세요</h3>
+        <p class="content">사진에 보이는 특이한 모양의 건축물이나 저 멀리 보이는 산맥 이름이 궁금해요. 혹시 가보신 분이 있다면 근처 숙소 위치나 이동하기 편한 교통수단도 같이 추천해 주시면 감사하겠습니다. 내공 100 드릴게요.</p>
+    </div>
+
+    <div class="picture">
+        <img class="mountain" src="img/22_여행지 사진.png" alt="여행지 사진">
+    </div>
+
+    <div class="card-footer-bottom">
+        <div class="info-group">
+            <span class="date">2026.03.21</span>
+            <span class="views">조회수 1,527</span>
+        </div>
+        <div class="interactions">
+            <button class="react-btn">
+                <img class="react" src="img/02좋아요1.png" alt=""> 
+                <span class="count">45개</span>
+            </button>
+            <button class="react-btn">
+                <img class="react" src="img/03싫어요1.png" alt=""> 
+                <span class="count">3개</span>
+            </button>
+            <button class="react-btn">
+                <img class="react" src="img/06답변하기1.png" alt=""> 
+                <span class="count">10개</span>
+            </button>
+        </div>
+    </div>
+</article>
+
+
+        <!-- 네번째 카드 (사진4장) -->
+
+        <article class="question-card">
+    <div class="card-header-top">
+        <div class="user-info-group">
+            <img class="plane" src="img/32_프사_RX7.png" alt="프로필">
+            <div class="name-tag-stack">
+                <span class="category-tag">컬처/취미</span>
+                <span class="username">프라덕후</span>
+            </div>
+        </div>
+        <div class="top-icons">
+            <img class="bookmark" src="img/01북마크1.png" alt="북마크" height="28">
+            <img class="share" src="img/05공유1.png" alt="공유" height="28">
+            <img class="more" src="img/14_더보기1.png" alt="더보기" height="28">
+        </div>
+    </div>
+
+    <div class="card-body-middle">
+        <h3 class="q-title"><span class="greenq">Q.</span> 이번에 작업 중인 PG등급 건프라인데, 마감 처리를 어떻게 하면 좋을까요?</h3>
+        <p class="content">처음으로 명암 도색에 도전해 보고 있습니다. 사진 1, 2번은 전체적인 소체 가조립 상태이고, 3, 4번은 특정 부위 도색 까짐이랑 데칼 부착 상태입니다. 무광 마감제를 뿌릴지, 반광으로 갈지 고민인데 고수님들은 어떤 게 어울린다고 보시나요? 특히 4번 사진 쪽 접합선 레드썬이 안 되는데 팁 좀 부탁드립니다!</p>
+    </div>
+
+    <!-- 건담 사진들 -->
+    <div class="photo-grid">
+        <img src="img/23_건담1.png" alt="건담1">
+        <img src="img/24_건담2.png" alt="건담2">
+        <img src="img/25_건담3.png" alt="건담3">
+        <img src="img/26_건담4.png" alt="건담4">
+    </div>
+
+    <div class="card-footer-bottom">
+        <div class="info-group">
+            <span class="date">2026.03.30</span>
+            <span class="views">조회수 1,170</span>
+        </div>
+        <div class="interactions">
+            <button class="react-btn">
+                <img class="react" src="img/02좋아요1.png" alt=""> 
+                <span class="count">45개</span>
+            </button>
+            <button class="react-btn">
+                <img class="react" src="img/03싫어요1.png" alt=""> 
+                <span class="count">3개</span>
+            </button>
+            <button class="react-btn">
+                <img class="react" src="img/06답변하기1.png" alt=""> 
+                <span class="count">10개</span>
+            </button>
+        </div>
+    </div>
+</article>
+
+
+<!-- 카드들 (3단으로 수정) -->
+
+        <!-- <section class="expert-section">
+        <h3>'게임' 분야 고수</h3>
+        <div class="expert-rank">
+            <div class="rank_contents_L">
+                
+            </div>
+            <div class="rank_contents_C">
+                <img class="Podium" src="img/16_순위대.png" alt="고수1">
+            </div>
+            <div class="rank_contents_R">
+                
+            </div>
+            </div>
+        </section> -->
+
+        <section class="expert-section">
+    <h3>'게임' 분야 고수</h3>
+    
+    <div class="expert-container">
+        <div class="rank-item rank-2">
+            <div class="profile-img"><img src="img/38_Fox.png" alt="2위"></div>
+            <div class="rank-info">
+                <p class="num2">2위</p>
+                <p class="name">Kitsune님</p>
+            </div>
+        </div>
+
+        <div class="rank-item rank-1">
+            <div class="profile-img"><img src="img/36_Doom.png" alt="1위"></div>
+            <div class="rank-info">
+                <p class="category">게임 분야 🎮</p>
+                <p class="num1">1위</p>
+                <p class="name">HellFire님</p>
+            </div>
+        </div>
+
+        <div class="rank-item rank-3">
+            <div class="profile-img"><img src="img/37_Hacker.png" alt="3위"></div>
+            <div class="rank-info">
+                <p class="num3">3위</p>
+                <p class="name">Null99님</p>
+            </div>
+        </div>
+        
+        <img class="podium-bg" src="img/16_순위대.png" alt="순위대">
+    </div>
+</section>
+
+
+
+
+        <button class="btn-more">더보기</button>
+        <div class="bottom_space11"></div>
+    </main>
+
+
+    <!-- 오른쪽 사이드바 -->
+    <aside class="side-right">
+        <div class="notice-box">
+        <button class="my">내 소식</button>
+        <div class="w-line"></div>
+        <button class="attancion">공지사항</button>
+        </div>
+
+
+        <div class="tag-cloud">
+        <h4>지식iN 인기태그</h4>
+
+        <!-- 태그들 -->
+        <div class="tags">
+                <div class="tag-inner">
+                <div class="tag-line-1">
+                    <span>#월드컵</span>
+                    <span>#레노버</span>
+                    <span>#위스키</span>
+                </div>
+                <div class="tag-line-2">
+                    <span>#호주유학</span>
+                    <span>#틴트</span>
+                    <span>#아기고양이</span>
+                </div>
+                <div class="tag-line-3">
+                    <span>#간호학과</span>
+                    <span>#백패킹</span>
+                    <span>#서양화가</span>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ad-banner">
+            <img class="ad" src="img/15_룰렛 광고.png" width="240px" height="260px" radius="20px" alt="ad">
+        </div>
+
+
+        <!-- 푸터 -->
+    <div class="footer">
+        <div class="footer-inner">
+        <div class="footer-1">
+            <span>이용약관</span>
+            <span>지식iN 서비스 운영정책</span>
+        </div>
+        <div class="footer-2">
+            <span>개인정보처리방침</span>
+            <span>권리보호센터</span>
+        </div>
+        <div class="footer-3">
+            <span>지식iN 고객센터</span>
+            <span><span>&copy; NAVER Corp.</span></span>
+        </div>
+        </div>
+    </div>
+    </aside>
+
+    
+</div>
+</body>
+</html>

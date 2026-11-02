@@ -1,0 +1,1152 @@
+/* 전체 레이아웃 세팅 */
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+
+
+.header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    /* height: 110px; */
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    z-index: 1000;
+}
+
+.header-inner {
+    width: 100%; /* 시안에 맞춰 조정 */
+    height: 100%;
+    margin-left: 105px; 
+    margin-right: 337px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+.logo {
+    margin-right: 112px !important; 
+    /* font-size: 22px; */
+}
+
+
+.gnb {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    
+}
+
+.gnb home, .gnb qna, .gnb best, .gnb HOF {
+    margin-inline: 20px;
+}
+
+
+
+.gnb qna{
+    border-bottom: #2DB400 4px solid;
+    padding-bottom: 32px;
+}
+
+
+.header-right {
+    margin-left: auto;
+    margin-right: 337px;
+    display: flex;
+    align-items: right;
+}
+
+
+
+.search-bar {
+    width: 257px;
+    height: 35px;
+    border: 3px solid;
+    border-color: #2DB400;
+    border-radius: 20px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+
+.bell {
+    /* width: 37px; */
+    height: 43px;
+    /* background-color: #fff3f3; */
+    border-radius: 4px;
+    margin-left: 39px;
+    /*margin-right: 20px;*/
+}
+
+.user {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-left: 26px;
+    border: 1px solid #CECECE;
+    /* margin-right: 10px; */
+}
+
+.btn-ask {
+    padding: 10px auto;
+    background-color: #2DB400;
+    color: #fff;
+    height: 48px;
+    width: 131px;
+    border-radius: 24px;
+    font-size: 20px;
+    margin-left: 26px;
+    border: none;
+}
+/* 커서 올리면 색깔 바뀌게 */
+.btn-ask:hover {
+    background-color: #30c000;
+    color: #fff;
+    border: #30c000 2px solid;
+}  
+/* 부드럽게 전환하는 효과 */
+.btn-ask {
+    transition: background-color 0.2s, color 0.2s, border 1s;
+}
+
+
+.content-wrapper {
+    display: flex;
+  /* justify-content: center;  <-- 이 줄을 삭제하거나 주석 처리하세요 */
+    
+    width: 100%;             /* 전체 너비 사용 */
+    padding-left: 105px;     /* 맨 왼쪽 여백 (측정값) */
+    gap: 48px;               /* 좌측 메뉴와 메인 컨텐츠 사이 간격 (측정값) */
+    
+    margin: 0;               /* 중앙 정렬 해제 */
+    padding-top: 90px;
+}
+
+.side-left {
+    width: 183px;   /*좌측 메뉴 너미 (측정값)*/
+    height: fit-content;  /* 내용물만큼 차지함 (스티기 필수) */
+    background-color: #fff;
+    border: 1px solid #E3E4ED;
+    border-radius: 20px;
+    flex-shrink: 0;
+
+    /*스크롤 시 따라오게*/
+    position: sticky;
+    top: 190px;
+    padding: 10px 0; /* 위 아래 살짝 여백주기 */
+
+}
+
+.category-list {
+    list-style: none;
+    padding-inline: 1px;
+    margin: 10px;
+}
+
+.category-list li {
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 450;
+    color: #333;
+    cursor: pointer;
+    border-radius: 8px;
+    border: #F5F5FF 2px solid;
+    margin-bottom: 5px;
+}
+/* 활성화된 카테고리 리스트 */
+.category-list li.active {
+    background-color: #2DB400;
+    color: #fff;
+    font-weight: 500;
+    border: #2DB400 2px solid;
+}
+/* 커서 올리면 색깔 바뀌게 */
+.category-list li .active, .category-list li:hover {
+    background-color: #30c000;
+    color: #fff;
+    font-weight: 500;
+    border: #30c000 2px solid;
+}  
+/* 부드럽게 전환하는 효과 */
+.category-list li {
+    transition: background-color 0.2s, color 0.2s, border 0.2s;
+}
+
+
+
+.main-content {
+    width: 928px;   /* 메인 컨텐츠 너비 (측정값) */
+    flex-shrink: 0;
+}
+
+.tab-menu {
+    margin-right: 25px;
+}
+
+.tab-menu button{
+    /* display: flex; */
+    gap: 10px; /* 탭 메뉴 간격 */
+    font-size: 35px;
+    padding: 15px;
+    padding-inline: 20px;
+    background-color: #fff;
+    color: #A4A6B1;
+    border: none;
+    margin-bottom: 20px; /* 탭 메뉴와 카드 사이 간격 (측정값) */
+    font-weight: 500;
+}
+
+.tab-menu button.active {
+    border-bottom: #2DB400 4px solid; /* 활성화된 탭의 밑줄 스타일 */
+    color: #000;
+    font-weight: 500;
+}
+
+
+/* 커서 올리면 색깔 바뀌게 */
+.tab-menu button:hover, .tab-menu button:active {
+    border-bottom: #30c000 4px solid;
+    color: #000;
+    font-weight: 500;
+}  
+/* 부드럽게 전환하는 효과 */
+.tab-menu button {
+    transition: background-color 0.2s, color 0.2s, border 0.08s;
+}
+
+/* 중앙 카테고리 */
+.category-middle {
+    font-weight: 400;
+    font-size: 22px;
+    margin-top: -30px;
+    line-height: 0.3;
+    margin-bottom: 50px;
+}
+.category-middle .cat2 {
+    font-size: 37px;
+    font-weight: 500;
+}
+
+
+
+.side-right {
+    width: 337px;   /* 우측 메뉴 너비 (측정값) */
+    margin-left: 78px; /* 메인 컨텐츠와 우측 메뉴 사이 간격 (측정값) */
+    flex-shrink: 0;
+
+    /* 스티키 설정 */
+    position: -webkit-sticky; /* 사파리 대응 */
+    position: sticky;
+    top: 190px;              /* 헤더 높이만큼 띄워주기 */
+    
+    /* 중요: 우측 사이드바가 부모의 높이를 다 쓰게 함 */
+    height: fit-content;     
+    align-self: flex-start;  /* 부모가 flex일 때 높이가 늘어나는 것 방지 */
+
+}
+
+
+
+
+/* 카드 UI 디자인 */
+
+/* =========================================
+    1. 기본 설정 및 레이아웃
+   ========================================= */
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+} */
+
+/* body {
+    background-color: #f5f6f7;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    padding: 50px 0;
+} */
+
+/* .container_m {
+    display: flex;
+    justify-content: top;
+    align-items: flex-start;
+    gap: 24px;
+} */
+
+/* =========================================
+    2. 메인 질문 카드 (Q-Card)
+   ========================================= */
+.question-card {
+    width: 928px;
+    height: auto;
+    padding: 15px;
+    padding-top: 25px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: #EEEEFC 1px solid;
+    border-radius: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card-top {
+    padding-left: 20px;
+}
+
+/* 카드 상단: 프로필 및 아이콘 */
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.plane .PSA {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #eee;
+}
+
+.nickname {
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+}
+
+.date-view {
+    font-size: 14px;
+    color: #999;
+}
+
+.top-icons {
+    display: flex;
+    margin-right: 40px;
+    gap: 20px;
+}
+
+.icon-png {
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    object-fit: contain;
+    
+}
+
+.main-title {
+    font-size: 50px;
+    margin-top: 10px;
+    font-weight: 450;
+    margin-left: -8px;
+}
+
+.q-mark {
+    color: #2db400;
+    margin-right: 5px;
+}
+
+/* 카드 중간: 본문 */
+.card-mid {
+
+    margin-bottom: 50px;
+    /* margin: 50px 0; */
+}
+
+.content {
+    padding-left: 70px;
+    padding-right: 40px;
+    line-height: 1.6;
+    font-size: 17px;
+    color: #333;
+    word-break: keep-all;
+}
+
+/* 카드 하단: 액션바 */
+.card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-left: 60px;
+    margin-right: 50px;
+    
+}
+
+.bottom-left {
+    display: flex;
+    align-items: center;
+}
+
+.btn-comment {
+    display: inline-block;
+    border: 1px solid #e0e0e0;
+    padding: 8px 33px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.bottom-center {
+    width: 480px;
+    display: flex;
+    justify-content: flex-start; /* 좌측 정렬 */
+    gap: 10px;
+}
+
+.tag {
+    background: #EEEEFC;
+    color: #8585B0;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.right-icon, .right-icon1 {
+    height: 35px;
+    width: auto;
+}
+
+.right-icon {
+    padding-bottom: 25px;
+}
+
+.vote-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.vote-count {
+    font-size: 15px;
+    color: #888;
+    font-weight: 500;
+}
+
+
+
+/* 구분선 */
+.divider {
+    border-top: 2px solid #e1e2e6;
+    margin-bottom: 25px;
+}
+
+/* =========================================
+    3. 댓글 확장 로직 (중요: 수정된 부분)
+   ========================================= */
+
+/* 체크박스는 항상 숨김 */
+#comment-toggle, #comment-toggle1, #comment-toggle2, #comment-toggle3 {
+    display: none;
+}
+
+/* 초기 상태: 높이 0, 숨김 */
+.expandable-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 14px;
+}
+
+/* 체크박스 체크 시(댓글 버튼 클릭 시) 동작 */
+#comment-toggle:checked ~ .expandable-content {
+    max-height: 500px; /* 답변창 높이에 따라 조절 가능 */
+    opacity: 1;
+    margin-top: 25px;
+}
+
+/* 체크 시 댓글 버튼 스타일 변경 (녹색 활성화) */
+#comment-toggle:checked ~ .card-bottom .btn-comment {
+    background: #2db400;
+    color: #fff;
+    border-color: #2db400;
+}
+
+
+
+/* =========================================
+    4. 댓글 입력창 디자인
+   ========================================= */
+.input-container {
+    margin-left: 55px;
+    border: 3px solid #e0e0e0;
+    border-radius: 20px;
+    background: #ffffff;
+    transition: border-color 0.2s;
+}
+
+.input-container:focus-within {
+    border-color: #2db400;
+}
+
+.comment-field {
+    width: 94.5%;
+    height: 100px;
+    border: none;
+    background: transparent;
+    padding: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    word-break: keep-all;
+    
+}
+
+/* 경고문구 색깔이니까 수정할것 */
+.comment-field .placeholder {
+    color: #9980ff;
+}
+
+.input-divider {
+    border-top: 1px solid #f2f2f2;
+    /* padding-left: 5px;
+    padding-right: 5px;
+    justify-content: center;  가운데 정렬 */
+}
+
+.input-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 25px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+/* 글자수 카운트 */
+.char-count {
+    font-size: 15px;
+    color: #aaa;
+}
+
+.btn-submit {
+    background: #a5d6a7; /* 기본 비활성색 */
+    color: #fff;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* 입력창에 글을 쓰려고 포커스하면 버튼이 진해짐 */
+.comment-field:focus ~ .input-footer .btn-submit {
+    background: #2db400;
+}
+
+/* 메인 질문 카드 끝 */
+
+
+
+
+/* 초록바 (필터 및 답변수 표시) */
+.greenbar {
+    display : flex;
+    width: 970px;
+    height: 40px;
+    border-radius: 30px;
+    padding: 20px;
+    background-color: #EBF6F1;
+    align-items: center;
+    justify-content: space-between; /* 여백 중앙에 */
+}
+
+.greenbar .left {
+    padding-left: 25px;
+    font-size: 30px;
+    font-weight: 200;
+}
+
+.greenbar .right {
+    display: flex;
+    justify-content: right;
+    padding-right: 30px;
+    gap: 25px;
+}
+
+.filter1, .filter2 {
+    background-color: #C6D1CC;
+    border-radius: 20px;
+    height: 20px;
+    align-items: center;
+    color: #2B4822;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.filter1 p, .filter2 p {
+    margin: 0;
+    line-height: 1;
+}
+
+
+
+
+
+
+/* 채택된 답변자 (파란색 글로우 효과) */
+
+
+.question-card1 {
+    width: 928px;
+    height: auto;
+    padding: 15px;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: #6E7CFF 4px solid;
+    box-shadow: 0 0 15px 5px #6e7cff35;
+    border-radius: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.Answer {
+    width: 65px; 
+    height: auto;
+    border-radius: 33px;
+    border: #A4A6B1 1px solid;
+}
+
+.nickname1 {
+    font-weight: 600;
+    font-size: 27px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.level-and-date {
+    display: flex;
+    gap: 20px;
+    align-items: center; /* 가로 중앙 맞춤 */
+}
+
+
+/* 레벨 */ 
+
+.answer-level-galaxy {
+    background-color: #E1DAFF;
+    color: #6643FF;
+    border:#FFBD2E 2px solid;
+    border-radius: 13px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px;
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+.answer-level-star {
+    background-color: #FFF4DE;
+    color: #FFB310;
+    border:#FFB310 2px solid;
+    border-radius: 13px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px;
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+.answer-level-super {
+    background-color: #E3F9FF;
+    color: #009074;
+    border:#00F2C2 2px solid;
+    border-radius: 13px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px;
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+
+.adopted {
+    display: flex;
+    background-color: #E2E2FF;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 16px;
+    border: #A7B0FF 4px solid;
+    border-radius: 30px;
+    align-items: center; /* 가로 중앙 맞춤 */
+    font-size: 25px;
+    font-weight: 400;
+    color: #607BFF;
+    gap: 12px;
+}
+
+.check {
+    margin-bottom: -5px;
+}
+
+.chV {
+    background-color: #fff;
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.more-a {
+    padding-top: 10px;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.border-a {
+    width: 95%;
+    border: #ABACB3 0.5px solid;
+    margin-bottom: 5px;
+}
+
+.border-a1 {
+    width: 95%;
+    border: #ABACB3 0.5px solid;
+    margin-bottom: 45px;
+}
+
+.job {
+    padding-left: 50px;
+}
+
+.content1 {
+    padding-top: 10px;
+    padding-left: 70px;
+    padding-right: 40px;
+    line-height: 1.6;
+    font-size: 17px;
+    color: #333;
+    word-break: keep-all;
+}
+
+.job-info {
+    align-items: left;
+    width: fit-content;
+    padding: 0.8px;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #21217F;
+    background-color: #F5F5FF;
+    border: #C2C6DE 1.6px solid;
+}
+
+.question-card1 .bottom-left {
+    gap: 18px;
+}
+
+.question-card3 .bottom-left {
+    gap: 18px;
+}
+
+.adopted-btn .active {
+    background-color: #FAFAFF;
+    border: #6E7CFF 3px solid;
+    color: #6E7CFF;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 5px;
+    padding-left: 18px;
+    padding-right: 18px;
+    border-radius: 22px;
+}
+
+.adopted-btn .deactive {
+    background-color: #FAFAFF;
+    border: #C2C6DE 3px solid;
+    color: #000000;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 5px;
+    padding-left: 18px;
+    padding-right: 18px;
+    border-radius: 22px;
+}
+
+.vote-unit-a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    padding-top: 5px;
+}
+
+.question-card3 {
+    width: 928px;
+    height: auto;
+    padding: 15px;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: #EEEEFC 1px solid;
+    border-radius: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* 질문답변 카드 끝 */
+
+/* 초록바 : 답변 더 보기 */
+.greenbar-more {
+    display : flex;
+    width: 970px;
+    height: 36px;
+    border-radius: 36px;
+    padding: 20px;
+    background-color: #EBF6F1;
+    align-items: center;
+    justify-content: center; /* 중앙정렬 */
+    font-size: 23px;
+    font-weight: 450;
+    margin-bottom: 10px;
+}
+
+
+
+/* 네스프레소 광고 */
+
+.ad-container {
+  position: relative;
+  width: 1012px;
+  /* max-width: 928px; */
+  height: 200px;
+  margin: 10px 0px;
+  border-radius: 30px;
+  overflow: hidden; /* 내부 배경이 튀어나오지 않게 함 */
+  display: flex;
+  align-items: center;
+  /* box-shadow: 0 10px 30px rgba(0,0,0,0.3); */
+}
+
+/* 배경 이미지 설정 */
+.ad-background {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 120%; /* 스크롤 여유분을 위해 높이를 더 잡음 */
+  background-image: url('/img/33_네스프레소_머신.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px); /* 블러 처리 */
+  z-index: 1;
+  /* 패럴랙스 효과: 배경 고정 방식 */
+  background-attachment: fixed; 
+}
+
+/* 50% 검정 필터 */
+.ad-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+/* 실제 텍스트 및 이미지 콘텐츠 */
+.ad-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  width: 100%;
+  padding: 0 20px;
+  color: white;
+  align-items: center;
+}
+
+.content-left img {
+  height: 160px;
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+  border-radius: 15px;
+}
+
+.content-right {
+  flex: 1;
+  margin-left: 30px;
+  padding-bottom: 12px;
+}
+
+.ad-badge {
+  position: absolute;
+  top: 0; right: 0;
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 2px 8px;
+  border-radius: 15px;
+  font-size: 12px;
+  margin-right: 25px;
+  margin-top: 10px;
+}
+
+.main-title-ad { font-size: 24px; margin-bottom: 7px; font-weight: 400; }
+.sub-title { font-size: 18px; margin-top: 10px; margin-bottom: 1px; opacity: 0.9; font-weight: 300;}
+.desc { font-size: 18px; opacity: 0.7; margin-top: 1px; margin-bottom: 15px; }
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand { display: flex; align-items: center; font-size: 18px; font-weight: 500; }
+.logo1 { width: 30px; height: 30px; margin-right: 10px; border-radius: 50%;}
+
+.btn-more {
+  border: 1px solid white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  background: rgba(255,255,255,0.1);
+  transition: 0.3s;
+}
+
+.btn-more:hover { background: white; color: black; }
+
+.AD-bottom {
+    width: 1012px;
+    margin-top: 15px;
+    margin-bottom: 160px;
+}
+
+.AD-bottom img {
+    border-radius: 30px;
+}
+
+
+
+
+/* 우측 메뉴바 */
+
+.notice-box {
+    background: #2DB400;
+    width: 210px;
+    height: 20px;
+    border-radius: 40px;
+    padding: 15px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.my {
+    color: #fff;
+    font-size: 18px;
+    background: none;
+    font-weight: 500;
+    padding-right: 20px;
+    border: none;
+}
+
+.w-line {
+    width: 1px;
+    height: 130%;
+    background-color: #fff;
+}
+
+.attancion {
+    color: #fff;
+    font-size: 18px;
+    background: none;
+    font-weight: 500;
+    padding-left: 20px;
+    border: none;
+}
+
+.SR-cloud {
+    background: #FAFAFF;
+    border: 1px solid #EEEEFC;
+    border-radius: 20px;
+    padding: 15px;
+    padding-bottom: 25px;
+    margin-bottom: 15px;
+    width: 210px;
+    height: auto;
+}
+
+.SR-top {
+    margin-top: 0px;
+    margin-bottom: 15px;
+    justify-content: space-between;
+    border-bottom: #C2C6DE 1px solid;
+    padding-bottom: 8px;
+    display: flex;
+    height: 30px;
+}
+
+
+/* 검색결과 */
+
+.Results {
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+    margin-top: 0px;
+    margin-bottom: 3px;
+}
+
+.Results span {
+    color: #2DB400;
+    font-weight: 600;
+}
+
+.see-all {
+    font-size: 13px;
+    color: #8989AD;
+    align-items: center; /* 가로 중앙 맞춤 */
+    padding-top: 5px;
+    text-decoration: underline;
+    text-decoration-color:#8989AD;
+}
+
+.result-title {
+    font-size: 14px;
+    font-weight: 550;
+}
+
+.SR {
+    margin-top: -7px;
+    font-size: 10.5px;
+}
+
+.SR p {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    word-break: keep-all;
+}
+
+.result-bottom {
+    align-items: left;
+    display: flex;
+    gap: 18px;
+    padding-bottom: 7px;
+    border-bottom: #C2C6DE 1px solid;
+}
+
+.Ans {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.date {
+    color: #8989AD;
+    padding-top: 1px;
+    font-size: 12px;
+}
+
+.SRfooter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    
+}
+
+.Fcontents {
+    font-size: 13px;
+    color: #535367;
+}
+
+.num, .num-act {
+    margin-inline: 2.5px;
+}
+
+.arowL-deact {
+    color:#C2C6DE;
+}
+
+.num-act {
+    font-weight: 700;
+    color: #2DB400;
+    text-decoration: underline;
+    text-decoration-color:#2DB400;
+}
+
+/* 검색결과 끝 */
+
+
+/* 많이 본 QnA */
+
+.QnA {
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+    margin-top: 0px;
+    margin-bottom: 3px;
+}
+
+.date-av {
+    font-size: 13px;
+    color: #8989AD;
+    font-weight: 450;
+    align-items: center; /* 가로 중앙 맞춤 */
+    padding-top: 8px;
+}
+
+
+
+/* 많이 본 QnA 끝 */
+
+
+
+/* 우측 사이드바 푸터 */
+
+/* 푸터 */
+.footer {
+    width: 240px;
+    color: #828282;
+    font-size: 11px;
+    font-weight: 400;
+    padding-top: 10px;
+}
+
+.footer-inner {
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    width: 240px;
+    place-items: center; /* 수직 및 수평 중앙 정렬 */
+}
+
+.footer-1 span, .footer-2 span, .footer-3 span {
+    margin-inline: 5px;
+}
+
+.footer-2, .footer-3 { 
+    margin-top: 3px;
+}
