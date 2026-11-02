@@ -1,7 +1,7 @@
 /* 전체 레이아웃 세팅 */
 .container {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -459,16 +459,6 @@
 /* =========================================
     3. 댓글 확장 로직 (중요: 수정된 부분)
    ========================================= */
-
-
-    
-
-
-
-
-
-
-
 
 /* 체크박스는 항상 숨김 */
 #comment-toggle, #comment-toggle1, #comment-toggle2, #comment-toggle3 {

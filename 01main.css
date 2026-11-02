@@ -1,7 +1,7 @@
 /* 전체 레이아웃 세팅 */
 .container {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -458,7 +458,7 @@
 
 /* 분야별 고수 */
 
-/* .expert-section {
+.expert-section {
     width: 928px;
     height: 430px;
     padding: 15px;
@@ -476,122 +476,6 @@
     color: #fff;
     font-size: 50px;
     margin-top: 10px;
-}
-
-.expert-rank {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 30px;
-}
-
-.rank_contents_C img {
-    width: 500px;
-    height: auto;
-} */
-
-
-.expert-section {
-    position: relative; /* 화살표나 더보기 버튼 배치를 위해 */
-    width: 1010px;
-    height: auto;
-    background: linear-gradient(180deg, #7858FF 20%, #9279FF 100%);
-    border-radius: 35px;
-    margin: 0 auto;
-    overflow: hidden; /* 영역 밖으로 나가는 것 방지 */
-}
-
-.expert-section h3 {
-    text-align: center;
-    color: #fff;
-    font-size: 40px;
-    margin-top: 15px;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-/* 1, 2, 3위를 감싸는 컨테이너 */
-.expert-container {
-    position: relative;
-    width: 550px; /* 포디움 이미지 너비에 맞춤 */
-    height: 300px;
-    margin: 50px auto 0;
-    padding-bottom: 25px;
-}
-
-/* 포디움 이미지 (바닥에 깔기) */
-.podium-bg {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 650px;
-    height: 140px;
-    z-index: 1;
-    /* padding-bottom: 70px; */
-}
-
-/* 각 순위 아이템 공통 설정 */
-.rank-item {
-    position: absolute;
-    bottom: 70px; /* 포디움 바닥에서 살짝 띄움 */
-    z-index: 2;
-    text-align: center;
-}
-
-/* 프 사 스타일 */ 
-.profile-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 1px solid rgb(201, 206, 231);
-    overflow: hidden;
-    margin: 0 auto 20px;
-}
-.profile-img img { width: 100%; height: 100%; object-fit: cover; }
-
-/* 1위만 특별하게 더 크게 */
-.rank-1 { left: 50%; transform: translateX(-50%); bottom: 65px; }
-.rank-1 .profile-img { width: 170px; height: 170px; }
-
-.rank-2 { left: 10px; }
-.rank-3 { right: 10px; }
-.rank-3 .profile-img { margin-bottom: 10px;  }
-
-/* 텍스트 스타일링 */
-.rank-info .num1 , .rank-info .num2, .rank-info .num3{ font-size: 24px; margin: 0; }
-.rank-1 .num1 { color: #FFB800; font-size: 32px; font-weight: 800;} /* 1위 숫자는 더 크게 */
-.rank-2 .num2 {color: #9CA5CCff; font-weight: 700;}
-.rank-3 .num3 {color: #B38477;font-weight: 700;}
-.rank-info .name { font-size: 18px; color: #333; margin: 0; margin-bottom: 3px;}
-.rank-1 .category { font-size: 14px; color: #666; margin-bottom: 5px; }
-
-
-
-
-
-
-.btn-more {
-    width: 1010px;
-    /* height는 삭제하거나 line-height로 조절하는 게 좋음 */
-    display: block;
-    margin: 30px auto 0; /* 상단 여백 30px, 좌우 가운데 정렬 */
-    
-    padding: 20px 0; /* 위아래 여백을 주면 글자가 자연스럽게 가운데로 */
-    background-color: #EEEEFC;
-    color: #4e4e4e;
-    border-radius: 50px; /* 알약 모양을 위해 값 올림 */
-    font-size: 25px;
-    border: none;
-    cursor: pointer; /* 마우스 올렸을 때 클릭 손가락 모양 추가 */
-    
-    /* 텍스트 정렬 */
-    text-align: center;
-    line-height: 1; /* 글자 높이 초기화 */
-}
-
-.bottom_space11 {
-    margin-bottom: 45px; /* 페이지 하단 여백 (측정값) */
 }
 
 
@@ -707,13 +591,4 @@
 
 .footer-2, .footer-3 { 
     margin-top: 3px;
-}
-
-
-.go-qna, .go-main, .go-upload {
-    text-decoration: none;
-    color: inherit;
-    font-family: inherit; /* 부모인 .question-card의 폰트를 그대로 사용 */
-    font-size: inherit;
-    font-weight: inherit;
 }
