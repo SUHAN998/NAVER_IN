@@ -764,3 +764,1086 @@ input:checked + .slider:before {
     cursor: pointer;
     line-height: 1;
 }
+
+/* 33차: 03upload 작성 카드의 외곽 너비를 공통 중앙 콘텐츠 열에 일치시킵니다.
+   기존 928px 고정 너비로 인해 01main/02qna 대비 넓은 화면에서 35px 짧던 현상만 수정합니다. */
+body.kin-upload .main-content > .container_m > .question-card {
+    width: 100%;
+}
+
+/* ============================================================================
+   34차 — 질문 작성 카드만 시안에 맞춘 구조/간격 및 편집 도구 UI.
+   HUD, 3열 그리드, 오른쪽 사이드바와 다른 두 페이지에는 영향을 주지 않습니다.
+   ============================================================================ */
+body.kin-upload .main-content > .container_m > .upload-compose-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: clamp(25px, 3.25vw, 50px) clamp(24px, 3.15vw, 48px) 18px;
+    background: #f8fffc;
+    border: 1px solid #c2e5d5;
+    border-radius: 35px;
+    overflow: visible;
+    margin: 20px 0;
+}
+body.kin-upload .upload-compose-card .card-top,
+body.kin-upload .upload-compose-card .card-mid {
+    margin: 0;
+    padding: 0;
+}
+body.kin-upload .upload-compose-card .top1 {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0 0 11px;
+}
+body.kin-upload .upload-compose-card .top1 h2 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 650;
+    line-height: 1.35;
+    color: #111;
+}
+body.kin-upload .upload-compose-card .top1 .input-counter {
+    margin: 0 0 3px;
+    padding: 0;
+    color: #9ca0a9;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+body.kin-upload .upload-compose-card .input-title {
+    width: 100%;
+}
+body.kin-upload .upload-compose-card .title {
+    display: block;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    padding: 0 19px;
+    border: 2px solid #b3b4bd;
+    border-radius: 9px;
+    background-color: #fff;
+    font-size: 16px;
+    color: #1b1b1b;
+    outline-offset: 2px;
+}
+body.kin-upload .upload-compose-card .title:focus-visible,
+body.kin-upload .upload-compose-card .content-wrap:focus-within,
+body.kin-upload .upload-compose-card .tag-input-box:focus-within {
+    border-color: #2db400;
+}
+body.kin-upload .upload-compose-card .card-mid {
+    margin-top: 48px;
+}
+body.kin-upload .upload-compose-card .content-wrap {
+    background: #fff;
+    border: 1.5px solid #b3b4bd;
+    border-radius: 11px;
+    overflow: hidden;
+}
+body.kin-upload .upload-compose-card .content-top {
+    width: auto;
+    height: 57px;
+    min-height: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 24px;
+    padding: 4px 0;
+    border: 0;
+    border-bottom: 1px solid #bfc3cd;
+    background: #fff;
+}
+body.kin-upload .upload-compose-card .upload-toolbar-icons {
+    display: grid;
+    grid-template-columns: repeat(4, 36px);
+    align-items: center;
+    justify-items: center;
+    column-gap: 5px;
+    width: max-content;
+}
+body.kin-upload .upload-compose-card .upload-tool {
+    width: 36px;
+    height: 37px;
+    padding: 5px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+body.kin-upload .upload-compose-card .upload-tool:hover,
+body.kin-upload .upload-compose-card .upload-tool:focus-visible {
+    background: #eff5f2;
+}
+body.kin-upload .upload-compose-card .upload-tool img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 25px;
+    max-height: 25px;
+    object-fit: contain;
+}
+body.kin-upload .upload-compose-card .upload-tool#insert-bold img { max-width: 23px; }
+body.kin-upload .upload-compose-card .upload-tool#insert-file img { max-height: 27px; }
+body.kin-upload .upload-compose-card .textarea-content {
+    min-height: 0;
+    padding: 0;
+}
+body.kin-upload .upload-compose-card .content {
+    display: block;
+    resize: vertical;
+    width: 100%;
+    min-width: 0;
+    height: clamp(310px, 24vw, 390px);
+    min-height: 230px;
+    margin: 0;
+    padding: 19px 24px 24px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #1b1b1b;
+    word-break: keep-all;
+}
+body.kin-upload .upload-compose-card .upload-attachments[hidden],
+body.kin-upload .upload-compose-card .upload-tag-list[hidden] { display: none; }
+body.kin-upload .upload-compose-card .upload-attachments {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+body.kin-upload .upload-compose-card .upload-file-pill {
+    border: 1px solid #c3d7d0;
+    background: white;
+    border-radius: 18px;
+    padding: 5px 11px;
+    font-size: 13px;
+    color: #66776f;
+}
+/* 처음에는 칩/빈 행을 표시하지 않고, 태그 추가 시에만 보입니다. */
+body.kin-upload .upload-compose-card .upload-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+    padding: 0 20px;
+    margin: 16px 0 0;
+}
+body.kin-upload .upload-compose-card .upload-tag-list .tag-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 5px 6px 5px 11px;
+    border: 0;
+    border-radius: 20px;
+    background: #eeeefa;
+    color: #8585b0;
+    font-size: 13px;
+    white-space: nowrap;
+}
+body.kin-upload .upload-compose-card .tag-remove {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #8585b0;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .15s ease;
+}
+body.kin-upload .upload-compose-card .tag-item:hover .tag-remove,
+body.kin-upload .upload-compose-card .tag-item:focus-within .tag-remove {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+body.kin-upload .upload-compose-card .tag-remove:hover { background: #deddf3; }
+body.kin-upload .upload-compose-card .upload-metadata-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 28px;
+    margin: 28px 0 0;
+    padding: 15px 24px;
+    border-top: 1px solid #97c6ae;
+    border-bottom: 1px solid #97c6ae;
+}
+body.kin-upload .upload-compose-card .bottom1-L,
+body.kin-upload .upload-compose-card .bottom1-R {
+    min-width: 0;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 16px;
+    margin: 0;
+}
+body.kin-upload .upload-compose-card .upload-meta-label {
+    display: block;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1b1b1b;
+}
+body.kin-upload .upload-compose-card .select-box {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+body.kin-upload .upload-compose-card #category {
+    width: 100%;
+    min-width: 0;
+    height: 41px;
+    padding: 0 38px 0 14px;
+    font-size: 15px;
+    font-family: inherit;
+    border: 1.5px solid #afb0ba;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+}
+body.kin-upload .upload-compose-card .tag-input-box {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    height: 41px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px 0 12px;
+    background: #fff;
+    border: 1.5px solid #afb0ba;
+    border-radius: 8px;
+}
+body.kin-upload .upload-compose-card .tag-input-box input {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 0;
+    padding: 7px 0;
+    color: #333;
+    font-size: 15px;
+    font-family: inherit;
+}
+body.kin-upload .upload-compose-card .tag-input-box #add-tag-btn {
+    flex: 0 0 auto;
+    padding: 4px 8px;
+    color: #8585b0;
+    font-size: 15px;
+    font-family: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+body.kin-upload .upload-compose-card .tag-input-box #add-tag-btn:hover { color: #2db400; }
+/* 펼침 내용은 하단의 펼침/접기 버튼 바로 위에 나타납니다. */
+body.kin-upload .upload-compose-card .expand-section { width: 100%; min-width: 0; }
+body.kin-upload .upload-compose-card #expand-trigger {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+body.kin-upload .upload-compose-card .expand-target {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    transition: max-height .32s ease, opacity .2s ease;
+}
+body.kin-upload .upload-compose-card #expand-trigger:checked ~ .expand-target {
+    max-height: 550px;
+    opacity: 1;
+    margin: 0;
+    padding: 0;
+}
+body.kin-upload .upload-compose-card .expand-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin: 0;
+    padding: 35px 0 5px;
+    cursor: pointer;
+    color: #111;
+    font-size: 18px;
+    line-height: 1.2;
+    user-select: none;
+}
+body.kin-upload .upload-compose-card .expand-btn:focus-visible { outline: 2px solid #2db400; outline-offset: 3px; }
+body.kin-upload .upload-compose-card .expand-btn .arrow {
+    display: block;
+    font-size: 14px;
+    color: #c4d4cd;
+    transition: transform .2s ease;
+}
+body.kin-upload .upload-compose-card #expand-trigger:checked ~ .expand-btn .arrow { transform: rotate(180deg); }
+body.kin-upload .upload-compose-card .setting-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 14px;
+    padding: 16px 24px;
+    min-width: 0;
+    border-bottom: 1px solid #97c6ae;
+    margin: 0;
+}
+body.kin-upload .upload-compose-card .setting-label {
+    flex: 0 0 90px;
+    width: 90px;
+    min-width: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: #111;
+}
+body.kin-upload .upload-compose-card .setting-content { min-width: 0; }
+body.kin-upload .upload-compose-card .upload-expert-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 11px;
+    flex: 1;
+}
+body.kin-upload .upload-compose-card .expert-select {
+    flex: 0 1 225px;
+    min-width: 155px;
+    width: 225px;
+    height: 41px;
+    border: 1.5px solid #afb0ba;
+    border-radius: 8px;
+    padding: 0 36px 0 12px;
+    color: #333;
+    background: #fff;
+    font-size: 14px;
+}
+body.kin-upload .upload-compose-card .info-text {
+    font-size: 13px;
+    color: #a9aeb6;
+    line-height: 1.4;
+}
+body.kin-upload .upload-compose-card .setting-content.toggle-group {
+    display: grid;
+    flex-wrap: nowrap;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(155px, 1.8fr);
+    gap: 8px;
+    flex: 1;
+    padding: 0;
+    width: auto;
+    align-items: start;
+}
+body.kin-upload .upload-compose-card .toggle-item {
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+}
+body.kin-upload .upload-compose-card .toggle-item > .toggle-name {
+    height: 35px;
+    min-height: 35px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    white-space: normal;
+    color: #262626;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.12;
+    text-align: center;
+}
+body.kin-upload .upload-compose-card .switch {
+    flex: 0 0 auto;
+    width: 51px;
+    height: 25px;
+    margin: 3px 0 0;
+}
+body.kin-upload .upload-compose-card .slider:before { height: 19px; width: 19px; left: 3px; bottom: 3px; }
+body.kin-upload .upload-compose-card input:checked + .slider:before { transform: translateX(26px); }
+body.kin-upload .upload-compose-card .status-text {
+    display: block;
+    margin: 0;
+    font-size: 12px;
+    color: #929b98;
+    white-space: nowrap;
+}
+body.kin-upload .upload-compose-card .reservation {
+    align-items: center !important;
+    width: 100% !important;
+}
+body.kin-upload .upload-compose-card .reservation-controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 11px;
+    margin-top: 0;
+    width: 100%;
+    justify-content: center;
+}
+body.kin-upload .upload-compose-card .switch-box {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 0;
+    margin: 0;
+}
+body.kin-upload .upload-compose-card .time-picker-container {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin: 1px 0 0;
+    padding: 0;
+}
+body.kin-upload .upload-compose-card .time-input {
+    width: 112px;
+    height: 31px;
+    min-width: 0;
+    border: 1px solid #aeb0b6;
+    border-radius: 5px;
+    color: #333;
+    font-size: 12px;
+    text-align: center;
+    background: #fff;
+}
+body.kin-upload .upload-compose-card .time-input:disabled { opacity: .55; background: #f5f6f5; }
+body.kin-upload .upload-compose-card .btn-more {
+    width: 28px;
+    height: 31px;
+    flex: 0 0 auto;
+    font-size: 12px;
+    color: #666;
+}
+body.kin-upload .upload-compose-card .btn-more:disabled { opacity: .5; cursor: default; }
+
+@media (max-width: 1300px) {
+    body.kin-upload .main-content > .container_m > .upload-compose-card { padding-inline: clamp(19px, 2.8vw, 32px); }
+    body.kin-upload .upload-compose-card .upload-metadata-row { padding-inline: 8px; gap: 14px; }
+    body.kin-upload .upload-compose-card .upload-meta-label { font-size: 15px; }
+    body.kin-upload .upload-compose-card .setting-row { padding-inline: 8px; }
+    body.kin-upload .upload-compose-card .setting-label { flex-basis: 70px; width: 70px; font-size: 14px; }
+    body.kin-upload .upload-compose-card .setting-content.toggle-group { grid-template-columns: repeat(4, minmax(56px, 1fr)) minmax(150px, 1.6fr); gap: 5px; }
+    body.kin-upload .upload-compose-card .toggle-item > .toggle-name { font-size: 11px; }
+    body.kin-upload .upload-compose-card .reservation-controls { gap: 6px; }
+    body.kin-upload .upload-compose-card .time-input { width: 91px; }
+}
+@media (max-width: 1050px) {
+    body.kin-upload .upload-compose-card .upload-metadata-row { grid-template-columns: 1fr; gap: 14px; }
+    body.kin-upload .upload-compose-card .bottom1-L,
+    body.kin-upload .upload-compose-card .bottom1-R { width: 100%; }
+    body.kin-upload .upload-compose-card .upload-meta-label { min-width: 88px; }
+    body.kin-upload .upload-compose-card .setting-row { align-items: flex-start; }
+    body.kin-upload .upload-compose-card .setting-content.toggle-group { grid-template-columns: repeat(3, minmax(70px, 1fr)); gap: 15px 6px; }
+    body.kin-upload .upload-compose-card #expand-trigger:checked ~ .expand-target { max-height: 780px; }
+    body.kin-upload .upload-compose-card .toggle-item > .toggle-name { font-size: 12px; }
+}
+@media (max-width: 720px) {
+    body.kin-upload .main-content > .container_m > .upload-compose-card { padding: 27px 18px 14px; border-radius: 26px; }
+    body.kin-upload .upload-compose-card .top1 h2 { font-size: 18px; }
+    body.kin-upload .upload-compose-card .card-mid { margin-top: 33px; }
+    body.kin-upload .upload-compose-card .title { height: 44px; font-size: 14px; }
+    body.kin-upload .upload-compose-card .content-top { margin-inline: 15px; height: 51px; min-height: 51px; }
+    body.kin-upload .upload-compose-card .upload-toolbar-icons { grid-template-columns: repeat(4, 32px); gap: 3px; }
+    body.kin-upload .upload-compose-card .upload-tool { width: 32px; height: 34px; }
+    body.kin-upload .upload-compose-card .upload-tool img { max-width: 22px; max-height: 22px; }
+    body.kin-upload .upload-compose-card .content { height: 265px; min-height: 220px; padding: 16px; font-size: 14px; }
+    body.kin-upload .upload-compose-card .upload-metadata-row { margin-top: 24px; padding-inline: 0; }
+    body.kin-upload .upload-compose-card .setting-row { flex-direction: column; gap: 10px; padding: 14px 0; }
+    body.kin-upload .upload-compose-card .setting-label { flex: 0 0 auto; width: auto; }
+    body.kin-upload .upload-compose-card .setting-content.toggle-group { width: 100%; }
+    body.kin-upload .upload-compose-card #expand-trigger:checked ~ .expand-target { max-height: 1000px; }
+    body.kin-upload .upload-compose-card .expand-btn { padding-top: 24px; font-size: 16px; }
+    body.kin-upload .upload-compose-card .upload-meta-label { font-size: 14px; min-width: 73px; }
+    body.kin-upload .upload-compose-card #category { height: 39px; font-size: 13px; }
+    body.kin-upload .upload-compose-card .tag-input-box { height: 39px; }
+    body.kin-upload .upload-compose-card .tag-input-box input { font-size: 13px; }
+}
+@media (max-width: 440px) {
+    body.kin-upload .main-content > .container_m > .upload-compose-card { padding-inline: 14px; }
+    body.kin-upload .upload-compose-card .upload-metadata-row { padding-inline: 0; }
+    body.kin-upload .upload-compose-card .bottom1-L,
+    body.kin-upload .upload-compose-card .bottom1-R { gap: 8px; }
+    body.kin-upload .upload-compose-card .setting-content.toggle-group { grid-template-columns: repeat(2,minmax(0, 1fr)); }
+    body.kin-upload .upload-compose-card .toggle-item { align-items: center; }
+    body.kin-upload .upload-compose-card .reservation { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+    body.kin-upload .upload-compose-card .expand-target,
+    body.kin-upload .upload-compose-card .tag-remove,
+    body.kin-upload .upload-compose-card .expand-btn .arrow { transition: none; }
+}
+
+
+/* ==========================================================================
+   35차 — 03upload 전용 간격/정렬 및 무페이드 아코디언.
+   원본 HUD, 타 페이지 및 입력 컴포넌트 스타일은 변경하지 않습니다.
+   ========================================================================== */
+
+/* 시안의 붉은 화살표: 광고/질문 등록/임시저장/취소/푸터를 한 덩어리로 내림.
+   sticky 기능은 보존하고 위치 오프셋만 변경합니다. */
+@media (min-width: 1021px) {
+    body.kin-upload .side-right .sticky-side-box {
+        margin-top: clamp(148px, 11.5vw, 202px);
+    }
+}
+
+/* 녹색 기준선: 카드 내부 하단 구성요소를 입력 상자의 왼쪽 선에 맞춤. */
+body.kin-upload .upload-compose-card .upload-metadata-row {
+    padding-left: 0;
+    padding-right: 0;
+}
+body.kin-upload .upload-compose-card .bottom1-L,
+body.kin-upload .upload-compose-card .bottom1-R { gap: 10px; }
+body.kin-upload .upload-compose-card .setting-row {
+    padding-left: 0;
+    padding-right: 0;
+    gap: 10px;
+}
+/* 파란 기준선: 질문 분야 선택창 및 답변자 선택창의 좌측 정렬. */
+body.kin-upload .upload-compose-card .setting-label {
+    flex: 0 0 62px;
+    width: 62px;
+}
+body.kin-upload .upload-compose-card .upload-expert-content {
+    gap: 10px;
+}
+
+/* 보라/주황 기준선: 4개 스위치가 동일한 폭의 슬롯을 차지하도록 하고,
+   예약 설정은 그 오른쪽의 독립된 칸에 유지합니다. */
+body.kin-upload .upload-compose-card .setting-content.toggle-group {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(174px, 0.64fr);
+    gap: 10px;
+    align-items: start;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+}
+body.kin-upload .upload-compose-card .privacy-switches {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 0;
+    width: 100%;
+    min-width: 0;
+}
+body.kin-upload .upload-compose-card .privacy-switches > .toggle-item {
+    width: 100%;
+    min-width: 0;
+    justify-self: center;
+}
+body.kin-upload .upload-compose-card .reservation-controls {
+    gap: 6px;
+    width: 100%;
+}
+body.kin-upload .upload-compose-card .reservation { grid-column: 2; }
+body.kin-upload .upload-compose-card .time-input { width: min(100%, 100px); }
+
+/* grid row (0fr ↔ 1fr) 방식으로 패널의 실제 높이를 보간합니다.
+   opacity를 바꾸지 않기 때문에 Fade In/Out 없이 자연스럽게 열립니다. */
+body.kin-upload .upload-compose-card .expand-target {
+    display: grid;
+    grid-template-rows: 0fr;
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+    transition: grid-template-rows 370ms cubic-bezier(.22,.70,.30,1);
+}
+body.kin-upload .upload-compose-card .expand-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+body.kin-upload .upload-compose-card #expand-trigger:checked ~ .expand-target {
+    grid-template-rows: 1fr;
+    max-height: none;
+    opacity: 1;
+}
+/* 페이지 높이 계측 중에는 애니메이션이 작동하지 않게 합니다. */
+body.kin-upload.kin-upload-measuring .upload-compose-card .expand-target {
+    transition: none !important;
+}
+
+/* 좁은 화면은 예약 컨트롤을 별도 행으로 내려 배치하되 4개 슬롯의
+   균등 간격과 설정 행의 왼쪽 정렬은 유지합니다. */
+@media (max-width: 1050px) {
+    body.kin-upload .upload-compose-card .setting-content.toggle-group {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 14px;
+    }
+    body.kin-upload .upload-compose-card .reservation { grid-column: 1; }
+    body.kin-upload .upload-compose-card .reservation-controls {
+        justify-content: flex-start;
+        width: auto;
+        gap: 18px;
+    }
+}
+@media (max-width: 720px) {
+    body.kin-upload .upload-compose-card .setting-label { width: auto; flex: 0 0 auto; }
+    body.kin-upload .upload-compose-card .setting-row { padding-left: 0; padding-right: 0; }
+}
+@media (max-width: 440px) {
+    body.kin-upload .upload-compose-card .privacy-switches {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 14px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    body.kin-upload .upload-compose-card .expand-target { transition: none; }
+}
+
+/* 짧은 공개설정 라벨은 원본처럼 한 줄로 표시합니다. */
+body.kin-upload .upload-compose-card .setting-label {
+    flex-basis: 70px;
+    width: 70px;
+    white-space: nowrap;
+}
+body.kin-upload .upload-compose-card .setting-row { gap: 6px; }
+body.kin-upload .side-right .btn-under button { white-space: nowrap; }
+@media (max-width: 720px) {
+    body.kin-upload .upload-compose-card .setting-label { flex-basis: auto; width: auto; }
+}
+
+
+/* =======================================================================
+   36차 — 작성 카드 편집 UI 및 우측 고정 메뉴 (다른 페이지 보존)
+   ======================================================================= */
+/* textarea 대신 실제 굵게 입력/본문 이미지가 가능한 contenteditable 입력창. */
+body.kin-upload .upload-compose-card .upload-rich-editor {
+    width: 100%;
+    height: clamp(310px, 24vw, 390px);
+    min-height: 230px;
+    padding: 19px 24px 24px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    outline: none;
+    font-family: Arial, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 400;
+    color: #1b1b1b;
+    cursor: text;
+}
+body.kin-upload .upload-compose-card .upload-rich-editor[data-empty="true"]::before {
+    content: attr(data-placeholder);
+    color: #90949d;
+    pointer-events: none;
+    font: inherit;
+    font-weight: 400;
+}
+body.kin-upload .upload-compose-card .upload-rich-editor b,
+body.kin-upload .upload-compose-card .upload-rich-editor strong { font-weight: 700; }
+body.kin-upload .upload-compose-card #insert-bold[aria-pressed="true"] { background: #e5f4eb; }
+body.kin-upload .upload-compose-card .upload-inline-image {
+    position: relative;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 12px 0;
+    padding: 0;
+    line-height: 0;
+}
+body.kin-upload .upload-compose-card .upload-inline-image img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 550px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px;
+}
+body.kin-upload .upload-compose-card .upload-image-remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: inline-grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    background: #333a;
+    cursor: pointer;
+    opacity: 0;
+}
+body.kin-upload .upload-compose-card .upload-inline-image:hover .upload-image-remove,
+body.kin-upload .upload-compose-card .upload-image-remove:focus-visible { opacity: 1; }
+body.kin-upload .upload-compose-card .upload-file-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+body.kin-upload .upload-compose-card .upload-file-remove {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 17px;
+    color: #8585b0;
+}
+
+/* 마크업 기준: 질문 분야·1:1 질문의 레이블/선택창 및 태그 입력열 간격. */
+@media (min-width: 1051px) {
+    body.kin-upload .upload-compose-card .upload-metadata-row {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 16px;
+    }
+    body.kin-upload .upload-compose-card .bottom1-L,
+    body.kin-upload .upload-compose-card .bottom1-R { gap: 7px; }
+    body.kin-upload .upload-compose-card .select-box { flex: 0 1 205px; }
+    body.kin-upload .upload-compose-card .expert-select {
+        flex: 0 1 205px;
+        min-width: 145px;
+        max-width: 205px;
+    }
+    body.kin-upload .upload-compose-card .upload-meta-label { font-size: 16px; }
+}
+/* 일정 HUD 간격으로 화면을 따라오는 우측 광고·버튼·푸터 묶음. */
+@media (min-width: 1021px) {
+    body.kin-upload .content-wrapper > .side-right {
+        align-self: stretch;
+        height: auto;
+        min-height: 100%;
+        padding-top: clamp(148px, 11.5vw, 202px);
+        box-sizing: border-box;
+    }
+    body.kin-upload .side-right .sticky-side-box {
+        position: sticky;
+        top: calc(var(--kin-header-height) + 18px);
+        margin-top: 0;
+        z-index: 20;
+    }
+}
+/* 펼침 설정 스위치: 4열 균등 슬롯, 예약은 오른쪽 별도 칸에. */
+@media (min-width: 1051px) {
+    body.kin-upload .upload-compose-card .setting-content.toggle-group {
+        grid-template-columns: minmax(0, 1fr) minmax(164px, .60fr);
+        gap: 12px;
+    }
+    body.kin-upload .upload-compose-card .privacy-switches {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        justify-items: stretch;
+    }
+    body.kin-upload .upload-compose-card .reservation-controls {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 5px;
+        flex: 1;
+        width: 100%;
+    }
+    body.kin-upload .upload-compose-card .reservation .toggle-name { white-space: nowrap; }
+    body.kin-upload .upload-compose-card .time-picker-container {
+        display: flex;
+        min-width: 0;
+        gap: 3px;
+        margin-top: 0;
+    }
+    body.kin-upload .upload-compose-card .time-input { width: 90px; }
+    body.kin-upload .upload-compose-card .btn-more { width: 26px; flex-basis: 26px; }
+}
+/* 임시저장·작성취소의 위아래 여백 1.2배 (기존 고정 높이 대비) */
+body.kin-upload .side-right .btn-under .btn-save1,
+body.kin-upload .side-right .btn-under .btn-cancel {
+    min-height: 45.6px;
+    height: auto;
+    padding-top: 9.6px;
+    padding-bottom: 9.6px;
+    line-height: 1.2;
+}
+@media (max-width: 720px) {
+    body.kin-upload .upload-compose-card .upload-rich-editor {
+        height: 265px;
+        min-height: 220px;
+        padding: 16px;
+        font-size: 14px;
+    }
+}
+
+/* 시안의 주황 표시 영역: 넓은 화면에서 예약 시간 컨트롤을 더 읽기 쉽게 확장. */
+@media (min-width: 1400px) {
+    body.kin-upload .upload-compose-card .reservation .time-input { width: 143px; }
+}
+
+
+/* =====================================================================
+   37차 — 실제 고정 우측 메뉴, 동일 선택창 축, 서식 토글 및 예약 정렬
+   ===================================================================== */
+body.kin-upload .upload-compose-card #insert-bullet[aria-pressed="true"],
+body.kin-upload .upload-compose-card #insert-bold[aria-pressed="true"] {
+    background: #e5f4eb;
+    outline: 1px solid #aed6bc;
+}
+body.kin-upload .upload-compose-card .upload-rich-editor ul {
+    list-style: disc outside;
+    padding-left: 27px;
+    margin: 0.35em 0;
+}
+body.kin-upload .upload-compose-card .upload-rich-editor ol {
+    list-style: decimal outside;
+    padding-left: 27px;
+    margin: 0.35em 0;
+}
+body.kin-upload .upload-compose-card .upload-rich-editor li {
+    display: list-item;
+    margin: 0.1em 0;
+    padding-left: 2px;
+}
+
+/* 공통 CSS보다 높은 우선순위로 우측 열 전체를 sticky 요소로 만듭니다.
+   열 자체가 움직이므로 내부 sticky 박스가 부모 높이에 묶이지 않습니다. */
+@media (min-width: 1021px) {
+    body.kin-upload .container .content-wrapper > .side-right {
+        position: sticky;
+        top: calc(var(--kin-header-height) + 18px);
+        align-self: start;
+        height: fit-content;
+        min-height: 0;
+        padding-top: 0;
+        margin-top: clamp(148px, 11.5vw, 202px);
+        overflow: visible;
+    }
+    body.kin-upload .container .content-wrapper > .side-right > .sticky-side-box {
+        position: static;
+        top: auto;
+        margin-top: 0;
+    }
+}
+/* 질문분야와 1:1 답변자 선택창의 시작점과 205px 너비를 동일하게 설정. */
+@media (min-width: 1051px) {
+    body.kin-upload .upload-compose-card .bottom1-L { gap: 6px; }
+    body.kin-upload .upload-compose-card .bottom1-L > .upload-meta-label {
+        flex: 0 0 70px;
+        width: 70px;
+        min-width: 70px;
+    }
+    body.kin-upload .upload-compose-card .bottom1-L > .select-box {
+        flex: 0 0 205px;
+        width: 205px;
+    }
+    body.kin-upload .upload-compose-card .upload-private-row > .setting-label {
+        flex: 0 0 70px;
+        width: 70px;
+    }
+    body.kin-upload .upload-compose-card .upload-private-row { gap: 6px; }
+    body.kin-upload .upload-compose-card .upload-expert-content > .expert-select {
+        flex: 0 0 205px;
+        width: 205px;
+        max-width: 205px;
+    }
+}
+/* 업로드 예약도 다른 스위치와 같은 순서: 이름 → 스위치 → 상태. */
+body.kin-upload .upload-compose-card .reservation .switch-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 72px;
+    width: 72px;
+    gap: 3px;
+}
+body.kin-upload .upload-compose-card .reservation .switch-box > .toggle-name {
+    display: flex;
+    height: 35px;
+    min-height: 35px;
+    align-items: flex-end;
+    justify-content: center;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.12;
+    color: #262626;
+}
+body.kin-upload .upload-compose-card .reservation .reservation-controls {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 4px;
+}
+body.kin-upload .upload-compose-card .reservation .time-picker-container {
+    margin-top: 38px;
+    min-width: 0;
+}
+@media (min-width: 1051px) {
+    body.kin-upload .upload-compose-card .setting-content.toggle-group {
+        grid-template-columns: minmax(0, 1fr) minmax(198px, .58fr);
+        gap: 9px;
+    }
+    body.kin-upload .upload-compose-card .reservation .time-input { width: 90px; }
+    body.kin-upload .upload-compose-card .reservation .btn-more { width: 24px; flex-basis: 24px; }
+}
+@media (max-width: 1050px) {
+    body.kin-upload .upload-compose-card .reservation .time-picker-container { margin-top: 38px; }
+}
+@media (max-width: 720px) {
+    body.kin-upload .upload-compose-card .bottom1-L > .upload-meta-label { min-width: 88px; }
+}
+/* 태블릿 가로 환경에서도 두 선택창의 가로 시작선과 너비를 일치시킵니다. */
+@media (min-width: 721px) and (max-width: 1050px) {
+    body.kin-upload .upload-compose-card .bottom1-L { gap: 6px; }
+    body.kin-upload .upload-compose-card .bottom1-L > .upload-meta-label {
+        flex: 0 0 70px;
+        min-width: 70px;
+        width: 70px;
+    }
+    body.kin-upload .upload-compose-card .bottom1-L > .select-box {
+        flex: 0 0 205px;
+        width: 205px;
+    }
+    body.kin-upload .upload-compose-card .upload-private-row > .setting-label {
+        flex: 0 0 70px;
+        width: 70px;
+    }
+    body.kin-upload .upload-compose-card .upload-private-row { gap: 6px; }
+    body.kin-upload .upload-compose-card .upload-expert-content > .expert-select {
+        flex: 0 0 205px;
+        width: 205px;
+        max-width: 205px;
+    }
+}
+
+
+/* =======================================================================
+   38차 — 작성 페이지 우측 메뉴 시작선/고정 여백 + 예약 날짜/시각 2칸
+   ======================================================================= */
+@media (min-width: 1021px) {
+    /* 빨간선: 처음 위치를 약 50px 올립니다.
+       고정 위치도 첫 화면의 좌표로 유지해 파란 여백이 변하지 않습니다. */
+    body.kin-upload .container .content-wrapper > .side-right {
+        margin-top: max(0px, calc(clamp(148px, 11.5vw, 202px) - 50px));
+        /* 최초 위치와 sticky 고정 위치를 동일한 식으로 계산해
+           HUD와 광고 사이의 파란 마크업 여백이 스크롤에도 변하지 않도록 합니다. */
+        top: calc(var(--kin-header-height) + var(--kin-top-gap) + max(0px, calc(clamp(148px, 11.5vw, 202px) - 50px)));
+    }
+}
+/* 업로드 예약 토글 + 두 개의 입력 그룹: 날짜가 앞, 오전/오후 시·분이 뒤. */
+body.kin-upload .upload-compose-card .reservation .reservation-controls {
+    display: grid;
+    grid-template-columns: 68px minmax(0, 1fr);
+    align-items: start;
+    justify-content: start;
+    gap: 6px;
+    width: 100%;
+}
+body.kin-upload .upload-compose-card .reservation .switch-box {
+    width: 68px;
+    flex-basis: 68px;
+}
+body.kin-upload .upload-compose-card .reservation .time-picker-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    min-width: 0;
+    margin-top: 38px;
+}
+body.kin-upload .upload-compose-card .reserve-date-field,
+body.kin-upload .upload-compose-card .reserve-clock-field {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    height: 31px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #afb2bc;
+    border-radius: 5px;
+    background: #fff;
+}
+body.kin-upload .upload-compose-card .reserve-date-input {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    padding: 0 3px;
+    font: 11px/1.2 Arial, 'Malgun Gothic', sans-serif;
+    color: #343943;
+    background: transparent;
+    border: 0;
+    border-radius: 5px;
+    outline-offset: 2px;
+}
+body.kin-upload .upload-compose-card .reserve-date-hint {
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font: 11px/1 Arial, 'Malgun Gothic', sans-serif;
+    color: #6e7480;
+    pointer-events: none;
+    white-space: nowrap;
+}
+body.kin-upload .upload-compose-card .reserve-date-field:focus-within .reserve-date-hint { display: none; }
+body.kin-upload .upload-compose-card .reserve-date-field:not(:focus-within) .reserve-date-input::-webkit-datetime-edit { color: transparent; }
+body.kin-upload .upload-compose-card .reserve-clock-field {
+    padding: 0 3px;
+    gap: 0;
+}
+body.kin-upload .upload-compose-card .reserve-time-part {
+    display: block;
+    height: 27px;
+    min-width: 0;
+    padding: 0 1px;
+    border: 0;
+    background: transparent;
+    color: #343943;
+    font: 11px/1.2 Arial, 'Malgun Gothic', sans-serif;
+    text-align: center;
+    appearance: none;
+    cursor: pointer;
+}
+body.kin-upload .upload-compose-card .reserve-period { flex: 2.2 1 0; }
+body.kin-upload .upload-compose-card .reserve-hour,
+body.kin-upload .upload-compose-card .reserve-minute { flex: 1.25 1 0; }
+body.kin-upload .upload-compose-card .reserve-colon { font-size: 11px; color: #60666d; }
+body.kin-upload .upload-compose-card .reserve-time-part:focus-visible { outline: 2px solid #2db400; outline-offset: -2px; }
+body.kin-upload .upload-compose-card .reserve-date-input:disabled,
+body.kin-upload .upload-compose-card .reserve-time-part:disabled { opacity: .5; cursor: not-allowed; }
+body.kin-upload .upload-compose-card .reserve-date-field:has(input:disabled),
+body.kin-upload .upload-compose-card .reserve-clock-field:has(select:disabled) { background: #f6f7f6; }
+@media (min-width: 1051px) {
+    body.kin-upload .upload-compose-card .setting-content.toggle-group {
+        grid-template-columns: minmax(0, 1fr) minmax(330px, .98fr);
+        gap: 8px;
+    }
+}
+@media (min-width: 1021px) and (max-width: 1130px) {
+    body.kin-upload .upload-compose-card .setting-content.toggle-group {
+        grid-template-columns: minmax(0,1fr);
+    }
+    body.kin-upload .upload-compose-card .reservation { grid-column: 1 / -1; }
+}
+@media (max-width: 1050px) {
+    body.kin-upload .upload-compose-card .reservation { grid-column: 1 / -1; }
+    body.kin-upload .upload-compose-card .reservation .time-picker-container { max-width: 330px; }
+}
+@media (max-width: 720px) {
+    body.kin-upload .upload-compose-card .setting-content.toggle-group { width: 100%; }
+    body.kin-upload .upload-compose-card .reservation .time-picker-container { max-width: none; }
+}

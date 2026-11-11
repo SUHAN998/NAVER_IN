@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="01main.css">
+    <link rel="stylesheet" href="01main.css?v=32">
+    <link rel="stylesheet" href="layout-common.css?v=38">
+    <script src="layout-common.js?v=32" defer></script>
+    <script src="01main.js?v=32" defer></script>
     <title>지식iN 메인</title>
 </head>
 
-<body>
+<body class="kin-main">
     <div class="container">
     <header class="header">
     <div class="header-inner">
         <h1 class="logo">
-            <img src="img/00지식인 로고.png" width="100" height="auto" alt="NAVER 지식iN">
+            <a href="01main.html" aria-label="지식iN 홈으로 이동">
+                <img src="img/00지식인 로고.png" width="100" height="auto" alt="NAVER 지식iN">
+            </a>
         </h1>
 
         <nav class="gnb">
@@ -31,7 +36,7 @@
         <div class="user-profile">
             <img class="user" src="img/20_사용자프사.png" width="48" height="48" radius="50%" alt="user">
         </div>
-        <button class="btn-ask">질문하기</button>
+        <a class="btn-ask" href="03upload.html">질문하기</a>
         </div>
     </div>
     </header>
@@ -78,7 +83,53 @@
 
         <!-- 카드들 (3단으로 수정) -->
 
-        <!-- 첫카드 -->
+        <!-- 첫번째 카드: 클릭 시 02qna.html로 이동 -->
+
+        <article class="question-card question-card--linked">
+    <div class="card-header-top">
+        <div class="user-info-group">
+            <img class="plane" src="img/21_프사.png" alt="프로필">
+            <div class="name-tag-stack">
+                <span class="category-tag">부동산, 건축</span>
+                <span class="username">PSA1***</span>
+            </div>
+        </div>
+        <div class="top-icons">
+            <button type="button" class="kin-main-icon-button" data-action="bookmark" aria-label="북마크" aria-pressed="false"><img class="bookmark" src="img/01북마크1.png" alt="" /></button>
+            <button type="button" class="kin-main-icon-button" data-action="share" aria-label="공유"><img class="share" src="img/05공유1.png" alt="" /></button>
+            <img class="more" src="img/14_더보기1.png" alt="더보기" height="28">
+        </div>
+    </div>
+
+    <div class="card-body-middle">
+        <h3 class="q-title"><a class="card-detail-link" href="02qna.html" style="color: inherit; text-decoration: none;"><span class="greenq">Q.</span> 보증금 대출 질문</a></h3>
+        <p class="content">저는 중소기업에 다니는 만 27세의 청년입니다. 통근이 힘들어 독립을 위해 보증금을 대출 받고 싶은데 80%밖에 안나와서요. 100% 중소기업 어쩌구는 폐지 되었다고 하고 저것도 세대주여야 버팀목 80% 받는다던데 저는 부모집에 살고 있으니 세대주는 아버지로 되어있는데 받을 수 있는건지도 모르겠고 보증금 1000~2000정도 받을 수 있는 대출 다 알려주시면 감사하겠습니다.</p>
+    </div>
+
+    <div class="card-footer-bottom">
+        <div class="info-group">
+            <span class="date">2026.04.16</span>
+            <span class="views">조회수 1,797</span>
+        </div>
+        <div class="interactions">
+            <button class="react-btn" type="button" data-action="like" aria-pressed="false" aria-label="좋아요">
+                <img class="react" src="img/02좋아요1.png" alt=""> 
+                <span class="count">31개</span>
+            </button>
+            <button class="react-btn" type="button" data-action="dislike" aria-pressed="false" aria-label="싫어요">
+                <img class="react" src="img/03싫어요1.png" alt=""> 
+                <span class="count">2개</span>
+            </button>
+            <button class="react-btn">
+                <img class="react" src="img/06답변하기1.png" alt=""> 
+                <span class="count">12개</span>
+            </button>
+        </div>
+    </div>
+</article>
+
+
+        <!-- 두번째 카드 -->
 
         <article class="question-card">
     <div class="card-header-top">
@@ -90,8 +141,8 @@
             </div>
         </div>
         <div class="top-icons">
-            <img class="bookmark" src="img/01북마크1.png" alt="북마크" height="28">
-            <img class="share" src="img/05공유1.png" alt="공유" height="28">
+            <button type="button" class="kin-main-icon-button" data-action="bookmark" aria-label="북마크" aria-pressed="false"><img class="bookmark" src="img/01북마크1.png" alt="" /></button>
+            <button type="button" class="kin-main-icon-button" data-action="share" aria-label="공유"><img class="share" src="img/05공유1.png" alt="" /></button>
             <img class="more" src="img/14_더보기1.png" alt="더보기" height="28">
         </div>
     </div>
@@ -107,63 +158,17 @@
             <span class="views">조회수 2,107</span>
         </div>
         <div class="interactions">
-            <button class="react-btn">
+            <button class="react-btn" type="button" data-action="like" aria-pressed="false" aria-label="좋아요">
                 <img class="react" src="img/02좋아요1.png" alt=""> 
                 <span class="count">45개</span>
             </button>
-            <button class="react-btn">
+            <button class="react-btn" type="button" data-action="dislike" aria-pressed="false" aria-label="싫어요">
                 <img class="react" src="img/03싫어요1.png" alt=""> 
                 <span class="count">3개</span>
             </button>
             <button class="react-btn">
                 <img class="react" src="img/06답변하기1.png" alt=""> 
                 <span class="count">15개</span>
-            </button>
-        </div>
-    </div>
-</article>
-
-
-        <!-- 두번째 카드 -->
-
-        <article class="question-card">
-    <div class="card-header-top">
-        <div class="user-info-group">
-            <img class="plane" src="img/21_프사.png" alt="프로필">
-            <div class="name-tag-stack">
-                <span class="category-tag">부동산, 건축</span>
-                <span class="username">PSA1***</span>
-            </div>
-        </div>
-        <div class="top-icons">
-            <img class="bookmark" src="img/01북마크1.png" alt="북마크" height="28">
-            <img class="share" src="img/05공유1.png" alt="공유" height="28">
-            <img class="more" src="img/14_더보기1.png" alt="더보기" height="28">
-        </div>
-    </div>
-
-    <div class="card-body-middle">
-        <h3 class="q-title"><span class="greenq">Q.</span> 보증금 대출 질문</h3>
-        <p class="content">저는 중소기업에 다니는 만 27세의 청년입니다. 통근이 힘들어 독립을 위해 보증금을 대출 받고 싶은데 80%밖에 안나와서요. 100% 중소기업 어쩌구는 폐지 되었다고 하고 저것도 세대주여야 버팀목 80% 받는다던데 저는 부모집에 살고 있으니 세대주는 아버지로 되어있는데 받을 수 있는건지도 모르겠고 보증금 1000~2000정도 받을 수 있는 대출 다 알려주시면 감사하겠습니다.</p>
-    </div>
-
-    <div class="card-footer-bottom">
-        <div class="info-group">
-            <span class="date">2026.04.16</span>
-            <span class="views">조회수 1,797</span>
-        </div>
-        <div class="interactions">
-            <button class="react-btn">
-                <img class="react" src="img/02좋아요1.png" alt=""> 
-                <span class="count">31개</span>
-            </button>
-            <button class="react-btn">
-                <img class="react" src="img/03싫어요1.png" alt=""> 
-                <span class="count">2개</span>
-            </button>
-            <button class="react-btn">
-                <img class="react" src="img/06답변하기1.png" alt=""> 
-                <span class="count">12개</span>
             </button>
         </div>
     </div>
@@ -182,8 +187,8 @@
             </div>
         </div>
         <div class="top-icons">
-            <img class="bookmark" src="img/01북마크1.png" alt="북마크" height="28">
-            <img class="share" src="img/05공유1.png" alt="공유" height="28">
+            <button type="button" class="kin-main-icon-button" data-action="bookmark" aria-label="북마크" aria-pressed="false"><img class="bookmark" src="img/01북마크1.png" alt="" /></button>
+            <button type="button" class="kin-main-icon-button" data-action="share" aria-label="공유"><img class="share" src="img/05공유1.png" alt="" /></button>
             <img class="more" src="img/14_더보기1.png" alt="더보기" height="28">
         </div>
     </div>
@@ -203,11 +208,11 @@
             <span class="views">조회수 1,527</span>
         </div>
         <div class="interactions">
-            <button class="react-btn">
+            <button class="react-btn" type="button" data-action="like" aria-pressed="false" aria-label="좋아요">
                 <img class="react" src="img/02좋아요1.png" alt=""> 
                 <span class="count">45개</span>
             </button>
-            <button class="react-btn">
+            <button class="react-btn" type="button" data-action="dislike" aria-pressed="false" aria-label="싫어요">
                 <img class="react" src="img/03싫어요1.png" alt=""> 
                 <span class="count">3개</span>
             </button>
@@ -232,8 +237,8 @@
             </div>
         </div>
         <div class="top-icons">
-            <img class="bookmark" src="img/01북마크1.png" alt="북마크" height="28">
-            <img class="share" src="img/05공유1.png" alt="공유" height="28">
+            <button type="button" class="kin-main-icon-button" data-action="bookmark" aria-label="북마크" aria-pressed="false"><img class="bookmark" src="img/01북마크1.png" alt="" /></button>
+            <button type="button" class="kin-main-icon-button" data-action="share" aria-label="공유"><img class="share" src="img/05공유1.png" alt="" /></button>
             <img class="more" src="img/14_더보기1.png" alt="더보기" height="28">
         </div>
     </div>
@@ -257,11 +262,11 @@
             <span class="views">조회수 1,170</span>
         </div>
         <div class="interactions">
-            <button class="react-btn">
+            <button class="react-btn" type="button" data-action="like" aria-pressed="false" aria-label="좋아요">
                 <img class="react" src="img/02좋아요1.png" alt=""> 
                 <span class="count">45개</span>
             </button>
-            <button class="react-btn">
+            <button class="react-btn" type="button" data-action="dislike" aria-pressed="false" aria-label="싫어요">
                 <img class="react" src="img/03싫어요1.png" alt=""> 
                 <span class="count">3개</span>
             </button>
@@ -276,9 +281,33 @@
 
 <!-- 카드들 (3단으로 수정) -->
 
-        <section class="expert-section">
-        <h3>'게임' 분야 고수</h3>
-        <div class="expert-rank">
+        <section class="expert-section" aria-labelledby="expert-heading">
+            <h3 id="expert-heading">'게임' 분야 고수</h3>
+            <div class="expert-rank" aria-label="게임 분야 고수 순위">
+                <!-- 원본 포디움 이미지는 자르거나 중복 표시하지 않고 한 장 그대로 사용합니다. -->
+                <img class="podium-art" src="img/16_순위대.png" alt="" aria-hidden="true">
+                <div class="rank-entrant rank-entrant--first">
+                    <img class="rank-avatar" src="img/37_게임고수_1위.png" alt="HellFire 프로필">
+                    <div class="rank-copy">
+                        <span class="rank-category">게임 분야 🎮</span>
+                        <strong class="rank-number">1위</strong>
+                        <span class="rank-name">HellFire님</span>
+                    </div>
+                </div>
+                <div class="rank-entrant rank-entrant--second">
+                    <img class="rank-avatar" src="img/38_게임고수_2위.png" alt="Kitsune 프로필">
+                    <div class="rank-copy">
+                        <strong class="rank-number">2위</strong>
+                        <span class="rank-name">Kitsune님</span>
+                    </div>
+                </div>
+                <div class="rank-entrant rank-entrant--third">
+                    <img class="rank-avatar" src="img/39_게임고수_3위.png" alt="Null99 프로필">
+                    <div class="rank-copy">
+                        <strong class="rank-number">3위</strong>
+                        <span class="rank-name">Null99님</span>
+                    </div>
+                </div>
             </div>
         </section>
 

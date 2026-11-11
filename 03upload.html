@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="03upload.css">
+    <link rel="stylesheet" href="03upload.css?v=38">
+    <link rel="stylesheet" href="layout-common.css?v=38">
+    <script src="layout-common.js?v=32" defer></script>
     <title>지식iN QnA 상세</title>
 </head>
 
-<body>
+<body class="kin-subpage kin-upload">
     <div class="container">
     <header class="header">
     <div class="header-inner">
         <h1 class="logo">
-            <img src="img/00지식인 로고.png" width="100" height="auto" alt="NAVER 지식iN">
+            <a href="01main.html" aria-label="지식iN 홈으로 이동">
+                <img src="img/00지식인 로고.png" width="100" height="auto" alt="NAVER 지식iN">
+            </a>
         </h1>
 
         <nav class="gnb">
         <home href="#">홈</home>
-        <qna href="#">Q&A</qna>
+        <qna href="#" class="active">Q&A</qna>
         <best href="#">베스트</best>
         <HOF href="#">명예의 전당</HOF>
         </nav>
@@ -31,7 +35,7 @@
         <div class="user-profile">
             <img class="user" src="img/20_사용자프사.png" width="48" height="48" radius="50%" alt="user">
         </div>
-        <!-- <button class="btn-ask">질문하기</button> -->
+        <a class="btn-ask" href="03upload.html">질문하기</a>
         </div>
     </div>
     </header>
@@ -51,177 +55,150 @@
 
 
             <!-- 카드 (질문작성) -->
-    <article class="question-card">
-        
+    <article class="question-card upload-compose-card">
+        <!-- 제목: 작성 전에는 빈 입력란만 보입니다. -->
         <header class="card-top">
             <div class="top1">
-                <div class="top1-L">
-                    <h2>제목</h2>
-                </div>
-                <div class="top1-R">
-                    <p>0 / 50</p>
-                </div>
+                <h2 id="upload-title-label">제목</h2>
+                <p class="input-counter" id="title-counter">0/50</p>
             </div>
-
-            <!-- 질문 제목 입력 -->
             <div class="input-title">
-                <input type="text" placeholder="질문 제목을 입력해주세요" class="title">
-                <!-- <div class="input-divider"></div> -->
-
+                <input id="upload-title" type="text" class="title" maxlength="50"
+                       placeholder="질문 제목을 입력해주세요" aria-labelledby="upload-title-label">
             </div>
         </header>
 
         <section class="card-mid">
-            
-
-            <!-- 질문 내용 입력 -->
             <div class="top1">
-                <div class="top1-L">
-                    <h2>내용</h2>
-                </div>
-                <div class="top1-R">
-                    <p>0 / 5,000</p>
-                </div>
+                <h2 id="upload-content-label">내용</h2>
+                <p class="input-counter" id="content-counter">0/10,000</p>
             </div>
             <div class="content-wrap">
-                <div class="content-top">
-                    <img class="image" height="32px" width="auto" src="img/10_이미지1.png" alt="image">
-                    <img class="image" height="32px" width="auto" src="img/11_글머리기호1.png" alt="bullet">
-                    <img class="image" height="32px" width="auto" src="img/12_텍스트굵게1.png" alt="bold">
-                    <img class="image" height="32px" width="auto" src="img/13_파일첨부1.png" alt="file">
+                <div class="content-top" role="toolbar" aria-label="질문 내용 편집 도구">
+                    <div class="upload-toolbar-icons">
+                        <button type="button" class="upload-tool" id="insert-image" title="이미지 첨부" aria-label="이미지 첨부">
+                            <img src="img/10_이미지1.png" alt="">
+                        </button>
+                        <button type="button" class="upload-tool" id="insert-bullet" title="글머리 기호 목록 (Enter로 계속, 빈 항목에서 Enter로 해제)" aria-pressed="false" aria-label="글머리 기호 목록 토글">
+                            <img src="img/11_글머리기호1.png" alt="">
+                        </button>
+                        <button type="button" class="upload-tool" id="insert-bold" title="글자 굵게 표시 (Ctrl+B)" aria-pressed="false" aria-label="글자 굵게 표시">
+                            <img src="img/12_텍스트굵게1.png" alt="">
+                        </button>
+                        <button type="button" class="upload-tool" id="insert-file" title="파일 첨부" aria-label="파일 첨부">
+                            <img src="img/13_파일첨부1.png" alt="">
+                        </button>
+                    </div>
+                    <input class="upload-asset-input" type="file" id="upload-image-input" accept="image/*" hidden>
+                    <input class="upload-asset-input" type="file" id="upload-file-input" hidden>
                 </div>
                 <div class="textarea-content">
-                <textarea type="text" placeholder="질문 내용을 입력해주세요" class="content"></textarea>
-                <!-- <div class="input-divider"></div> -->
-
+                    <div id="upload-content" class="content upload-rich-editor" contenteditable="true"
+                         role="textbox" aria-multiline="true" aria-labelledby="upload-content-label"
+                         data-placeholder="질문 내용을 입력해주세요" data-empty="true"></div>
+                </div>
             </div>
-            </div>
-            
-
+            <div id="upload-attachments" class="upload-attachments" aria-live="polite" hidden></div>
         </section>
 
-        <input type="checkbox" id="comment-toggle">
+        <!-- 추가 버튼을 누르기 전에는 태그 칩이 나타나지 않습니다. -->
+        <div id="tag-container" class="upload-tag-list" aria-label="등록한 태그" aria-live="polite" hidden></div>
 
-
-        <footer class="card-bottom">
-            
-            
-            <div class="bottom-center">
-                <span class="tag">#부동산</span>
-                <span class="tag">#건축</span>
-                <span class="tag">#보증금</span>
-                <span class="tag">#대출</span>
-            </div>
-            
-        </footer>
-        <div class="divider"></div>
-
-        <div class="bottom1">
+        <div class="bottom1 upload-metadata-row">
             <div class="bottom1-L">
-                <p>질문분야)</p>
+                <label class="upload-meta-label" for="category">질문분야)</label>
                 <div class="select-box">
-                    <label for="category">질문분야</label>
                     <select id="category" name="category">
-                        <option value="">관련 분야 선택</option>
-                        <option value="estate">전문지식 / 학문</option>
-                        <option value="estate">IT / 테크</option>
-                        <option value="estate">라이프 / 건강</option>
-                        <option value="estate">컬처 / 취미</option>
-                        <option value="estate">고민 / 커뮤니티</option>
-                        
+                        <option value="" selected>관련 분야 선택</option>
+                        <option value="academic">전문지식 / 학문</option>
+                        <option value="tech">IT / 테크</option>
+                        <option value="lifestyle">라이프 / 건강</option>
+                        <option value="culture">컬처 / 취미</option>
+                        <option value="community">고민 / 커뮤니티</option>
                     </select>
                 </div>
             </div>
             <div class="bottom1-R">
-                <span class="label-text">태그</span>
-            <div class="tag-input-box">
-                <input type="text" id="tag-input" placeholder="태그를 입력해주세요">
-                <button type="button" id="add-tag-btn">추가</button>
+                <label class="label-text upload-meta-label" for="tag-input">태그</label>
+                <div class="tag-input-box">
+                    <input type="text" id="tag-input" maxlength="30" placeholder="태그를 입력해주세요" title="태그에 공백은 사용할 수 없습니다. 단어 구분은 밑줄(_)을 사용하세요" autocomplete="off">
+                    <button type="button" id="add-tag-btn">추가</button>
+                </div>
             </div>
         </div>
-        <!-- <div id="tag-container" class="tag-container">
-        </div>
-        
 
-        <div class="expandable-content"> -->
-        
-    </div>
+        <!-- 시안처럼 추가설정은 처음 접혀 있으며 아래쪽에서 펼칩니다. -->
+        <div class="expand-section">
+            <input type="checkbox" id="expand-trigger" aria-controls="upload-extra-settings">
+            <div class="expand-target" id="upload-extra-settings">
+                <div class="expand-inner">
+                <div class="setting-row upload-private-row">
+                    <label class="setting-label" for="upload-expert">1:1 질문</label>
+                    <div class="setting-content upload-expert-content">
+                        <select id="upload-expert" class="expert-select">
+                            <option value="" selected>답변자 선택하기</option>
+                        </select>
+                        <span class="info-text">답변자가 반려하기 전까지는 1:1 질문이 유지됩니다.</span>
+                    </div>
+                </div>
 
-    <!-- 펼치기 -->
-    <div class="expand-section">
-    <input type="checkbox" id="expand-trigger">
-    <label for="expand-trigger" class="expand-btn">추가설정 <span class="arrow">▼</span></label>
-    
-
-    <div class="expand-target">
-    <div class="setting-row line-top">
-        <div class="setting-label">1:1 질문</div>
-        <div class="setting-content">
-            <select class="expert-select">
-                <option>답변자 선택하기</option>
-            </select>
-            <span class="info-text">답변자가 반려하기 전까지는 1:1 질문이 유지됩니다.</span>
-        </div>
-    </div>
-
-    <div class="setting-row line-top">
-        <div class="setting-label">공개설정</div>
-        <div class="setting-content toggle-group">
-            <div class="toggle-item">
-                <span>질문자 별명</span>
-                <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
-                <span class="status-text">공개</span>
+                <div class="setting-row upload-privacy-row">
+                    <div class="setting-label" id="upload-privacy-label">공개설정</div>
+                    <div class="setting-content toggle-group" role="group" aria-labelledby="upload-privacy-label">
+                        <div class="privacy-switches">
+                        <div class="toggle-item">
+                            <span class="toggle-name">질문자 별명</span>
+                            <label class="switch"><input type="checkbox" data-on="공개" data-off="비공개" checked aria-label="질문자 별명 공개"><span class="slider"></span></label>
+                            <span class="status-text">공개</span>
+                        </div>
+                        <div class="toggle-item">
+                            <span class="toggle-name">미성년자 열람</span>
+                            <label class="switch"><input type="checkbox" data-on="허용" data-off="비허용" checked aria-label="미성년자 열람 허용"><span class="slider"></span></label>
+                            <span class="status-text">허용</span>
+                        </div>
+                        <div class="toggle-item">
+                            <span class="toggle-name">외부검색</span>
+                            <label class="switch"><input type="checkbox" data-on="허용" data-off="비허용" checked aria-label="외부검색 허용"><span class="slider"></span></label>
+                            <span class="status-text">허용</span>
+                        </div>
+                        <div class="toggle-item">
+                            <span class="toggle-name">만 14세 미만<br>답변 참여</span>
+                            <label class="switch"><input type="checkbox" data-on="허용" data-off="비허용" checked aria-label="만 14세 미만 답변 참여 허용"><span class="slider"></span></label>
+                            <span class="status-text">허용</span>
+                        </div>
+                        </div>
+                        <div class="toggle-item reservation">
+                            <div class="reservation-controls">
+                                <div class="switch-box">
+                                    <span class="toggle-name">업로드 예약</span>
+                                    <label class="switch"><input type="checkbox" id="reserve-upload" data-on="설정" data-off="미설정" aria-label="업로드 예약 설정"><span class="slider"></span></label>
+                                    <span class="status-text">미설정</span>
+                                </div>
+                                <div class="time-picker-container" role="group" aria-label="예약 날짜 및 시간">
+                                    <div class="reserve-date-field is-empty">
+                                        <input type="date" class="reserve-date-input" id="upload-reserve-date"
+                                               lang="ko-KR" aria-label="업로드 예약 날짜 (년 월 일)" title="년 월 일" disabled>
+                                        <span class="reserve-date-hint" aria-hidden="true">년 · 월 · 일</span>
+                                    </div>
+                                    <div class="reserve-clock-field" role="group" aria-label="예약 시각 (오전 오후, 시, 분)">
+                                        <select id="upload-reserve-period" class="reserve-time-part reserve-period" aria-label="오전 또는 오후" disabled>
+                                            <option value="AM">오전</option><option value="PM" selected>오후</option>
+                                        </select>
+                                        <select id="upload-reserve-hour" class="reserve-time-part reserve-hour" aria-label="시" disabled></select>
+                                        <span aria-hidden="true" class="reserve-colon">:</span>
+                                        <select id="upload-reserve-minute" class="reserve-time-part reserve-minute" aria-label="분" disabled></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
             </div>
-            <div class="toggle-item">
-                <span>미성년자 열람</span>
-                <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
-                <span class="status-text">허용</span>
-            </div>
-            <div class="toggle-item">
-                <span>외부검색</span>
-                <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
-                <span class="status-text">허용</span>
-            </div>
-            <div class="toggle-item">
-                <span>만 14세 미만<br>답변 참여</span>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                </label>
-                <span class="status-text">비허용</span>
-            </div>
-            <div class="toggle-item reservation">
-    <span>업로드 예약</span>
-    
-    <div class="reservation-controls">
-        <div class="switch-box">
-            <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider"></span>
+            <label for="expand-trigger" class="expand-btn" role="button" tabindex="0" aria-controls="upload-extra-settings">
+                <span class="expand-label">추가설정</span><span class="arrow" aria-hidden="true">▼</span>
             </label>
-            <span class="status-text">설정</span>
         </div>
-
-        <div class="time-picker-container">
-            <input type="text" class="time-input" value="03:30 PM">
-            <button class="btn-more">···</button>
-        </div>
-    </div>
-</div>
-        </div>
-    </div>
-</div>
-    
-</div>
     </article>
 
 
@@ -272,6 +249,6 @@
     </aside>
     </div>
 </div>
-<script src="03upload.js"></script>
+<script src="03upload.js?v=38"></script>
 </body>
 </html>

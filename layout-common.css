@@ -1,0 +1,2270 @@
+/* 세 페이지 공통: 헤더/본문 같은 가로축, 안정적인 스티키 간격 */
+:root {
+    --kin-layout-max: 1447px;
+    --kin-gutter: 24px;
+    --kin-top-gap: 70px;  /* 처음 화면에서 헤더와 양쪽 메뉴 사이 여백 */
+    --kin-header-height: 108px;
+    --kin-sticky-top: calc(var(--kin-header-height) + var(--kin-top-gap));
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; }
+.container {
+    width: 100%; height: auto; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: stretch;
+}
+.header {
+    position: sticky; top: 0; z-index: 1000;
+    flex: 0 0 auto; width: 100%;
+    background: #fff; border-bottom: 1px solid #e0e0e0;
+}
+.header-inner {
+    width: min(calc(100% - var(--kin-gutter) * 2), var(--kin-layout-max));
+    height: auto; min-height: 108px;
+    margin-inline: auto; padding: 0;
+    display: flex; align-items: center;
+    gap: clamp(24px, 3.2vw, 55px);
+}
+.logo {
+    flex: 0 0 auto; margin: 0 !important; padding: 0;
+    line-height: 0;
+}
+.logo img { display: block; width: 100px; height: auto; max-width: none; }
+.gnb {
+    display: flex; align-items: center; align-self: stretch;
+    flex: 0 0 auto; gap: clamp(13px, 1.9vw, 32px);
+    font-size: 19px; font-weight: 600; white-space: nowrap;
+    color: #333;
+}
+/* 홈/Q&A 등 원본의 사용자 정의 태그를 그대로 사용합니다. */
+.gnb > * {
+    position: relative; display: inline-flex; align-items: center;
+    align-self: stretch; flex: 0 0 auto;
+    margin: 0 !important; padding: 0 !important;
+    border: 0 !important;
+    line-height: 1.4; cursor: pointer;
+}
+/* 선택된 탭의 초록선은 글자 바로 밑이 아니라 헤더 맨 아래 안쪽에 고정 */
+.gnb > .active::after {
+    content: ""; position: absolute;
+    left: 0; right: 0; bottom: 2px;
+    height: 4px; border-radius: 2px;
+    background-color: #2db400;
+}
+.header-right {
+    display: flex; align-items: center; flex: 0 1 auto;
+    min-width: 0; margin: 0 0 0 auto;
+    gap: clamp(11px, 1.5vw, 24px);
+}
+.search-bar {
+    width: clamp(155px, 15vw, 257px); height: 38px;
+    flex: 1 1 auto; min-width: 0;
+    padding-left: 16px; border: 2px solid #2db400;
+    border-radius: 20px;
+}
+.alarm, .user-profile { flex: 0 0 auto; line-height: 0; }
+.bell { width: 32px; height: auto; margin: 0; }
+.user { width: 44px; height: 44px; margin: 0; border-radius: 50%; object-fit: cover; }
+.btn-ask {
+    flex: 0 0 auto; width: auto; min-width: 108px;
+    height: 44px; margin: 0; padding: 0 16px;
+    border: 0; border-radius: 24px;
+    color: white; background: #2db400;
+    font-size: 17px;
+}
+/* main과 qna/upload의 본문 왼쪽 출발점을 로고의 왼쪽 출발점에 맞춤 */
+.content-wrapper {
+    width: min(calc(100% - var(--kin-gutter) * 2), var(--kin-layout-max));
+    max-width: var(--kin-layout-max);
+    margin-inline: auto; padding: var(--kin-top-gap) 0 90px;
+    align-items: start;
+}
+.side-left, .side-right { top: var(--kin-sticky-top); }
+
+/* 메인 외 페이지는 아직 고정폭 flex였으므로, 공통 좌/우 축이 맞도록 전환 */
+body.kin-subpage .content-wrapper {
+    display: grid;
+    grid-template-columns: 183px minmax(0, 1fr) 240px;
+    gap: 48px;
+}
+body.kin-subpage .main-content { width: 100%; min-width: 0; flex-shrink: 1; }
+body.kin-subpage .side-left {
+    width: 100%; margin: 0; position: sticky;
+    align-self: start; height: fit-content;
+}
+body.kin-subpage .side-right { width: 100%; margin: 0; min-width: 0; }
+body.kin-subpage .question-card { max-width: 100%; }
+body.kin-qna .side-right { position: sticky; align-self: start; height: fit-content; }
+/* 질문작성 페이지는 우측 박스만 sticky여야 전체 부모 높이를 참조할 수 있음 */
+body.kin-upload .side-right { position: relative; top: auto; height: 100%; align-self: stretch; }
+body.kin-upload .sticky-side-box { position: sticky; top: var(--kin-sticky-top); }
+
+@media (max-width:1300px) {
+    .header-inner { min-height: 92px; gap: 24px; }
+    .gnb { gap: 15px; font-size: 17px; }
+    .header-right { gap: 12px; }
+    .search-bar { width: 180px; }
+    body.kin-subpage .content-wrapper { grid-template-columns: 162px minmax(0,1fr) 220px; gap: 24px; }
+}
+@media (max-width:1020px) {
+    :root { --kin-top-gap: 44px; }
+    .header-inner {
+        flex-wrap: wrap; justify-content: space-between;
+        row-gap: 0; padding-block: 13px;
+    }
+    .gnb { order: 3; width: 100%; min-height: 46px; justify-content: center; }
+    .header-right { margin-left: auto; }
+    .search-bar { width: clamp(165px,24vw,260px); }
+    body.kin-subpage .content-wrapper { grid-template-columns: 160px minmax(0,1fr); gap: 24px; }
+    body.kin-subpage .side-left { grid-row: 1 / span 2; }
+    body.kin-subpage .main-content { grid-column: 2; grid-row: 1; }
+    body.kin-subpage .side-right { grid-column:2; grid-row:2; position:static; height:auto; }
+    body.kin-upload .sticky-side-box { position:static; }
+}
+@media (max-width:720px) {
+    :root { --kin-gutter: 16px; --kin-top-gap: 30px; }
+    .header-inner { gap: 12px; min-height: 0; }
+    .logo img { width: 84px; }
+    .gnb { gap: clamp(10px, 4vw, 26px); font-size: 15px; justify-content: flex-start; overflow-x: auto; }
+    .header-right { flex: 1 1 auto; gap: 10px; justify-content: flex-end; }
+    .search-bar { width: min(100%,190px); flex: 1 1 120px; }
+    .user { width: 36px; height:36px; }
+    .bell { width:25px; }
+    .btn-ask { min-width:74px; height:36px; padding-inline:10px; font-size:14px; }
+    body.kin-subpage .content-wrapper { display: flex; flex-direction: column; align-items:stretch; gap:20px; }
+    body.kin-subpage .main-content { width:100%; }
+    body.kin-subpage .side-left { position: static; }
+    body.kin-qna .side-left { width:100%; border:0; padding:0; }
+    body.kin-qna .category-list { display:flex; gap:7px; overflow-x:auto; margin:0; padding:0 0 7px; }
+    body.kin-qna .category-list li { flex:0 0 auto; margin:0; white-space:nowrap; }
+    body.kin-subpage .side-right { width:100%; }
+    body.kin-subpage .question-card { width:100%; padding-inline:clamp(14px,4vw,25px); }
+    body.kin-subpage .content, body.kin-subpage .card-bottom { max-width:100%; }
+    body.kin-qna .content { padding-inline:10px; }
+    body.kin-qna .card-bottom { margin-inline:0; flex-wrap:wrap; gap:12px; }
+    body.kin-qna .bottom-center { width:auto; flex-wrap:wrap; }
+    body.kin-upload .bottom1 { margin-inline:0; gap:10px; flex-wrap:wrap; }
+    body.kin-upload .content { width:100%; }
+}
+@media (max-width:440px) {
+    .logo img { width:73px; }
+    .header-right { gap:7px; }
+    .search-bar { width:80px; min-width:60px; height:32px; padding-left:8px; font-size:11px; }
+    .bell { width:21px; }
+    .user { width:30px; height:30px; }
+    .btn-ask { min-width:64px; height:32px; padding-inline:8px; font-size:12px; }
+    .gnb { font-size:14px; }
+}
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+
+/* 나머지 두 페이지의 오래된 고정폭 블록이 좁은 화면에서 튀어나오지 않도록 보완 */
+body.kin-qna .question-card,
+body.kin-qna .question-card1,
+body.kin-qna .question-card3,
+body.kin-qna .greenbar-more,
+body.kin-qna .ad-container,
+body.kin-qna .AD-bottom {
+    width: 100%; max-width: 100%;
+}
+body.kin-qna .AD-bottom img { display:block; width:100%; max-width:100%; height:auto; }
+body.kin-qna .ad-content, body.kin-qna .content-right { min-width:0; }
+body.kin-qna .ad-background, body.kin-qna .ad-overlay { max-width:100%; }
+body.kin-qna .footer, body.kin-qna .footer-inner,
+body.kin-upload .footer, body.kin-upload .footer-inner { max-width:100%; }
+body.kin-upload .setting-content.toggle-group { flex-wrap: wrap; gap:20px; min-width:0; }
+body.kin-upload .reservation-controls { flex-wrap:wrap; gap:16px; }
+body.kin-upload .bottom1-R { flex-wrap:wrap; max-width:100%; }
+body.kin-upload .tag-input-box { max-width:100%; }
+body.kin-upload .tag-input-box input { min-width:0; max-width:100%; }
+
+@media (max-width:720px) {
+    body.kin-qna .main-title { font-size:clamp(26px,6vw,40px); }
+    body.kin-qna .question-card1,
+    body.kin-qna .question-card3 { padding-inline:clamp(14px,4vw,25px); }
+    body.kin-qna .content1 { padding-inline:10px; }
+    body.kin-qna .job { padding-left:10px; }
+    body.kin-qna .ad-container { height:auto; min-height:210px; }
+    body.kin-qna .ad-content { padding:14px; gap:12px; }
+    body.kin-qna .content-left { flex: 0 0 auto; }
+    body.kin-qna .content-left img { width:clamp(60px,24vw,110px); height:auto; max-height:130px; object-fit:contain; }
+    body.kin-qna .content-right { margin:0; }
+    body.kin-qna .main-title-ad { font-size:clamp(16px,4vw,22px); }
+    body.kin-qna .ad-content p { overflow-wrap:anywhere; }
+    body.kin-upload .setting-row { flex-wrap:wrap; gap:8px; }
+    body.kin-upload .setting-content.toggle-group { width:100%; }
+    body.kin-upload .tag-row { flex-wrap:wrap; }
+    body.kin-upload .bottom1-L { flex-wrap:wrap; }
+    body.kin-upload .main-title { font-size:clamp(30px,7vw,50px); }
+}
+body.kin-qna .greenbar {
+    width:100%; max-width:100%; height:auto; min-height:62px;
+    padding:12px clamp(12px,2vw,20px); gap:12px;
+}
+body.kin-qna .greenbar .right {
+    flex:0 1 auto; min-width:0; padding-right:0; gap:10px; flex-wrap:wrap;
+}
+body.kin-qna .greenbar .left { padding-left:0; flex:0 0 auto; }
+@media (max-width:1020px) {
+    body.kin-upload .bottom1 { margin-inline:0; flex-wrap:wrap; gap:14px; }
+    body.kin-upload .bottom1-R { flex: 1 1 250px; }
+}
+@media (max-width:720px) {
+    body.kin-qna .greenbar { flex-wrap:wrap; }
+    body.kin-qna .greenbar .right { justify-content:flex-start; }
+    body.kin-qna .filter1, body.kin-qna .filter2 { font-size:14px; padding:8px 10px; height:auto; }
+}
+@media (max-width:720px) {
+    body.kin-qna .top-row { flex-wrap:wrap; gap:10px; }
+    body.kin-qna .top-icons { margin-right:0; gap:8px; max-width:100%; }
+    body.kin-qna .top-icons img { max-width:32px; height:auto; }
+}
+
+/* ===============================================================
+   7차 보완: 전체 페이지 우측 메뉴의 가로 정렬 및 Q&A 정보 밀도
+   우측 메뉴의 바깥 오른쪽 끝을 상단 '질문하기' 버튼 끝에 맞춥니다.
+   =============================================================== */
+
+/* 우측 열의 너비를 자식 요소가 전부 활용하도록 통일 */
+.side-right {
+    min-width: 0;
+}
+.side-right > .notice-box,
+.side-right > .tag-cloud,
+.side-right > .SR-cloud,
+.side-right > .ad-banner,
+.side-right > .footer,
+.side-right > .sticky-side-box,
+.side-right .sticky-side-box > .ad-banner,
+.side-right .sticky-side-box > .footer {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+.side-right .footer-inner { width: 100%; max-width: 100%; }
+.side-right .ad-banner img { display: block; max-width: 100%; height: auto; }
+
+/* 세 페이지에서 공통으로 쓰는 '내 소식 / 공지사항' 녹색 메뉴 */
+.side-right .notice-box {
+    width: 100%;
+    min-height: 48px;
+    height: 48px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+.side-right .notice-box .my,
+.side-right .notice-box .attancion {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0 7px;
+    margin: 0;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.25;
+}
+.side-right .notice-box .w-line {
+    flex: 0 0 1px;
+    width: 1px;
+    height: 22px;
+    align-self: center;
+}
+
+/* Q&A 상세 페이지의 검색결과 / 많이 본 Q&A */
+body.kin-qna .SR-cloud {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 16px;
+    padding-bottom: 17px;
+}
+body.kin-qna .SR-top {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    height: auto;
+    min-height: 34px;
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+}
+body.kin-qna .SR-top .Results,
+body.kin-qna .SR-top .QnA {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+body.kin-qna .SR-top .see-all,
+body.kin-qna .SR-top .date-av {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    font-size: 11px;
+    line-height: 1.35;
+}
+body.kin-qna .SR {
+    min-width: 0;
+    margin-top: 0;
+    font-size: 13px; /* 페이지 번호와 동일한 글자 크기 */
+    line-height: 1.45;
+}
+body.kin-qna .SR-inner,
+body.kin-qna .SR .result1,
+body.kin-qna .SR .result-title { min-width: 0; }
+body.kin-qna .SR .result-title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+body.kin-qna .SR .result-title p,
+body.kin-qna .SR .result1 > p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    max-height: 2.9em;
+    overflow-wrap: anywhere;
+    word-break: keep-all;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+body.kin-qna .SR .result-title p { max-height: 2.8em; }
+body.kin-qna .SR .result-bottom {
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    padding-bottom: 8px;
+}
+body.kin-qna .SR .result-bottom .Ans { font-size: 13px; flex: 0 0 auto; white-space: nowrap; }
+body.kin-qna .SR .result-bottom .date { font-size: 12px; padding-top: 0; white-space: nowrap; }
+
+/* 기존 세 번째 항목은 삭제하지 않고 보존하되, 화면에는 2개씩만 표시 */
+body.kin-qna .SR-inner > .result1:nth-child(n + 3) { display: none; }
+
+/* Q&A 답변 수와 정렬 필터: 마크업의 낮고 넓은 연녹색 바 */
+body.kin-qna .greenbar {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    height: 96px;
+    min-height: 96px;
+    padding: 12px 18px;
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+body.kin-qna .greenbar .left {
+    flex: 0 1 auto;
+    min-width: 0;
+    padding: 0;
+    font-size: 30px;
+}
+body.kin-qna .greenbar .left h3 {
+    margin: 0;
+    font-size: 30px;
+    line-height: 1.25;
+    font-weight: 650;
+    white-space: nowrap;
+}
+body.kin-qna .greenbar .right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 12px;
+    padding: 0;
+}
+body.kin-qna .greenbar .filter1,
+body.kin-qna .greenbar .filter2 {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    width: 110px;
+    height: 42px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    font-size: 17px;
+    line-height: 1;
+    white-space: nowrap;
+}
+body.kin-qna .greenbar .filter2 { width: 120px; }
+body.kin-qna .greenbar .filter1 p,
+body.kin-qna .greenbar .filter2 p { margin: 0; line-height: 1.15; }
+
+@media (max-width: 1020px) {
+    body.kin-qna .greenbar .left h3 { font-size: clamp(22px, 3vw, 30px); }
+}
+@media (max-width: 720px) {
+    body.kin-qna .greenbar { height: auto; min-height: 74px; padding: 12px; flex-wrap: wrap; }
+    body.kin-qna .greenbar .left h3 { font-size: clamp(19px, 5vw, 27px); }
+    body.kin-qna .greenbar .right { justify-content: flex-start; flex-wrap: wrap; gap: 8px; }
+    body.kin-qna .greenbar .filter1,
+    body.kin-qna .greenbar .filter2 { width: 84px; height: 34px; font-size: 14px; }
+}
+@media (max-width: 440px) {
+    .side-right .notice-box .my,
+    .side-right .notice-box .attancion { font-size: 15px; }
+    body.kin-qna .SR-cloud { padding: 14px; }
+    body.kin-qna .SR-top .Results,
+    body.kin-qna .SR-top .QnA { font-size: 16px; }
+}
+
+/* 8차: PDF 시안의 공통 HUD 비주얼을 유지하며 모든 페이지 이동 링크를 활성화 */
+.header .logo > a {
+    display: inline-block;
+    line-height: 0;
+    text-decoration: none;
+    border-radius: 3px;
+}
+.header .logo > a:focus-visible,
+.header .btn-ask:focus-visible {
+    outline: 3px solid #2db400;
+    outline-offset: 4px;
+}
+.header .btn-ask {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.header .btn-ask:hover { text-decoration: none; }
+
+/* 9차: Q&A 카드 아이콘 크기 통일과 질문 태그 위치 미세 조정.
+   화면 너비에 따른 변화폭을 제한해 대형 모니터/노트북에서 비슷한 크기로 보이도록 합니다. */
+body.kin-qna {
+    --kin-qna-action-icon: clamp(25px, 1.65vw, 29px);
+}
+/* 기존 .right-icon의 padding-bottom:25px가 이미지의 실제 표시 영역을
+   찌그러뜨렸으므로, 모든 카드의 액션 아이콘에 동일한 정사각형 박스를 적용합니다. */
+body.kin-qna .question-card .card-bottom img.right-icon,
+body.kin-qna .question-card .card-bottom img.right-icon1,
+body.kin-qna .question-card1 .card-bottom img.right-icon1,
+body.kin-qna .question-card3 .card-bottom img.right-icon1 {
+    display: block;
+    width: var(--kin-qna-action-icon);
+    height: var(--kin-qna-action-icon);
+    padding: 0;
+    margin: 0;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
+/* 아래쪽 텍스트(좋아요 수)는 아이콘과 분리해 크기 변경의 영향을 받지 않게 유지 */
+body.kin-qna .question-card .card-bottom .bottom-right {
+    align-items: flex-start;
+    gap: clamp(9px, .8vw, 13px);
+}
+body.kin-qna .question-card .card-bottom .vote-unit,
+body.kin-qna .question-card1 .card-bottom .vote-unit-a,
+body.kin-qna .question-card3 .card-bottom .vote-unit-a {
+    gap: 5px;
+    padding-top: 0;
+}
+/* 카드 상단의 알림/더보기 아이콘도 과하게 크지 않게 맞춥니다.
+   채택 답변 표시 안의 체크 아이콘은 기존 배지를 유지합니다. */
+body.kin-qna .question-card .top-icons > img,
+body.kin-qna .question-card1 .top-icons > img,
+body.kin-qna .question-card3 .top-icons > img {
+    width: var(--kin-qna-action-icon);
+    height: var(--kin-qna-action-icon);
+    padding: 0;
+    object-fit: contain;
+}
+/* 첫 질문 카드의 태그 4개만 화살표 방향으로 이동. 답변 카드/사이드바는 유지 */
+@media (min-width: 1201px) {
+    body.kin-qna .question-card > .card-bottom .bottom-center {
+        position: relative;
+        left: clamp(24px, 2.15vw, 40px);
+    }
+}
+@media (min-width: 1021px) and (max-width: 1200px) {
+    body.kin-qna .question-card > .card-bottom .bottom-center {
+        position: relative;
+        left: 12px;
+    }
+}
+@media (max-width: 1020px) {
+    body.kin-qna .question-card > .card-bottom .bottom-center {
+        left: auto;
+    }
+}
+@media (max-width: 720px) {
+    body.kin-qna { --kin-qna-action-icon: 25px; }
+}
+body.kin-qna .question-card .card-bottom .vote-unit {
+    flex: 0 0 auto;
+    min-width: max-content;
+}
+body.kin-qna .question-card .card-bottom .vote-count,
+body.kin-qna .question-card1 .card-bottom .vote-count,
+body.kin-qna .question-card3 .card-bottom .vote-count {
+    white-space: nowrap;
+}
+/* 태블릿에서는 좁은 첫 질문 카드의 태그가 세로 한 글자씩 찌그러지지 않도록
+   아이콘을 윗줄, 태그를 아랫줄에 배치합니다. */
+@media (min-width: 721px) and (max-width: 1150px) {
+    body.kin-qna .question-card > .card-bottom {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    body.kin-qna .question-card > .card-bottom .bottom-left { order: 1; flex: 0 0 auto; }
+    body.kin-qna .question-card > .card-bottom .bottom-right {
+        order: 2;
+        flex: 0 0 auto;
+        margin-left: auto;
+    }
+    body.kin-qna .question-card > .card-bottom .bottom-center {
+        order: 3;
+        flex: 1 0 100%;
+        width: 100%;
+        left: auto;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    body.kin-qna .question-card > .card-bottom .tag { flex: 0 0 auto; }
+}
+
+/* ========================================================================
+   10차 공통 레이아웃 규격
+   - 메인/Q&A/질문작성 페이지의 열 위치, 사이드바 규격을 한곳에서 관리
+   - 헤더 바로 아래 안내선에 세 열을 정렬 (스크롤 중 sticky 간격도 동일)
+   - 매우 작은 화면에서는 카드와 버튼을 무한히 축소하지 않고 360px을 하한으로 유지
+   ======================================================================== */
+:root {
+    --kin-top-gap: 18px;
+    --kin-left-column: 183px;
+    --kin-right-column: 240px;
+    --kin-column-gap: 48px;
+    --kin-sidebar-border: 1px solid #e3e4ed;
+    --kin-sidebar-radius: 20px;
+    --kin-category-height: 41px;
+}
+/* 360px 미만은 레이아웃을 찌그러뜨리는 대신 가로 이동으로 확인합니다. */
+html, body { min-width: 360px; }
+
+/* 세 페이지 모두 동일한 그리드 열과 시작점을 공유 */
+body .content-wrapper,
+body.kin-subpage .content-wrapper {
+    display: grid;
+    grid-template-columns: var(--kin-left-column) minmax(0, 1fr) var(--kin-right-column);
+    column-gap: var(--kin-column-gap);
+    row-gap: 24px;
+    align-items: start;
+    width: min(calc(100% - var(--kin-gutter) * 2), var(--kin-layout-max));
+    max-width: var(--kin-layout-max);
+    margin-inline: auto;
+    padding: var(--kin-top-gap) 0 90px;
+}
+body .content-wrapper > .main-content {
+    min-width: 0;
+    width: 100%;
+}
+body .content-wrapper > .side-left,
+body .content-wrapper > .side-right {
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    align-self: start;
+}
+body .content-wrapper > .side-left,
+body.kin-qna .content-wrapper > .side-right,
+body:not(.kin-subpage) .content-wrapper > .side-right {
+    position: sticky;
+    top: var(--kin-sticky-top);
+    height: fit-content;
+}
+
+/* 카테고리 패널: 같은 너비, 전체 높이, 패딩, 테두리, 모서리 및 항목 간격 */
+body .content-wrapper > .side-left:has(> .category-list) {
+    padding: 10px 0;
+    border: var(--kin-sidebar-border);
+    border-radius: var(--kin-sidebar-radius);
+    background: #fff;
+}
+body .content-wrapper > .side-left:not(:has(> .category-list)) {
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+body .side-left > .category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: auto;
+    margin: 10px;
+    padding: 0;
+    list-style: none;
+}
+body .side-left > .category-list > li {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--kin-category-height);
+    min-height: var(--kin-category-height);
+    margin: 0;
+    padding: 0 10px;
+    border: 2px solid #f5f5ff;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.25;
+    font-weight: 450;
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+body .side-left > .category-list > li.active { border-color: #2db400; }
+
+/* 모든 우측 메뉴는 헤더의 질문하기 버튼과 오른쪽 끝을 공유하며,
+   공통 패널 규격을 사용합니다. 각 페이지의 콘텐츠와 색상은 유지합니다. */
+body .side-right > .notice-box,
+body .side-right > .tag-cloud,
+body .side-right > .SR-cloud,
+body .side-right > .ad-banner,
+body .side-right > .sticky-side-box {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+}
+body .side-right > .notice-box {
+    min-height: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 24px;
+    padding-inline: 12px;
+}
+body .side-right > .tag-cloud,
+body .side-right > .SR-cloud {
+    border: 1px solid #eeeefc;
+    border-radius: var(--kin-sidebar-radius);
+}
+body .side-right > .ad-banner img,
+body .side-right .sticky-side-box > .ad-banner img { width: 100%; height: auto; }
+/* 작성 페이지: 우측 광고와 버튼만 스티키, 그리드 열 자체는 늘어날 수 있음 */
+body.kin-upload .content-wrapper > .side-right {
+    position: relative;
+    top: auto;
+    height: 100%;
+    align-self: stretch;
+}
+body.kin-upload .sticky-side-box { top: var(--kin-sticky-top); }
+
+/* Q&A 상세의 댓글/태그 및 버튼은 너비가 부족해도 글자를 2줄로 압축하지 않음 */
+body.kin-qna .btn-comment {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 112px;
+    width: 112px;
+    min-width: 112px;
+    height: 36px;
+    min-height: 36px;
+    padding: 0 12px;
+    white-space: nowrap;
+    word-break: keep-all;
+    line-height: 1.2;
+}
+body.kin-qna .bottom-left,
+body.kin-qna .bottom-right,
+body.kin-qna .bottom-right .vote-unit,
+body.kin-qna .card-bottom .bottom-left {
+    flex-shrink: 0;
+}
+body.kin-qna .card-bottom .tag {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    word-break: keep-all;
+}
+body.kin-qna .card-bottom .bottom-center {
+    min-width: 0;
+    flex-wrap: wrap;
+}
+body.kin-qna .greenbar .filter1,
+body.kin-qna .greenbar .filter2,
+.header .btn-ask,
+.side-right .notice-box button { white-space: nowrap; word-break: keep-all; }
+
+/* 노트북: 같은 3열 규격을 페이지 모두에 똑같이 적용 */
+@media (max-width: 1300px) {
+    :root {
+        --kin-left-column: 162px;
+        --kin-right-column: 220px;
+        --kin-column-gap: 24px;
+    }
+}
+/* 태블릿: 공통 2열 구성, 우측 콘텐츠는 본문 뒤로 이동 */
+@media (max-width: 1020px) {
+    :root { --kin-left-column: 160px; --kin-column-gap: 24px; --kin-top-gap: 20px; }
+    body .content-wrapper,
+    body.kin-subpage .content-wrapper {
+        grid-template-columns: var(--kin-left-column) minmax(0, 1fr);
+    }
+    body .content-wrapper > .side-left { grid-column: 1; grid-row: 1 / span 2; }
+    body .content-wrapper > .main-content { grid-column: 2; grid-row: 1; }
+    body .content-wrapper > .side-right {
+        grid-column: 2;
+        grid-row: 2;
+        width: 100%;
+        position: static;
+        top: auto;
+        height: auto;
+    }
+    body.kin-upload .content-wrapper > .side-right { position: static; height: auto; }
+    body.kin-upload .sticky-side-box { position: static; }
+}
+/* 모바일: 카테고리만 한 줄 스크롤, 콘텐츠와 사이드바는 세로 순서 */
+@media (max-width: 720px) {
+    :root { --kin-top-gap: 20px; }
+    body .content-wrapper,
+    body.kin-subpage .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+    }
+    body .content-wrapper > .side-left,
+    body .content-wrapper > .main-content,
+    body .content-wrapper > .side-right {
+        grid-column: auto;
+        grid-row: auto;
+        width: 100%;
+    }
+    body .content-wrapper > .side-left:has(> .category-list) {
+        position: static;
+        height: auto;
+        padding: 0;
+        border: 0;
+        background: transparent;
+    }
+    body .side-left > .category-list {
+        flex-direction: row;
+        gap: 7px;
+        overflow-x: auto;
+        width: 100%;
+        margin: 0;
+        padding: 0 0 7px;
+        scrollbar-width: thin;
+    }
+    body .side-left > .category-list > li {
+        width: auto;
+        height: 36px;
+        min-height: 36px;
+        padding: 0 11px;
+        font-size: 13px;
+    }
+    body .content-wrapper > .side-left:not(:has(> .category-list)) { display: none; }
+    body .content-wrapper > .side-right { position: static; }
+    body.kin-qna .card-bottom { flex-wrap: wrap; }
+    body.kin-qna .card-bottom .bottom-center { flex: 1 1 auto; }
+    body.kin-qna .btn-comment { width: 112px; }
+}
+
+/* 상단 기준선: Q&A 분류 제목과 질문 작성 제목의 시작점 보정 */
+body.kin-qna .category-middle { margin-top: -16px; }
+body.kin-upload .main-content > .container_m > .main-title { margin-top: 0; }
+
+/* 11차: 3페이지 공통 HUD를 약 2/3 높이로 축소.
+   Bell 크기는 최소/최대값을 지정한 유동 단위로 조절해 해상도 차이에도
+   육안상 크게 달라지지 않게 합니다. 헤더 실제 높이는 layout-common.js가
+   --kin-header-height로 반영하므로 사이드바 sticky 간격은 그대로 유지됩니다. */
+:root {
+    --kin-header-height: 73px; /* JS 미실행 시 폴백값 (헤더 72px + 아래쪽 테두리 1px) */
+    --kin-bell-size: clamp(20px, calc(19px + 0.3vw), 24px);
+}
+.header .header-inner {
+    height: 72px;
+    min-height: 72px;
+    padding-block: 0;
+}
+.header .alarm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header .bell {
+    display: block;
+    width: var(--kin-bell-size);
+    min-width: 20px;
+    max-width: 24px;
+    height: auto;
+    margin: 0;
+}
+@media (min-width: 1021px) and (max-width: 1300px) {
+    :root { --kin-header-height: 63px; }
+    .header .header-inner { height: 62px; min-height: 62px; }
+}
+/* 태블릿/모바일의 HUD는 기존 2줄 레이아웃 유지, 과도한 세로 패딩만 축소 */
+@media (max-width: 1020px) {
+    :root { --kin-header-height: 81px; }
+    .header .header-inner {
+        height: auto;
+        min-height: 0;
+        padding-block: 6px 0;
+        row-gap: 0;
+    }
+    .header .gnb {
+        min-height: 30px;
+        height: 30px;
+    }
+}
+@media (max-width: 720px) {
+    :root { --kin-header-height: 73px; }
+    .header .gnb { min-height: 30px; height: 30px; }
+}
+/* 작은 화면에서도 원본 HUD의 약 2/3 비율로 여백을 확보 */
+@media (max-width: 720px) {
+    :root { --kin-header-height: 79px; }
+    .header .header-inner { padding-block: 10px 2px; }
+}
+@media (max-width: 440px) {
+    :root { --kin-header-height: 75px; }
+}
+
+/* =====================================================================
+   12차: 기존 11차 코드를 유지하며 데스크톱 3열 비율을 균형 있게 조정.
+   - 좌측 분류 패널을 조금 슬림하게, 우측 위젯은 넓게
+   - 중앙 카드와 두 사이드바 사이 여백 축소
+   - 메인/Q&A/질문 작성에 같은 그리드 변수 재사용
+   - 1020px 이하의 기존 2열/1열 반응형과 compact HUD는 보존
+   ===================================================================== */
+@media (min-width: 1301px) {
+    :root {
+        --kin-left-column: 172px;
+        --kin-right-column: 284px;
+        --kin-column-gap: 34px;
+        --kin-category-height: 43px;
+    }
+}
+@media (min-width: 1021px) and (max-width: 1300px) {
+    :root {
+        --kin-left-column: 158px;
+        --kin-right-column: 235px;
+        --kin-column-gap: 23px;
+        --kin-category-height: 41px;
+    }
+}
+@media (min-width: 1021px) {
+    body .side-left > .category-list { gap: 6px; }
+}
+/* 우측 위젯은 확대된 공통 열 너비를 모두 쓰고 이미지 원본 비율은 유지 */
+body:not(.kin-subpage) .side-right > .tag-cloud {
+    padding: 17px 14px;
+    min-height: 172px;
+}
+body:not(.kin-subpage) .side-right > .tag-cloud h4 { margin-bottom: 12px; }
+body:not(.kin-subpage) .side-right .ad-banner > .ad {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+/* 메인 카드의 높이만 살짝 정돈: 본문 내용·기능·타이포그래피는 유지 */
+@media (min-width: 1021px) {
+    body:not(.kin-subpage) .question-card .card-body-middle { margin-bottom: 18px; }
+    body:not(.kin-subpage) .question-card .card-footer-bottom { margin-top: 15px; }
+    body:not(.kin-subpage) .question-card .info-group { margin-bottom: 30px; }
+}
+
+/* =====================================================================
+   13차: 마크업 기준 3열 너비 미세 조정 (12차 레이아웃 보존)
+   - 데스크톱: 우측 열 284px -> 230px (빨간 표시 영역)
+   - 가운데 열: 주황색 기준선까지 가로 확장
+   - 좌측 카테고리, HUD, 기존 두/한 열 반응형 및 동작 유지
+   ===================================================================== */
+@media (min-width: 1301px) {
+    :root { --kin-right-column: 230px; }
+    /* 좌측 사이드바에서 중앙까지 간격은 유지하고, 중앙/우측 사이에는
+       시안처럼 조금 더 넓은 숨 쉴 공간을 남긴다. */
+    body .content-wrapper > .main-content {
+        width: calc(100% - 14px);
+        min-width: 0;
+    }
+}
+@media (min-width: 1021px) and (max-width: 1300px) {
+    :root { --kin-right-column: 214px; }
+    /* 노트북에서도 오른쪽 위젯에 텍스트가 좁게 겹치지 않도록
+       중간 컨텐츠가 확보할 공간을 우선한다. */
+}
+
+/* =====================================================================
+   14차: 마크업 기준 간격·컨트롤 크기 정렬
+   - 세 페이지 상단 HUD 링크 버튼의 글꼴/크기 동일
+   - HUD 아래 콘텐츠 시작 여백 두 배, sticky 오프셋 연동
+   - 메인 보기 옵션 바와 아이콘 축소
+   - Q&A 질문 카드의 텍스트/태그/액션 위치를 기준선에 맞춰 미세 조정
+   ===================================================================== */
+
+/* 페이지마다 서로 다른 기본 폰트를 상속해 버튼 글자가 달라 보이지 않도록 통일 */
+.header .btn-ask {
+    font-family: Arial, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 13차 상단 여백 18px → 36px, 좁은 화면의 20px → 40px */
+:root { --kin-top-gap: 36px; }
+@media (max-width: 1020px) {
+    :root { --kin-top-gap: 40px; }
+}
+@media (max-width: 720px) {
+    .header .btn-ask { font-size: 14px; }
+}
+@media (max-width: 440px) {
+    .header .btn-ask { font-size: 12px; }
+}
+
+/* 메인: 파란 마크업 높이(약 56px)의 보기 옵션 바와 아이콘 3개 일괄 축소 */
+body:not(.kin-subpage) .main-content > .greenbar {
+    width: 100%;
+    height: 56px;
+    min-height: 56px;
+    padding: 8px 20px;
+    margin-bottom: 20px;
+    border-radius: 28px;
+}
+body:not(.kin-subpage) .greenbar > .view-filter {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    height: 28px;
+}
+body:not(.kin-subpage) .view-filter > .cardV,
+body:not(.kin-subpage) .view-filter > .listV,
+body:not(.kin-subpage) .view-filter > .filterOP {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    padding: 0;
+    margin: 0;
+}
+body:not(.kin-subpage) .view-filter img {
+    display: block;
+    width: 26px;
+    height: 26px;
+    max-width: 26px;
+    max-height: 26px;
+    object-fit: contain;
+}
+
+/* 상세: 주황색 기준선과 파란색 마크업의 프로필/질문/본문/댓글·태그·액션 배치 */
+@media (min-width: 1021px) {
+    body.kin-qna .main-content > .container_m > .question-card:first-of-type {
+        padding-bottom: 15px;
+    }
+    body.kin-qna .question-card .main-title {
+        font-size: clamp(40px, 2.8vw, 48px);
+        line-height: 1.16;
+    }
+    body.kin-qna .question-card .content {
+        padding-left: 78px;
+        padding-right: 8px;
+    }
+    body.kin-qna .question-card .card-mid {
+        margin-bottom: 57px;
+    }
+    body.kin-qna .question-card > .card-bottom {
+        margin-left: 73px;
+        margin-right: 14px;
+        gap: 10px;
+    }
+    body.kin-qna .question-card > .card-bottom .bottom-center {
+        width: 410px;
+        left: clamp(19px, 2vw, 34px);
+        gap: 8px;
+    }
+    body.kin-qna .question-card > .card-bottom .bottom-right {
+        gap: 16px;
+    }
+}
+/* 태블릿·모바일의 기존 유연한 카드 구성은 유지하고 폰트만 과도하게 커지지 않게 함 */
+@media (max-width: 1020px) {
+    body.kin-qna .question-card .content { padding-right: 10px; }
+}
+
+/* 오른쪽 두 카드 사이의 간격(15px)과 마지막 카드-푸터 사이 간격 일치 */
+body.kin-qna .side-right > .footer {
+    padding-top: 0;
+    margin-top: 0;
+}
+/* 하단 컨트롤은 파란 기준선의 시작점에 맞추되, 아이콘들과 겹치지 않음 */
+@media (min-width: 1301px) {
+    body.kin-qna .question-card > .card-bottom {
+        justify-content: flex-start;
+        gap: 32px;
+    }
+    body.kin-qna .question-card > .card-bottom .bottom-center {
+        position: static;
+        flex: 0 0 auto;
+        width: auto;
+        max-width: 320px;
+    }
+    body.kin-qna .question-card > .card-bottom .bottom-right {
+        margin-left: auto;
+    }
+}
+@media (min-width: 1021px) and (max-width: 1300px) {
+    body.kin-qna .question-card > .card-bottom {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+    body.kin-qna .question-card > .card-bottom .bottom-center {
+        position: static;
+        flex: 1 1 250px;
+        width: auto;
+    }
+    body.kin-qna .question-card > .card-bottom .bottom-right { margin-left: auto; }
+}
+
+
+/* ============================================================================
+   15차: 메인 '더보기'와 상세 '답변 더보기' 동일 규격, 색상만 다르게.
+   Q&A 네 댓글창의 독립 작동 및 모든 카드 하단 컨트롤의 기준 높이 36px.
+   ============================================================================ */
+body.kin-qna .greenbar-more {
+    display: flex;
+    width: 100%;
+    min-height: 58px;
+    height: auto;
+    margin: 0 0 10px;
+    padding: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    border-radius: 999px;
+    background: #ebf6f1;
+    color: #2f4b3b;
+    font-size: clamp(19px, 2vw, 25px);
+    font-weight: 450;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+body.kin-qna .greenbar-more:hover { background: #d8ece2; color: #254432; }
+body.kin-qna .greenbar-more:focus-visible,
+body.kin-qna .btn-comment:focus-visible,
+body.kin-qna .qna-icon-button:focus-visible,
+body.kin-qna .btn-submit:focus-visible {
+    outline: 2px solid #2db400;
+    outline-offset: 3px;
+}
+/* 아이콘/댓글/채택 컨트롤 상자의 높이를 통일합니다.
+   좋아요/싫어요 개수는 이 높이에 포함하지 않습니다. */
+body.kin-qna { --kin-qna-control-height: 36px; }
+body.kin-qna .question-card .card-bottom,
+body.kin-qna .question-card1 .card-bottom,
+body.kin-qna .question-card3 .card-bottom {
+    align-items: flex-start;
+    min-width: 0;
+}
+body.kin-qna .card-bottom .bottom-left,
+body.kin-qna .card-bottom .bottom-right {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+body.kin-qna .card-bottom .btn-comment {
+    flex: 0 0 112px;
+    min-width: 112px;
+    width: 112px;
+    height: var(--kin-qna-control-height);
+    min-height: var(--kin-qna-control-height);
+    line-height: 1;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+body.kin-qna .card-bottom .btn-comment[aria-expanded="true"] {
+    color: #fff;
+    background: #2db400;
+    border-color: #2db400;
+}
+body.kin-qna .card-bottom .qna-icon-button {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 var(--kin-qna-control-height);
+    width: var(--kin-qna-control-height);
+    height: var(--kin-qna-control-height);
+    min-width: var(--kin-qna-control-height);
+    min-height: var(--kin-qna-control-height);
+    margin: 0;
+    padding: 3px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+}
+body.kin-qna .card-bottom .qna-icon-button:hover { background: #f2f3fd; }
+body.kin-qna .card-bottom .qna-icon-button[aria-pressed="true"] { background: #e9f5ee; }
+body.kin-qna .card-bottom .qna-icon-button img.right-icon,
+body.kin-qna .card-bottom .qna-icon-button img.right-icon1 {
+    display: block;
+    width: min(100%, var(--kin-qna-action-icon));
+    height: min(100%, var(--kin-qna-action-icon));
+    max-width: 100%; max-height: 100%;
+    padding: 0;
+    margin: 0;
+    object-fit: contain;
+}
+body.kin-qna .card-bottom .vote-unit,
+body.kin-qna .card-bottom .vote-unit-a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 3px;
+    padding: 0;
+    margin: 0;
+}
+body.kin-qna .card-bottom .vote-count { line-height: 1.15; margin: 0; }
+body.kin-qna .card-bottom .adopted-btn,
+body.kin-qna .card-bottom .adopted-btn > p {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--kin-qna-control-height);
+    min-height: var(--kin-qna-control-height);
+    margin: 0;
+    box-sizing: border-box;
+    line-height: 1;
+    white-space: nowrap;
+}
+body.kin-qna .card-bottom .adopted-btn > p { padding: 0 16px; }
+body.kin-qna .question-card1 .card-bottom .bottom-left,
+body.kin-qna .question-card3 .card-bottom .bottom-left { gap: 12px; }
+@media (min-width: 1021px) {
+    body.kin-qna .question-card .card-bottom,
+    body.kin-qna .question-card1 .card-bottom,
+    body.kin-qna .question-card3 .card-bottom { margin-left: 79px; }
+}
+@media (max-width: 720px) {
+    body.kin-qna .question-card .card-bottom,
+    body.kin-qna .question-card1 .card-bottom,
+    body.kin-qna .question-card3 .card-bottom { margin-inline: 0; flex-wrap: wrap; gap: 12px; }
+    body.kin-qna .question-card .card-bottom .bottom-center {
+        order: 3; flex: 1 0 100%; width: 100%; position: static; left: auto;
+    }
+    body.kin-qna .question-card .card-bottom .bottom-right { margin-left: auto; }
+}
+/* 중복 id 체크박스 토글 대신 각 카드의 독립 댓글 영역을 표시합니다. */
+body.kin-qna .expandable-content:not(.is-open) { display: none; }
+body.kin-qna .expandable-content.is-open {
+    display: block;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    opacity: 1;
+    margin: 18px 0 18px;
+    transition: none;
+}
+body.kin-qna .expandable-content .comment-input-area { max-width: 100%; }
+body.kin-qna .expandable-content .input-container {
+    margin: 0 clamp(0px, 3vw, 55px);
+    max-width: 100%;
+}
+body.kin-qna .expandable-content .comment-field {
+    display: block;
+    width: 100%;
+    min-height: 95px;
+    padding: 15px 22px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+body.kin-qna .expandable-content .btn-submit:disabled { cursor: not-allowed; opacity: .65; }
+body.kin-qna .expandable-content .btn-submit:not(:disabled) { background: #2db400; }
+body.kin-qna .qna-comment-list { margin: 0 clamp(0px, 3vw, 55px) 14px; }
+body.kin-qna .qna-comment-item {
+    border-bottom: 1px solid #eeeefc;
+    padding: 12px 6px;
+    font-size: 14px;
+    word-break: break-word;
+}
+body.kin-qna .qna-comment-item.is-reply { margin-left: 20px; padding-left: 14px; border-left: 2px solid #e4e4fb; }
+body.kin-qna .qna-comment-meta { display:flex; gap:10px; align-items:center; color:#9193a2; font-size:12px; }
+body.kin-qna .qna-comment-meta strong { color:#3a3a3a; font-size:13px; }
+body.kin-qna .qna-comment-text { margin: 8px 0; white-space:pre-wrap; }
+body.kin-qna .qna-reply-trigger { padding: 3px 0; border:0; background:none; color:#6c6f8c; cursor:pointer; font-size:12px; }
+body.kin-qna .qna-reply-form { margin-top: 10px; display:flex; gap:8px; flex-wrap:wrap; }
+body.kin-qna .qna-reply-form textarea { width:100%; min-height:64px; max-width:100%; border:1px solid #ddddea; border-radius:10px; padding:10px; font:inherit; }
+body.kin-qna .qna-reply-form button { border:0; border-radius:14px; padding:6px 14px; background:#ebf6f1; color:#23532d; cursor:pointer; }
+body.kin-qna .qna-reply-form button:disabled { opacity:.5; cursor:not-allowed; }
+@media (prefers-reduced-motion: reduce) {
+    body.kin-qna .greenbar-more, body.kin-qna .btn-comment { transition: none; }
+}
+
+body.kin-qna .greenbar-more > p { margin: 0; }
+/* 두 더보기 컨트롤은 배경/글자 색과 표시 문구만 다르게 적용합니다. */
+body:not(.kin-subpage) .main-content > .btn-more,
+body.kin-qna .main-content .greenbar-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    height: 58px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 999px;
+    font-family: Arial, sans-serif;
+    font-size: clamp(19px, 2vw, 25px);
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+/* 채택 답변 카드의 4px 외곽선으로 인해 생기는 3px 좌표 차이 보정 */
+body.kin-qna .question-card1 .card-bottom { position: relative; left: -3px; }
+
+
+/* ===========================================================================
+   16차: Q&A 마크업 기준의 카드 내부 배치
+   - 상단 더보기 바로 왼쪽에 북마크 배치 (질문/답변 전체)
+   - 답변 좋아요/싫어요를 질문 카드와 동일한 우측 끝에 배치
+   - 질문 제목·본문·하단 댓글/태그를 공통 콘텐츠 세로축에 정렬
+   - 댓글창을 카드 콘텐츠 시작점부터 오른쪽 끝까지 확장
+   =========================================================================== */
+body.kin-qna .card-top .top-icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+body.kin-qna .card-top .top-icons > img,
+body.kin-qna .card-top .top-icons > img.more-a {
+    display: block;
+    width: var(--kin-qna-action-icon);
+    height: 36px;
+    padding: 0;
+    margin: 0;
+    object-fit: contain;
+    flex: 0 0 var(--kin-qna-action-icon);
+}
+body.kin-qna .card-top .top-icons .qna-top-bookmark {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    flex: 0 0 36px;
+    margin: 0;
+    padding: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+body.kin-qna .card-top .top-icons .qna-top-bookmark:hover { background: #f2f3fd; }
+body.kin-qna .card-top .top-icons .qna-top-bookmark[aria-pressed="true"] { background: #e9f5ee; }
+body.kin-qna .card-top .top-icons .qna-top-bookmark > img {
+    display: block;
+    width: var(--kin-qna-action-icon);
+    height: var(--kin-qna-action-icon);
+    max-width: 100%;
+    object-fit: contain;
+}
+body.kin-qna .card-top .top-icons .qna-top-bookmark:focus-visible {
+    outline: 2px solid #2db400;
+    outline-offset: 3px;
+}
+
+/* 하단 좋아요/싫어요는 항상 오른쪽의 마지막 두 칸에 두고,
+   답변 카드의 '채택하기'는 그 왼쪽에 둡니다. */
+body.kin-qna .question-card .card-bottom,
+body.kin-qna .question-card1 .card-bottom,
+body.kin-qna .question-card3 .card-bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    column-gap: 12px;
+    margin-right: 12px;
+}
+body.kin-qna .question-card1 .card-bottom { left: 0; margin-right: 9px; }
+body.kin-qna .question-card1 .card-bottom .bottom-left,
+body.kin-qna .question-card3 .card-bottom .bottom-left { gap: 0; }
+body.kin-qna .question-card .card-bottom .bottom-left,
+body.kin-qna .question-card1 .card-bottom .bottom-left,
+body.kin-qna .question-card3 .card-bottom .bottom-left { flex: 0 0 112px; }
+body.kin-qna .question-card .card-bottom .bottom-right,
+body.kin-qna .question-card1 .card-bottom .bottom-right,
+body.kin-qna .question-card3 .card-bottom .bottom-right {
+    flex: 0 0 auto;
+    margin-left: auto;
+    gap: 12px;
+    align-items: flex-start;
+}
+body.kin-qna .card-bottom .vote-unit,
+body.kin-qna .card-bottom .vote-unit-a {
+    flex: 0 0 36px;
+    width: 36px;
+}
+
+/* 데스크톱 마크업: 프로필 닉네임, 질문 제목, 본문, 댓글 버튼이
+   고정된 같은 세로축을 따라 배치됩니다. */
+@media (min-width: 1301px) {
+    body.kin-qna .question-card .user-info { gap: 26px; }
+    body.kin-qna .question-card .main-title { margin-left: 3px; }
+    body.kin-qna .question-card .top-row { margin-bottom: 28px; }
+    body.kin-qna .question-card .card-mid { margin-top: 26px; margin-bottom: 77px; }
+    body.kin-qna .question-card .content { padding-left: 90px; padding-right: 8px; }
+    body.kin-qna .question-card .card-bottom,
+    body.kin-qna .question-card1 .card-bottom,
+    body.kin-qna .question-card3 .card-bottom { margin-left: 90px; }
+    body.kin-qna .question-card .card-bottom { margin-bottom: 28px; }
+    body.kin-qna .question-card .card-bottom .bottom-center { left: 0; }
+    body.kin-qna .question-card .q-mark { margin-right: 11px; }
+    body.kin-qna .question-card .expandable-content.is-open { margin-top: 34px; }
+}
+
+/* 댓글 입력창: 빨간 마크업처럼 본문 시작축 아래에서 오른쪽 카드 경계에
+   가깝게 펼치고, 모든 질문/답변 카드에서 같은 규격으로 표시합니다. */
+body.kin-qna .expandable-content .comment-input-area { width: 100%; }
+body.kin-qna .expandable-content .input-container {
+    box-sizing: border-box;
+    margin-right: 4px;
+    margin-left: clamp(0px, 8.5vw, 90px);
+    width: auto;
+    max-width: none;
+    border-radius: 12px;
+}
+body.kin-qna .expandable-content .comment-field {
+    width: 100%;
+    min-height: 126px;
+    padding: 16px 12px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+body.kin-qna .expandable-content .input-footer {
+    min-height: 52px;
+    box-sizing: border-box;
+    padding: 7px 15px;
+}
+body.kin-qna .expandable-content .btn-submit {
+    min-height: 36px;
+    border-radius: 18px;
+    white-space: nowrap;
+}
+body.kin-qna .qna-comment-list {
+    margin-right: 4px;
+    margin-left: clamp(0px, 8.5vw, 90px);
+}
+/* 중앙 내용이 좁은 화면에서 가로로 눌리지 않도록 정렬 규칙만 완화합니다. */
+@media (min-width: 1021px) and (max-width: 1300px) {
+    body.kin-qna .question-card .card-bottom,
+    body.kin-qna .question-card1 .card-bottom,
+    body.kin-qna .question-card3 .card-bottom { margin-left: 50px; }
+}
+@media (max-width: 1020px) {
+    body.kin-qna .expandable-content .input-container,
+    body.kin-qna .qna-comment-list { margin-left: clamp(0px, 4vw, 32px); }
+}
+@media (max-width: 720px) {
+    body.kin-qna .question-card .card-bottom,
+    body.kin-qna .question-card1 .card-bottom,
+    body.kin-qna .question-card3 .card-bottom { margin-left: 0; margin-right: 0; row-gap: 12px; }
+    body.kin-qna .question-card .card-bottom .bottom-center { order: 3; }
+    body.kin-qna .question-card .card-bottom .bottom-right,
+    body.kin-qna .question-card1 .card-bottom .bottom-right,
+    body.kin-qna .question-card3 .card-bottom .bottom-right { margin-left: auto; }
+    body.kin-qna .expandable-content .input-container,
+    body.kin-qna .qna-comment-list { margin-left: 0; margin-right: 0; }
+    body.kin-qna .card-top .top-icons { gap: 6px; }
+}
+/* 채택 카드의 4px 테두리 차이를 모바일에서도 보정해 좋아요/싫어요의
+   오른쪽 기준선이 질문 카드 및 다른 답변 카드와 일치하게 합니다. */
+@media (max-width: 720px) {
+    body.kin-qna .question-card1 .card-bottom { margin-right: -3px; }
+}
+@media (max-width: 720px) {
+    body.kin-qna .question-card1 .card-bottom .bottom-right { transform: translateX(3px); }
+}
+
+
+/* ===========================================================================
+   17차: Q&A 답변의 단일 텍스트 시작선 / 프로필 정사각형 / 홈 카드 액션 통일
+   - 답변 카드: 프로필 오른쪽부터 닉네임, 등급/일시, 본문, 자격 배지, 댓글이
+     하나의 수직 기준선에 정렬되도록 카드의 테두리 두께를 반영합니다.
+   - 메인 카드: Q&A와 동일한 36px 컨트롤과 최소/최대 아이콘 크기를 사용합니다.
+   - 기존 3열 레이아웃 및 모바일 한 열 전환은 유지합니다.
+   =========================================================================== */
+:root {
+    --kin-card-control-box: 36px;
+    --kin-card-icon-size: clamp(25px, 1.65vw, 29px);
+}
+
+/* 1. Q&A 세 답변 카드: avatar(56px) 끝과 닉네임/배지/본문/댓글의
+      시작선을 통일. 채택 답변(4px 테두리)과 일반 답변(1px)의 차이를 보정. */
+body.kin-qna .question-card1 .card-top { padding-left: 14px; }
+body.kin-qna .question-card3 .card-top { padding-left: 17px; }
+body.kin-qna .question-card1 .user-info,
+body.kin-qna .question-card3 .user-info {
+    gap: 6px;
+    min-width: 0;
+    align-items: center;
+}
+body.kin-qna .question-card1 .plane,
+body.kin-qna .question-card3 .plane,
+body.kin-qna .question-card1 .plane > .Answer,
+body.kin-qna .question-card3 .plane > .Answer {
+    display: block;
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px;
+    min-height: 56px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+body.kin-qna .question-card1 .user-meta,
+body.kin-qna .question-card3 .user-meta { min-width: 0; }
+body.kin-qna .question-card1 .job,
+body.kin-qna .question-card3 .job { padding-left: 62px; }
+body.kin-qna .question-card1 .content1 { padding-left: 76px; }
+body.kin-qna .question-card3 .content1 { padding-left: 79px; }
+body.kin-qna .question-card1 .card-bottom { margin-left: 76px; }
+body.kin-qna .question-card3 .card-bottom { margin-left: 79px; }
+/* 작은 카드의 장문 닉네임과 우측 채택 배지가 서로 겹치지 않도록 합니다. */
+@media (min-width: 721px) and (max-width: 1120px) {
+    body.kin-qna .question-card1 .top-row,
+    body.kin-qna .question-card3 .top-row { flex-wrap: wrap; row-gap: 10px; }
+    body.kin-qna .question-card1 .top-icons,
+    body.kin-qna .question-card3 .top-icons { margin-left: auto; }
+}
+@media (max-width: 720px) {
+    body.kin-qna .question-card1 .card-top,
+    body.kin-qna .question-card3 .card-top { padding-left: 0; }
+    body.kin-qna .question-card1 .user-info,
+    body.kin-qna .question-card3 .user-info { gap: 10px; }
+    body.kin-qna .question-card1 .plane,
+    body.kin-qna .question-card3 .plane,
+    body.kin-qna .question-card1 .plane > .Answer,
+    body.kin-qna .question-card3 .plane > .Answer {
+        width: 46px !important; height: 46px !important;
+        min-width: 46px; min-height: 46px;
+    }
+    body.kin-qna .question-card1 .nickname1,
+    body.kin-qna .question-card3 .nickname1 { font-size: clamp(18px, 4.8vw, 24px); }
+    body.kin-qna .question-card1 .top-row,
+    body.kin-qna .question-card3 .top-row { flex-wrap: wrap; row-gap: 9px; }
+    body.kin-qna .question-card1 .top-icons,
+    body.kin-qna .question-card3 .top-icons { margin-left: auto; }
+    body.kin-qna .question-card1 .job,
+    body.kin-qna .question-card3 .job,
+    body.kin-qna .question-card1 .content1,
+    body.kin-qna .question-card3 .content1 { padding-left: 0; }
+    body.kin-qna .question-card1 .card-bottom,
+    body.kin-qna .question-card3 .card-bottom { margin-left: 0; }
+}
+
+/* 2. 메인 질문 카드를 Q&A 카드와 같은 36px 액션 박스 규격으로 구성. */
+body:not(.kin-subpage) .main-content .question-card .card-header-top {
+    padding-left: 17px;
+    padding-right: 4px;
+}
+body:not(.kin-subpage) .main-content .question-card .plane {
+    display: block;
+    width: 56px !important;
+    height: 56px !important;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+}
+body:not(.kin-subpage) .main-content .question-card .user-info-group { gap: 6px; }
+body:not(.kin-subpage) .main-content .question-card .card-body-middle,
+body:not(.kin-subpage) .main-content .question-card .card-footer-bottom {
+    padding-left: 79px;
+}
+body:not(.kin-subpage) .main-content .question-card .top-icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex: 0 0 auto;
+}
+body:not(.kin-subpage) .main-content .question-card .kin-main-icon-button,
+body:not(.kin-subpage) .main-content .question-card .top-icons > .more {
+    display: inline-flex;
+    width: var(--kin-card-control-box);
+    height: var(--kin-card-control-box);
+    flex: 0 0 var(--kin-card-control-box);
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body:not(.kin-subpage) .main-content .question-card .kin-main-icon-button {
+    appearance: none;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+}
+body:not(.kin-subpage) .main-content .question-card .kin-main-icon-button:hover,
+body:not(.kin-subpage) .main-content .question-card .react-btn:hover {
+    background-color: #f2f3fd;
+}
+body:not(.kin-subpage) .main-content .question-card .kin-main-icon-button[aria-pressed="true"],
+body:not(.kin-subpage) .main-content .question-card .react-btn[aria-pressed="true"] {
+    background-color: #e9f5ee;
+}
+body:not(.kin-subpage) .main-content .question-card .kin-main-icon-button img,
+body:not(.kin-subpage) .main-content .question-card .top-icons > .more {
+    display: block;
+    width: var(--kin-card-icon-size);
+    height: var(--kin-card-icon-size);
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0;
+    padding: 0;
+}
+body:not(.kin-subpage) .main-content .question-card .interactions {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0;
+}
+body:not(.kin-subpage) .main-content .question-card .react-btn {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 3px;
+    flex: 0 0 var(--kin-card-control-box);
+    width: var(--kin-card-control-box);
+    min-width: var(--kin-card-control-box);
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+body:not(.kin-subpage) .main-content .question-card .react-btn > .react {
+    display: block;
+    width: var(--kin-card-icon-size);
+    height: var(--kin-card-control-box);
+    max-width: 100%;
+    margin: 0;
+    object-fit: contain;
+}
+body:not(.kin-subpage) .main-content .question-card .react-btn > .count {
+    margin: 0;
+    color: #888;
+    line-height: 1.15;
+    font-size: 12px;
+    white-space: nowrap;
+}
+body:not(.kin-subpage) .main-content .question-card .card-footer-bottom {
+    display: flex;
+    align-items: flex-start;
+    min-height: 58px;
+}
+body:not(.kin-subpage) .main-content .question-card .info-group {
+    align-self: center;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+body:not(.kin-subpage) .main-content .question-card .top-icons,
+body:not(.kin-subpage) .main-content .question-card .interactions {
+    position: relative;
+    z-index: 2;
+}
+body:not(.kin-subpage) .main-content .question-card .kin-main-icon-button:focus-visible,
+body:not(.kin-subpage) .main-content .question-card .react-btn:focus-visible {
+    outline: 2px solid #2db400;
+    outline-offset: 2px;
+}
+@media (max-width: 720px) {
+    :root { --kin-card-icon-size: 25px; }
+    body:not(.kin-subpage) .main-content .question-card .card-header-top { padding-left: 0; padding-right: 0; }
+    body:not(.kin-subpage) .main-content .question-card .card-body-middle,
+    body:not(.kin-subpage) .main-content .question-card .card-footer-bottom { padding-left: 0; }
+    body:not(.kin-subpage) .main-content .question-card .plane {
+        width: 43px !important; height: 43px !important;
+    }
+    body:not(.kin-subpage) .main-content .question-card .top-icons { gap: 5px; }
+    body:not(.kin-subpage) .main-content .question-card .kin-main-icon-button,
+    body:not(.kin-subpage) .main-content .question-card .top-icons > .more {
+        width: 32px; height: 32px; flex-basis: 32px;
+    }
+    body:not(.kin-subpage) .main-content .question-card .interactions { gap: 8px; }
+}
+
+
+/* ==========================================================================
+   18차: Q&A 채택 표시, 자격 배지, 프로필 크기, 우측 많이 본 Q&A, 아이콘 간격
+   이전 레이아웃/댓글 기능은 그대로 두고 요청된 구성 요소만 최종 재정의합니다.
+   ========================================================================== */
+
+/* 질문자와 모든 답변자의 프로필 크기를 일치시킵니다. 텍스트 시작선은 유지합니다. */
+body.kin-qna { --kin-qna-avatar-shared: 44px; }
+body.kin-qna .question-card .plane,
+body.kin-qna .question-card .plane > .PSA,
+body.kin-qna .question-card1 .plane,
+body.kin-qna .question-card3 .plane,
+body.kin-qna .question-card1 .plane > .Answer,
+body.kin-qna .question-card3 .plane > .Answer {
+    width: var(--kin-qna-avatar-shared) !important;
+    height: var(--kin-qna-avatar-shared) !important;
+    min-width: var(--kin-qna-avatar-shared);
+    min-height: var(--kin-qna-avatar-shared);
+    max-width: var(--kin-qna-avatar-shared);
+    max-height: var(--kin-qna-avatar-shared);
+    aspect-ratio: 1 / 1;
+    display: block;
+    flex: 0 0 var(--kin-qna-avatar-shared);
+    object-fit: cover;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+/* 프로필이 작아져도 등급·닉네임·본문의 기존 기준선은 바꾸지 않습니다. */
+body.kin-qna .question-card1 .user-info,
+body.kin-qna .question-card3 .user-info { gap: 18px; }
+
+/* 상단 '채택된 답변': 기존 자리에서 표시 자체의 폭·높이·글자를 축소. */
+body.kin-qna .question-card1 .adopted {
+    height: 42px;
+    min-height: 42px;
+    width: auto;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 3px 10px 3px 5px;
+    border-width: 3px;
+    border-radius: 24px;
+    font-size: 18px;
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+body.kin-qna .question-card1 .adopted .check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    flex: 0 0 29px;
+}
+body.kin-qna .question-card1 .adopted .chV {
+    width: 29px;
+    height: 29px;
+    max-width: 29px;
+    object-fit: contain;
+    box-sizing: border-box;
+    padding: 2px;
+}
+
+/* 공인중개사 배지는 구분선 아래로 내리고 너비와 글자를 줄입니다. */
+body.kin-qna .question-card1 .job {
+    margin-top: 10px;
+    margin-bottom: 3px;
+}
+body.kin-qna .question-card1 .job-info {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 22px;
+    box-sizing: border-box;
+    padding: 1px 9px;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 500;
+    border: 1px solid #c2c6de;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+/* 검색결과 박스는 HTML에서 제거. 많이 본 Q&A는 세 항목 모두 표시. */
+body.kin-qna .side-right > .SR-cloud { margin-top: 0; }
+body.kin-qna .side-right .SR-inner > .result1:nth-child(n + 3) { display: block; }
+
+/* 질문 및 답변의 상단/하단 액션 아이콘 사이 가로 간격 1.5배. */
+body.kin-qna .card-top .top-icons { gap: 18px; }
+body.kin-qna .question-card .card-bottom .bottom-right,
+body.kin-qna .question-card1 .card-bottom .bottom-right,
+body.kin-qna .question-card3 .card-bottom .bottom-right { gap: 18px; }
+
+@media (max-width: 720px) {
+    body.kin-qna { --kin-qna-avatar-shared: 42px; }
+    body.kin-qna .question-card1 .user-info,
+    body.kin-qna .question-card3 .user-info { gap: 14px; }
+    body.kin-qna .question-card1 .adopted { height: 36px; min-height: 36px; font-size: 15px; gap: 5px; padding: 2px 7px 2px 4px; border-width: 2px; }
+    body.kin-qna .question-card1 .adopted .check { flex-basis: 24px; }
+    body.kin-qna .question-card1 .adopted .chV { width: 24px; height: 24px; }
+    /* 좁은 화면에서는 1.5배 간격을 상한으로 제한해 버튼이 겹치지 않게 합니다. */
+    body.kin-qna .card-top .top-icons,
+    body.kin-qna .question-card .card-bottom .bottom-right,
+    body.kin-qna .question-card1 .card-bottom .bottom-right,
+    body.kin-qna .question-card3 .card-bottom .bottom-right { gap: clamp(9px, 3vw, 18px); }
+}
+
+/* =====================================================================
+   19차: 마크업 기준 HUD-본문 사이 여백 및 Q&A 상단 두 아이콘 축소
+   - 세 페이지에서 HUD 아래 첫 콘텐츠/사이드바의 시작선 통일
+   - Q&A 질문 카드의 알림, 더보기 그림만 0.85배; 36px 정렬 영역은 유지
+   ===================================================================== */
+:root { --kin-top-gap: 46px; }
+@media (max-width: 1020px) {
+    :root { --kin-top-gap: 46px; }
+}
+@media (max-width: 720px) {
+    :root { --kin-top-gap: 34px; }
+}
+body.kin-qna .question-card > .card-top .top-icons > img.icon-png {
+    transform: scale(.85);
+    transform-origin: center center;
+}
+
+
+/* =====================================================================
+   20차 — 메인 페이지의 사용자가 표시한 정렬선과 강조 상자 반영
+   다른 페이지에 영향을 주지 않도록 .kin-main 내부에만 적용합니다.
+   질문 카드의 프로필 → 사용자명 → 질문 → 본문 → 날짜 순서/상대 위치 보존
+   ===================================================================== */
+@media (min-width: 1021px) {
+    /* 프로필은 카드 좌측 안쪽으로 살짝 옮기고, 닉네임과 한 그룹으로 유지. */
+    body.kin-main .main-content .question-card .card-header-top .user-info-group {
+        position: relative;
+        left: -22px;
+    }
+    /* 세로 빨간 표시선 기준: 제목·본문·날짜·조회수의 시작선 일치. */
+    body.kin-main .main-content .question-card .card-body-middle,
+    body.kin-main .main-content .question-card .card-footer-bottom {
+        padding-left: 56px;
+    }
+    /* 주황 표시 영역: 제목과 본문 사이 간격을 유지하되 문단 높이는 정돈. */
+    body.kin-main .main-content .question-card .card-body-middle {
+        margin-bottom: 10px;
+    }
+    body.kin-main .main-content .question-card .q-title {
+        margin-bottom: 4px;
+        line-height: 1.3;
+    }
+    body.kin-main .main-content .question-card .content {
+        font-size: 16px;
+        line-height: 1.58;
+        margin-bottom: 12px;
+        overflow-wrap: break-word;
+    }
+    body.kin-main .main-content .question-card .info-group {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 13px;
+    }
+    body.kin-main .main-content .question-card .info-group .views {
+        margin-left: 0;
+    }
+    /* 초록 상단 메뉴: 마크업 안에 텍스트가 같은 크기로 들어가도록. */
+    body.kin-main .side-right .notice-box .my,
+    body.kin-main .side-right .notice-box .attancion {
+        font-size: 16px;
+        font-weight: 550;
+    }
+    /* 붉게 표시된 세 줄 태그: 가독성은 살리면서 카드 안쪽에 맞춤. */
+    body.kin-main .side-right .tag-cloud .tags {
+        font-size: 13px;
+        line-height: 1.15;
+    }
+    body.kin-main .side-right .tag-line-1,
+    body.kin-main .side-right .tag-line-2,
+    body.kin-main .side-right .tag-line-3 {
+        margin-block: 16px;
+        white-space: nowrap;
+    }
+    body.kin-main .side-right .tag-line-1 span,
+    body.kin-main .side-right .tag-line-2 span,
+    body.kin-main .side-right .tag-line-3 span {
+        padding: 6px 5px;
+        white-space: nowrap;
+    }
+}
+/* 노트북(1021~1300px)의 좁은 오른쪽 열에서는 태그가 잘리지 않도록. */
+@media (min-width: 1021px) and (max-width: 1300px) {
+    body.kin-main .side-right .tag-cloud .tags { font-size: 11px; }
+    body.kin-main .side-right .tag-line-1 span,
+    body.kin-main .side-right .tag-line-2 span,
+    body.kin-main .side-right .tag-line-3 span { padding-inline: 4px; }
+}
+
+/* =====================================================================
+   21차 — 메인 질문 카드의 프로필·텍스트·첨부 이미지 정렬 통일
+   - 질문/본문/날짜/첨부 사진의 시작 좌표를 하나의 기준선으로 묶습니다.
+   - 프로필 사진만 줄여 왼쪽으로 이동하고, 사용자명은 기준선에 고정합니다.
+   - 메인 전용 스타일로 Q&A·질문 작성 페이지에는 영향을 주지 않습니다.
+   ===================================================================== */
+@media (min-width: 721px) {
+    body.kin-main .main-content .question-card {
+        --kin-main-card-content-indent: 56px;
+    }
+    body.kin-main .main-content .question-card .card-header-top {
+        padding-left: 0;
+    }
+    body.kin-main .main-content .question-card .card-header-top .user-info-group {
+        position: relative;
+        left: -10px;
+        gap: 22px;
+    }
+    body.kin-main .main-content .question-card .card-header-top .user-info-group > .plane {
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px;
+        min-height: 44px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    body.kin-main .main-content .question-card .card-body-middle,
+    body.kin-main .main-content .question-card .card-footer-bottom {
+        padding-left: var(--kin-main-card-content-indent);
+    }
+    /* 여행 사진과 건담 사진 모두 질문 텍스트의 왼쪽 시작선에 맞춥니다. */
+    body.kin-main .main-content .question-card .picture > .mountain {
+        display: block;
+        width: calc(100% - var(--kin-main-card-content-indent));
+        max-width: calc(100% - var(--kin-main-card-content-indent));
+        height: auto;
+        margin-left: var(--kin-main-card-content-indent);
+    }
+    body.kin-main .main-content .question-card .photo-grid {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        padding-left: var(--kin-main-card-content-indent);
+        padding-right: 0;
+    }
+}
+@media (max-width: 720px) {
+    /* 모바일은 기존 한 열 레이아웃을 유지하고 프로필만 적절히 축소합니다. */
+    body.kin-main .main-content .question-card .card-header-top .user-info-group {
+        position: relative;
+        left: -3px;
+        gap: 9px;
+    }
+    body.kin-main .main-content .question-card .card-header-top .user-info-group > .plane {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px;
+        min-height: 38px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+}
+
+/* ========================================================================
+   22차 — Q&A 상세 마크업 정렬 보정
+   기준: 질문/답변 카드의 안쪽 세로 기준선, 필터바 크기, 본문과 액션 정렬.
+   기존 HTML·JS 및 3페이지 공통 레이아웃 규칙은 변경하지 않습니다.
+   ======================================================================== */
+@media (min-width: 1021px) {
+    /* 카드의 내용이 오른쪽 빨간 기준선까지 도달하도록 여유를 확보합니다. */
+    body.kin-qna .main-content .question-card,
+    body.kin-qna .main-content .question-card1,
+    body.kin-qna .main-content .question-card3 {
+        padding-right: 22px;
+    }
+    body.kin-qna .question-card .content {
+        padding-right: 8px;
+    }
+    body.kin-qna .question-card1 .content1,
+    body.kin-qna .question-card3 .content1 {
+        padding-right: 8px;
+        max-width: 100%;
+    }
+    /* 알림/북마크/더보기: 카드를 기준으로 동일한 오른쪽 여백. */
+    body.kin-qna .question-card .card-top .top-icons,
+    body.kin-qna .question-card1 .card-top .top-icons,
+    body.kin-qna .question-card3 .card-top .top-icons {
+        margin-right: 0;
+    }
+    /* 채택 답변과 일반 답변의 헤더 구분선을 동일한 안쪽 경계에 정렬. */
+    body.kin-qna .question-card1 .border-a,
+    body.kin-qna .question-card3 .border-a,
+    body.kin-qna .question-card3 .border-a1 {
+        position: relative;
+        left: -18px;
+        width: calc(95% + 78px);
+        max-width: calc(100% + 18px);
+    }
+    /* 하단 반응 버튼도 텍스트/카드 오른쪽 기준선과 맞추기. */
+    body.kin-qna .question-card .card-bottom,
+    body.kin-qna .question-card1 .card-bottom,
+    body.kin-qna .question-card3 .card-bottom {
+        margin-right: 5px;
+    }
+    /* 질문 댓글과 태그를 그림의 파란 영역에 모아서 배치. */
+    body.kin-qna .question-card .card-bottom .bottom-center {
+        margin-left: -8px;
+        gap: 8px;
+    }
+}
+/* 답변 수 필터 영역: 지정된 낮은 막대와 두 개의 작은 버튼. */
+body.kin-qna .main-content .greenbar {
+    min-height: 72px;
+    height: 72px;
+    padding: 0 60px 0 43px;
+    border-radius: 28px;
+}
+body.kin-qna .main-content .greenbar .left { padding-left: 0; }
+body.kin-qna .main-content .greenbar .left h3 {
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 0;
+    white-space: nowrap;
+}
+body.kin-qna .main-content .greenbar .right {
+    gap: 10px;
+    padding-right: 0;
+    flex-wrap: nowrap;
+}
+body.kin-qna .main-content .greenbar .filter1,
+body.kin-qna .main-content .greenbar .filter2 {
+    height: 36px;
+    min-height: 36px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 17px;
+}
+body.kin-qna .main-content .greenbar .filter1 { width: 110px; }
+body.kin-qna .main-content .greenbar .filter2 { width: 102px; }
+@media (min-width: 1021px) {
+    /* 막대 자체만 낮추고 다음 답변 카드와의 기존 수직 간격을 유지. */
+    body.kin-qna .main-content .question-card1 { margin-top: 44px; }
+}
+@media (min-width: 721px) and (max-width: 1300px) {
+    body.kin-qna .main-content .greenbar { padding-inline: 22px; }
+    body.kin-qna .main-content .greenbar .left h3 { font-size: 22px; }
+    body.kin-qna .main-content .greenbar .filter1 { width: 98px; }
+    body.kin-qna .main-content .greenbar .filter2 { width: 100px; }
+}
+@media (max-width: 720px) {
+    /* 1열 레이아웃에서는 읽기와 터치가 우선, 줄바꿈/겹침 방지. */
+    body.kin-qna .main-content .greenbar {
+        min-height: 72px;
+        height: auto;
+        padding: 12px 14px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    body.kin-qna .main-content .greenbar .left h3 { font-size: 20px; }
+    body.kin-qna .main-content .greenbar .right { gap: 7px; }
+    body.kin-qna .main-content .greenbar .filter1,
+    body.kin-qna .main-content .greenbar .filter2 {
+        width: auto;
+        min-width: 72px;
+        padding: 0 10px;
+        height: 32px;
+        min-height: 32px;
+        font-size: 13px;
+    }
+}
+
+/* ========================================================================
+   23차 — Q&A 카드의 붉은 내부 기준선과 여백 재조정
+   - 22차에서 과도하게 오른쪽으로 확장된 문단을 안쪽으로 되돌립니다.
+   - 질문/답변 본문과 하단 버튼의 시작선을 동일하게 유지합니다.
+   - 카드 외곽, 헤더, 사이드바, 기존 댓글 스크립트는 변경하지 않습니다.
+   ======================================================================== */
+@media (min-width: 1021px) {
+    /* 세 카드 모두 오른쪽 경계에서 같은 만큼 호흡 공간을 남깁니다. */
+    body.kin-qna .main-content .question-card,
+    body.kin-qna .main-content .question-card1,
+    body.kin-qna .main-content .question-card3 {
+        padding-right: 32px;
+    }
+
+    /* 질문 카드와 답변 카드의 문단 왼쪽 기준선을 동일하게 맞춥니다. */
+    body.kin-qna .question-card .content {
+        padding-left: 79px;
+        padding-right: 20px;
+        line-height: 1.75;
+    }
+    body.kin-qna .question-card1 .content1 {
+        padding-left: 76px;
+        padding-right: 20px;
+        line-height: 1.75;
+    }
+    body.kin-qna .question-card3 .content1 {
+        padding-left: 79px;
+        padding-right: 20px;
+        line-height: 1.75;
+    }
+
+    /* 댓글·태그도 본문의 시작선과 맞추고 하단 정보는 답답하지 않게 유지. */
+    body.kin-qna .question-card .card-bottom {
+        margin-left: 79px;
+    }
+    body.kin-qna .question-card1 .card-mid,
+    body.kin-qna .question-card3 .card-mid {
+        margin-bottom: 58px;
+    }
+}
+
+@media (min-width: 721px) and (max-width: 1020px) {
+    body.kin-qna .question-card .content {
+        padding-left: 79px;
+        padding-right: 16px;
+        line-height: 1.72;
+    }
+    body.kin-qna .question-card1 .content1 {
+        padding-left: 76px;
+        padding-right: 16px;
+        line-height: 1.72;
+    }
+    body.kin-qna .question-card3 .content1 {
+        padding-left: 79px;
+        padding-right: 16px;
+        line-height: 1.72;
+    }
+}
+
+@media (max-width: 720px) {
+    /* 좁은 화면은 기존 단일 열 구성 유지. 문단의 가독성만 보완합니다. */
+    body.kin-qna .question-card .content,
+    body.kin-qna .question-card1 .content1,
+    body.kin-qna .question-card3 .content1 {
+        line-height: 1.7;
+    }
+}
+
+/* ========================================================================
+   24차 — Q&A 마크업의 세로 정렬선 / 해시태그 높이 / 더보기 아이콘
+   23차의 질문·답변 카드 크기와 댓글 기능은 유지합니다.
+   ======================================================================== */
+/* 주황색 마크업: 제목 앞 'Q.' 글자만 살짝 왼쪽으로 이동.
+   position: relative를 사용하므로 뒤의 제목 텍스트 시작선은 바뀌지 않습니다. */
+body.kin-qna .question-card .main-title .q-mark {
+    position: relative;
+    left: -7px;
+}
+
+@media (min-width: 721px) {
+    /* 빨간 기준선: 질문자 이름, 질문 제목, 질문 본문, 댓글 버튼,
+       펼쳐지는 댓글창의 왼쪽 경계가 같은 콘텐츠 시작축을 공유합니다. */
+    body.kin-qna .question-card .user-info { gap: 15px; }
+    body.kin-qna .question-card .expandable-content .input-container,
+    body.kin-qna .question-card .qna-comment-list {
+        margin-left: 79px;
+    }
+}
+@media (min-width: 1021px) and (max-width: 1300px) {
+    /* 이 구간은 원래 제목의 Q.와 본문 사이 시작선이 약 23px 달랐습니다. */
+    body.kin-qna .question-card .main-title .q-mark { margin-right: 28px; }
+}
+@media (min-width: 721px) and (max-width: 1020px) {
+    body.kin-qna .question-card .main-title .q-mark { margin-right: 18px; }
+}
+@media (min-width: 1151px) {
+    /* 하늘색 마크업: 태그 칩의 중심을 높이 36px 댓글 버튼과 일치시킵니다.
+       태그가 별도 행으로 내려가는 좁은 화면에서는 이동하지 않습니다. */
+    body.kin-qna .question-card .card-bottom .bottom-center {
+        margin-top: 5.5px;
+    }
+}
+
+/* 점 3개 '더보기' 아이콘: 기존 자리와 터치 영역은 유지하고
+   보이는 그림/문자만 기존 크기의 90%로 줄입니다. */
+body.kin-main .main-content .question-card .top-icons > img.more[alt="더보기"],
+body.kin-qna .question-card1 .card-top .top-icons > img[alt="더보기"],
+body.kin-qna .question-card3 .card-top .top-icons > img[alt="더보기"] {
+    transform: scale(.9);
+    transform-origin: center;
+}
+/* 질문 카드 더보기는 19차에서 이미 0.85배였으므로 현재의 추가 0.9배. */
+body.kin-qna .question-card > .card-top .top-icons > img.icon-png[alt="더보기"] {
+    transform: scale(.765);
+    transform-origin: center;
+}
+/* 질문 작성 페이지의 업로드 예약 '···' 역시 버튼 영역을 유지합니다. */
+body.kin-upload .time-picker-container > .btn-more { font-size: 12px; }
+
+/* 25차 — Q&A 질문 제목 글자만 본문/댓글 기준선으로 붙입니다.
+   Q. 마크의 좌표와 다른 카드/페이지의 간격은 유지합니다. */
+@media (min-width: 1301px) {
+    body.kin-qna .question-card .main-title .q-mark { margin-right: -1px; }
+}
+@media (min-width: 1021px) and (max-width: 1300px) {
+    body.kin-qna .question-card .main-title .q-mark { margin-right: 18px; }
+}
+@media (min-width: 721px) and (max-width: 1020px) {
+    body.kin-qna .question-card .main-title .q-mark { margin-right: 6px; }
+}
+
+/* ========================================================================
+   26차 — 16인치 FHD / Windows 배율 125% (CSS 약 1536px) 가독성 조정
+   원본의 공통 3열 폭·카드 텍스트 기준선·HUD·Q&A·질문 작성 기능은 그대로 둡니다.
+   큰 화면에서도 본문과 탭이 과도하게 커지지 않도록 유동적인 폰트 값을 사용합니다.
+   ======================================================================== */
+@media (min-width: 1021px) {
+    /* 메인의 큰 상단 탭: 1536px에서 약 29px, 큰 화면에서는 최대 31px. */
+    body.kin-main .main-content .tab-menu button {
+        font-size: clamp(26px, 1.9vw, 31px);
+        padding: 13px 18px;
+        margin-bottom: 18px;
+    }
+
+    /* 질문 카드: 내부 축은 변경하지 않고, 글자의 시각적 무게를 조금 줄여
+       문단과 다음 카드 사이의 호흡 공간을 확보합니다. */
+    body.kin-main .main-content .question-card {
+        padding-top: 28px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+    body.kin-main .main-content .question-card .category-tag {
+        font-size: clamp(21px, 1.5vw, 24px);
+    }
+    body.kin-main .main-content .question-card .card-header-top {
+        margin-bottom: 18px;
+    }
+    body.kin-main .main-content .question-card .q-title {
+        font-size: clamp(19px, 1.3vw, 20px);
+    }
+    body.kin-main .main-content .question-card .content {
+        font-size: clamp(15.2px, 1vw, 16px);
+        line-height: 1.66;
+    }
+
+    /* 기존 우측 230px 폭을 바꾸지 않고 태그의 수직 리듬만 10%가량 완화. */
+    body.kin-main .side-right > .tag-cloud {
+        padding-top: 19px;
+        padding-bottom: 19px;
+        margin-bottom: 19px;
+    }
+    body.kin-main .side-right .tag-cloud h4 {
+        font-size: clamp(17px, 1.2vw, 19px);
+    }
+    body.kin-main .side-right .tag-cloud .tags {
+        line-height: 1.25;
+    }
+    body.kin-main .side-right .tag-line-1,
+    body.kin-main .side-right .tag-line-2,
+    body.kin-main .side-right .tag-line-3 {
+        margin-block: clamp(14px, 1.12vw, 18px);
+    }
+}
+
+/* ============================================================================
+   27차 — 세 페이지 상단 HUD 픽셀 단위 공통 규격
+   메인은 body에 Arial 글꼴을 지정했지만, Q&A와 업로드는 브라우저 기본
+   Times New Roman 글꼴을 상속해 GNB 메뉴 글자 너비가 1~2px 달랐습니다.
+   레이아웃 크기, 선택 탭 상태, 링크 동작은 그대로 두고 HUD만 폰트 일치.
+   ============================================================================ */
+.header,
+.header .header-inner,
+.header .gnb,
+.header .gnb > *,
+.header .header-right {
+    font-family: Arial, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+}
+
+
+/* 29차 — HUD 로고만 시안의 파란 기준 박스에 맞춰 90% 축소.
+   로고가 차지하는 flex 슬롯은 고정해, 기존 GNB/검색창 위치를 보존합니다.
+   세 페이지가 공유하는 layout-common.css 에서만 지정합니다. */
+.header .logo { width: 100px; flex: 0 0 100px; }
+.header .logo img { width: 90px; height: auto; }
+@media (max-width: 720px) {
+    .header .logo { width: 84px; flex-basis: 84px; }
+    .header .logo img { width: 76px; }
+}
+@media (max-width: 440px) {
+    .header .logo { width: 73px; flex-basis: 73px; }
+    .header .logo img { width: 66px; }
+}
+
+/* ========================================================================
+   30차: 세 페이지 공통 HUD의 가로축 정렬
+   - 로고의 좌측 끝은 카테고리 사이드바의 외곽 왼쪽 끝과 일치.
+   - 홈/Q&A/베스트/명예의 전당 메뉴는 중앙 콘텐츠의 왼쪽 축에서 시작.
+   - 검색/알림/프로필/질문하기는 기존 우측 끝 정렬을 유지.
+   - 태블릿·모바일의 기존 2행 HUD는 그대로 유지.
+   ======================================================================== */
+@media (min-width: 1021px) {
+    .header .header-inner {
+        column-gap: var(--kin-column-gap);
+    }
+    .header .logo {
+        width: var(--kin-left-column);
+        flex: 0 0 var(--kin-left-column);
+        margin-inline: 0 !important;
+        padding-inline: 0;
+        text-align: left;
+    }
+    .header .logo > a { display: inline-flex; align-items: center; }
+    .header .gnb { flex: 0 0 auto; }
+}
+
+/* 31차: Q&A 전체 답변 카드의 점 3개 더보기 아이콘을 질문 카드와
+   동일한 시각적 배율로 통일. 36px 정렬 슬롯/북마크 위치는 유지. */
+body.kin-qna .question-card1 .card-top .top-icons > img.more-a[alt="더보기"],
+body.kin-qna .question-card3 .card-top .top-icons > img.more-a[alt="더보기"] {
+    transform: scale(.765);
+    transform-origin: center center;
+}
+
+
+/* 36차 — 내 소식 / 공지사항 버튼 글자: Q&A 상세 페이지 규격으로 통일. */
+body.kin-main .side-right .notice-box .my,
+body.kin-main .side-right .notice-box .attancion {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+
+/* =======================================================================
+   38차 — 메인/답변 더보기의 글자 크기 90%, 부드러운 hover 전환
+   ======================================================================= */
+body.kin-main .main-content > .btn-more,
+body.kin-qna .main-content .greenbar-more {
+    font-size: clamp(17.1px, 1.8vw, 22.5px);
+    transition: background-color .28s ease-in-out, color .28s ease-in-out;
+}
+body.kin-main .main-content > .btn-more:hover {
+    background-color: #e1e1fc;
+    color: #262645;
+}
+body.kin-qna .main-content .greenbar-more:hover {
+    background-color: #d8ece2;
+    color: #254432;
+}
+@media (prefers-reduced-motion: reduce) {
+    body.kin-main .main-content > .btn-more,
+    body.kin-qna .main-content .greenbar-more { transition: none; }
+}

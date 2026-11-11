@@ -592,3 +592,433 @@
 .footer-2, .footer-3 { 
     margin-top: 3px;
 }
+
+/* ================================================================
+   메인 페이지 개선: 데스크톱 중앙 정렬, 반응형 레이아웃, 게임 고수 포디움
+   기존 컬러 / 카드 UI를 유지하면서, 예전 고정 너비만 덮어씁니다.
+   ================================================================ */
+:root {
+    --main-layout-max: 1447px;
+    --main-layout-gutter: 24px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; font-family: Arial, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+img { max-width: 100%; }
+
+.container {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    align-items: stretch;
+}
+
+/* 헤더와 본문을 같은 최대 너비의 중앙 축으로 맞춥니다. */
+.header-inner {
+    width: min(calc(100% - var(--main-layout-gutter) * 2), var(--main-layout-max));
+    min-height: 108px;
+    margin-inline: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: clamp(24px, 3.2vw, 55px);
+}
+.logo {
+    margin: 0;
+    flex: 0 0 auto;
+    line-height: 0;
+}
+.logo img { width: 100px; height: auto; }
+.gnb {
+    display: flex;
+    align-items: center;
+    gap: clamp(13px, 1.9vw, 32px);
+    white-space: nowrap;
+    font-size: 19px;
+    flex: 0 0 auto;
+    align-self: stretch;
+}
+.gnb home, .gnb qna, .gnb best, .gnb HOF {
+    display: inline-flex;
+    margin: 0;
+    align-items: center;
+    border-bottom: 4px solid transparent;
+    padding-top: 4px;
+}
+.gnb home { border-bottom-color: #2DB400; padding-bottom: 0; }
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(11px, 1.5vw, 24px);
+    margin: 0 0 0 auto;
+    min-width: 0;
+}
+.search-bar {
+    width: clamp(155px, 15vw, 257px);
+    min-width: 0;
+    height: 38px;
+    border-width: 2px;
+    flex: 1 1 auto;
+}
+.alarm, .user-profile { line-height: 0; flex: 0 0 auto; }
+.bell { width: 32px; height: auto; margin: 0; }
+.user { width: 44px; height: 44px; margin: 0; object-fit: cover; }
+.btn-ask {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 108px;
+    height: 44px;
+    margin: 0;
+    padding: 0 16px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.content-wrapper {
+    width: min(calc(100% - var(--main-layout-gutter) * 2), var(--main-layout-max));
+    max-width: var(--main-layout-max);
+    display: grid;
+    grid-template-columns: minmax(156px, 183px) minmax(0, 1fr) 240px;
+    align-items: start;
+    gap: 48px;
+    margin-inline: auto;
+    padding: 70px 0 90px;
+}
+.side-left, .side-right {
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    position: sticky;
+    top: 134px;
+    align-self: start;
+    height: fit-content;
+}
+.main-content { min-width: 0; width: 100%; }
+.tab-menu { margin-right: 0; }
+.tab-menu button { font-size: clamp(24px, 2.1vw, 35px); }
+.greenbar {
+    width: 100%;
+    height: auto;
+    min-height: 62px;
+    padding: 12px 26px;
+}
+.question-card {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: 25px clamp(18px, 3vw, 40px) 15px;
+}
+.card-header-top { gap: 12px; }
+.user-info-group, .name-tag-stack { min-width: 0; }
+.top-icons { display: flex; align-items: center; gap: 14px; margin: 0; flex: 0 0 auto; }
+.top-icons .bookmark, .top-icons .share, .top-icons .more { margin: 0; }
+.card-body-middle, .card-footer-bottom { padding-left: 68px; }
+.q-title { align-items: baseline; margin-bottom: 4px; }
+.content { padding-right: 0; overflow-wrap: anywhere; }
+.interactions { margin-right: 0; }
+.info-group { margin-bottom: 35px; }
+.picture { max-width: 100%; }
+.mountain {
+    display: block;
+    width: calc(100% - 68px);
+    max-width: calc(100% - 68px);
+    height: auto;
+    margin-left: 68px;
+}
+.photo-grid {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 68px;
+    padding-right: 0;
+}
+.notice-box { width: 100%; height: 50px; padding: 10px 12px; }
+.my, .attancion { font-size: 17px; }
+.my { padding-right: 12px; }
+.attancion { padding-left: 12px; }
+.tag-cloud { width: 100%; height: auto; min-height: 160px; }
+.tag-cloud h4 { font-size: 19px; }
+.tag-line-1, .tag-line-2, .tag-line-3 { margin-block: 14px; white-space: nowrap; }
+.tag-line-1 span, .tag-line-2 span, .tag-line-3 span { margin-inline: 0; padding: 4px; }
+.ad { display: block; width: 100%; height: auto; }
+.footer, .footer-inner { width: 100%; }
+
+/* 포디움은 원본 PNG 1장 전체를 사용합니다 (clip-path / crop 없음).
+   시상대만 10% 크게 표시하고, 프로필 및 텍스트는 기존 크기를 유지합니다. */
+.expert-section {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 26px 22px 48px;
+    border-radius: 35px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #7453ff 5%, #8d73fa 100%);
+}
+.expert-section h3 {
+    font-size: clamp(25px, 3.2vw, 50px);
+    line-height: 1.2;
+    font-weight: 750;
+    text-align: center;
+    color: #fff;
+    margin: 0 0 13px;
+}
+.expert-rank {
+    width: 95%;
+    max-width: 880px;
+    margin-inline: auto;
+    position: relative;
+    aspect-ratio: 880 / 530;
+    container-type: inline-size;
+}
+.rank-entrant { position: absolute; inset: 0; }
+.rank-entrant--first { z-index: 3; }
+.rank-entrant--second { z-index: 1; }
+.rank-entrant--third { z-index: 2; }
+.podium-art {
+    position: absolute;
+    top: calc(50% - 8px);
+    left: -5%;
+    width: 110%;
+    max-width: none; /* 전역 img max-width:100%가 시상대 확대를 막지 않도록 */
+    height: auto;
+    display: block;
+    pointer-events: none;
+    /* 비율 변경이나 부분 잘라내기 없이 원본 PNG 전체 표시 */
+}
+.rank-avatar {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1;
+}
+.rank-entrant--first .rank-avatar { width: 29.1%; left: 35.45%; top: 0; }
+.rank-entrant--second .rank-avatar { width: 20.7%; left: 4.8%; top: 23%; }
+.rank-entrant--third .rank-avatar { width: 20.7%; left: 74.55%; top: 26%; }
+.rank-copy {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    color: #3d3d3d;
+    line-height: 1.15;
+}
+.rank-entrant--first .rank-copy { top: 56%; left: 32%; width: 36%; }
+.rank-entrant--second .rank-copy { top: 68.5%; left: 4.8%; width: 20.7%; }
+.rank-entrant--third .rank-copy { top: 69.5%; left: 74.55%; width: 20.7%; }
+.rank-category { font-size: 3.1cqw; line-height: 1.3; color: #777; margin-bottom: 1.3cqw; }
+.rank-number { display: block; line-height: 1.06; font-weight: 800; }
+.rank-name { display: block; margin-top: 1.7cqw; font-weight: 450; }
+.rank-entrant--first .rank-number { font-size: 6.5cqw; color: #ffb000; }
+.rank-entrant--second .rank-number { font-size: 5.1cqw; color: #9ca9ce; }
+.rank-entrant--third .rank-number { font-size: 5.1cqw; color: #b38477; }
+.rank-entrant--first .rank-name { font-size: 4cqw; }
+.rank-entrant--second .rank-name, .rank-entrant--third .rank-name { font-size: 3.0cqw; }
+
+/* 시상대 PNG / 게임 분야 텍스트 / 1·2·3위 숫자는 처음부터 계속 표시합니다.
+   스크롤 진입 시 프로필 사진만 아래에서 올라오고, 닉네임은 제자리에서 Fade In.
+   두 요소의 시작 시간과 지속 시간을 동일하게 맞추어 동기화합니다.
+   1위 즉시 / 2위 0.45초 뒤 / 3위 0.90초 뒤. JS 없으면 전부 표시. */
+html.js-expert-animation .expert-rank:not(.is-visible) .rank-avatar {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: none;
+}
+html.js-expert-animation .expert-rank:not(.is-visible) .rank-name {
+    opacity: 0;
+    transition: none;
+}
+html.js-expert-animation .expert-rank.is-visible .rank-avatar {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1.8s cubic-bezier(.22,.72,.18,1),
+                transform 1.8s cubic-bezier(.22,.72,.18,1);
+}
+html.js-expert-animation .expert-rank.is-visible .rank-name {
+    opacity: 1;
+    transition: opacity 1.8s cubic-bezier(.22,.72,.18,1);
+}
+html.js-expert-animation .expert-rank.is-visible .rank-entrant--second .rank-avatar,
+html.js-expert-animation .expert-rank.is-visible .rank-entrant--second .rank-name {
+    transition-delay: .45s;
+}
+html.js-expert-animation .expert-rank.is-visible .rank-entrant--third .rank-avatar,
+html.js-expert-animation .expert-rank.is-visible .rank-entrant--third .rank-name {
+    transition-delay: .90s;
+}
+
+.btn-more {
+    display: block;
+    width: 100%;
+    min-height: 58px;
+    border: 0;
+    border-radius: 999px;
+    color: #393939;
+    background: #eeeefe;
+    font-size: clamp(19px, 2vw, 25px);
+    cursor: pointer;
+}
+.btn-more:hover { background: #e1e1fc; }
+
+/* 좁은 노트북: 비례를 줄이고 세 열을 유지합니다. */
+@media (max-width: 1300px) {
+    .content-wrapper { grid-template-columns: 162px minmax(0,1fr) 220px; gap: 24px; }
+    .header-inner { min-height: 92px; gap: 24px; }
+    .gnb { gap: 15px; font-size: 17px; }
+    .header-right { gap: 12px; }
+    .search-bar { width: 180px; }
+    .category-tag { font-size: 21px; }
+    .notice-box .my, .notice-box .attancion { font-size: 15px; }
+    .tag-cloud h4 { font-size: 17px; }
+    .tags { font-size: 11px; }
+}
+
+/* 태블릿: 메인 질문을 우선하고, 우측 정보는 메인 아래에 표시합니다. */
+@media (max-width: 1020px) {
+    .header-inner { flex-wrap: wrap; justify-content: space-between; row-gap: 0; padding-block: 13px; }
+    .gnb { order: 3; width: 100%; min-height: 46px; justify-content: center; }
+    .header-right { margin-left: auto; }
+    .search-bar { width: clamp(165px, 24vw, 260px); }
+    .content-wrapper { grid-template-columns: 160px minmax(0,1fr); gap: 24px; padding-top: var(--kin-top-gap); }
+    .side-left { grid-column: 1; grid-row: 1 / span 2; }
+    .main-content { grid-column: 2; grid-row: 1; }
+    .side-right {
+        grid-column: 2;
+        grid-row: 2;
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+    .notice-box { grid-column: 1 / -1; margin: 0; }
+    .tag-cloud { margin: 0; }
+    .ad-banner { min-width: 0; }
+    .ad { width: auto; max-height: 250px; }
+    .footer { grid-column: 1 / -1; }
+    .expert-rank { width: 95%; }
+}
+
+/* 휴대폰 / 소형 태블릿: 한 열과 가로 스크롤형 카테고리로 전환합니다. */
+@media (max-width: 720px) {
+    :root { --main-layout-gutter: 16px; }
+    .header-inner { gap: 12px; min-height: 0; }
+    .logo img { width: 84px; }
+    .gnb { gap: clamp(10px, 4vw, 26px); font-size: 15px; overflow-x: auto; justify-content: flex-start; }
+    .header-right { gap: 10px; flex: 1 1 auto; justify-content: flex-end; }
+    .search-bar { width: min(100%, 190px); flex: 1 1 120px; }
+    .user { width: 36px; height: 36px; }
+    .bell { width: 25px; }
+    .btn-ask { min-width: 74px; height: 36px; padding-inline: 10px; font-size: 14px; }
+    .content-wrapper { display: flex; flex-direction: column; align-items: stretch; gap: 18px; padding-top: var(--kin-top-gap); }
+    .side-left { width: 100%; position: static; border: 0; padding: 0; background: transparent; }
+    .category-list { display: flex; gap: 7px; overflow-x: auto; margin: 0; padding: 0 0 7px; scrollbar-width: thin; }
+    .category-list li { flex: 0 0 auto; white-space: nowrap; margin: 0; padding: 9px 11px; font-size: 13px; }
+    .main-content { width: 100%; }
+    .tab-menu button { font-size: 24px; padding: 10px 14px; margin-bottom: 10px; }
+    .greenbar { min-height: 52px; padding: 8px 17px; }
+    .question-card { border-radius: 24px; padding: 18px 17px 12px; }
+    .plane { width: 43px !important; height: 43px !important; }
+    .user-info-group { gap: 10px; }
+    .category-tag { font-size: 17px; }
+    .username { font-size: 12px; }
+    .top-icons { gap: 7px; }
+    .top-icons img { height: 20px; max-width: 20px; object-fit: contain; }
+    .card-body-middle, .card-footer-bottom { padding-left: 0; }
+    .card-body-middle { margin-bottom: 15px; }
+    .q-title { font-size: 17px; }
+    .greenq { font-size: 18px; }
+    .content { font-size: 14px; line-height: 1.6; }
+    .info-group { margin-bottom: 14px; font-size: 12px; }
+    .interactions { gap: 3px; }
+    .react { width: 28px; height: 28px; }
+    .count { font-size: 12px; }
+    .mountain { margin: 0; width: 100%; max-width: 100%; }
+    .photo-grid { padding: 0; }
+    .expert-section { padding: 24px 12px 30px; border-radius: 24px; }
+    .expert-section h3 { font-size: clamp(24px, 6vw, 34px); }
+    /* 포디움 확대로 양 끝이 잘리지 않도록 모바일에서 무대를 살짝 줄인 컨테이너 안에 배치 */
+    .expert-rank { width: 90%; }
+    .side-right { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+
+@media (max-width: 440px) {
+    .header-inner { justify-content: flex-start; }
+    .logo img { width: 73px; }
+    .header-right { gap: 7px; }
+    .search-bar { width: 80px; min-width: 60px; height: 32px; padding-left: 8px; font-size: 11px; }
+    .bell { width: 21px; }
+    .user { width: 30px; height: 30px; }
+    .btn-ask { min-width: 64px; height: 32px; padding: 0 8px; font-size: 12px; }
+    .gnb { font-size: 14px; }
+    .category-tag { font-size: 15px; }
+    .top-icons { gap: 4px; }
+    .top-icons img { height: 17px; max-width: 17px; }
+    .card-footer-bottom { gap: 5px; }
+    .views { margin-left: 8px; }
+    .side-right { grid-template-columns: 1fr; }
+    .notice-box, .footer { grid-column: 1; }
+    .ad { width: 100%; max-height: 280px; object-fit: contain; object-position: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    html.js-expert-animation .expert-rank .rank-avatar,
+    html.js-expert-animation .expert-rank .rank-name {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* 6차: 메인 페이지의 기존 이동 링크 복구 (파일 직접 실행도 지원) */
+.btn-ask {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.question-card--linked { position: relative; }
+.question-card--linked .card-detail-link {
+    display: inline-flex;
+    align-items: baseline;
+    color: inherit;
+    text-decoration: none;
+}
+/* 제목의 네이티브 링크를 카드 전체까지 확장합니다. */
+.question-card--linked .card-detail-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+}
+.question-card--linked .card-detail-link:focus-visible::after {
+    outline: 3px solid #2db400;
+    outline-offset: 3px;
+}
+/* 원래 카드의 아이콘 버튼은 카드 이동 링크를 덮어 씌우지 않습니다. */
+.question-card--linked .top-icons,
+.question-card--linked .interactions { position: relative; z-index: 2; }
+.question-card--linked:hover { cursor: pointer; }
+
+/* =====================================================================
+   19차: '게임' 분야 고수 섹션의 세로 길이를 노란 마크업 크기로 축소.
+   무대 PNG는 자르거나 왜곡하지 않고, 프로필/텍스트/시상대를 같은
+   .expert-rank 비율 안에서 함께 축소합니다. 등장 애니메이션은 유지.
+   ===================================================================== */
+.expert-section {
+    padding-top: 24px;
+    padding-bottom: 32px;
+}
+.expert-rank { width: 65%; }
+@media (min-width: 721px) and (max-width: 1020px) {
+    .expert-rank { width: 72%; }
+}
+@media (max-width: 720px) {
+    .expert-section { padding-top: 20px; padding-bottom: 22px; }
+    .expert-rank { width: 85%; }
+}
